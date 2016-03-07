@@ -13,3 +13,14 @@
  *= require_tree .
  *= require_self
  */
+#title { 
+	text-align:center;
+	font-family:"Avenir-Black";
+	font-size:200%;
+}
+
+#instruction {
+	text-align: left;
+	font-family:"Avenir";
+	font-size:100%;
+}
