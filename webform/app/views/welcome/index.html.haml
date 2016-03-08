@@ -7,4 +7,6 @@
 #instruction Please enter an absurdly large amount of text :)
 %textarea{:rows => "12", :cols => "60"}
 %br
-=submit_tag "Submit"
+= form_tag welcome_index_path, :method => :get do
+  Include:
+  = submit_tag 'Submit', :id => 'ratings_submit'
