@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
   root 'welcome#index'
   get 'welcome/index'
+  post 'welcome/index', :to => 'welcome#indexCheck'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
   get 'welcome/volunteer', :to => 'welcome#volunteer'
-  post 'welcome/index', :to => 'welcome#indexCheck'
+  post 'welcome/volunteer', :to => 'welcome#volunteerCheck'
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
