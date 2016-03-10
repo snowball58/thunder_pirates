@@ -7,4 +7,5 @@
 #instruction Please enter an absurdly large amount of text :)
 %textarea{:rows => "12", :cols => "60"}
 %br
-= button_to "Continue", welcome_volunteer_path, :method => :get
+= form_tag welcome_index_path, :method => :post do
+  = submit_tag 'Continue'
