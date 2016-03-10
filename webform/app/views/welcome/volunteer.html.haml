@@ -1,4 +1,4 @@
-#title Scotty's House Volunteer & Intern Application
+#title Volunteer Page
 %br
 #instruction Please enter your name:
 %input{:type=>"text", :placeholder => "Luke Skywalker"}
@@ -7,4 +7,6 @@
 #instruction Please enter an absurdly large amount of text :)
 %textarea{:rows => "12", :cols => "60"}
 %br
-= button_to "Continue", welcome_volunteer_path, :method => :get
+= form_tag welcome_volunteer_path, :method => :get do
+  Include:
+  = submit_tag 'Submit'
