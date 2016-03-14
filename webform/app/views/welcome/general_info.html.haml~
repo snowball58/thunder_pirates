@@ -1,0 +1,30 @@
+%meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
+
+  .title General Information
+
+  -# The method attribute specifies how to send form data (GET or POST)
+  -# GET is default and appends the data to the URL in name/value pairs URL?name=value&name=value
+  -# POST sends data as HTTP post transaction 
+  -# Form data is sent to the page specified in the action attribute
+
+  =form_tag welcome_general_info_path, :method => :post do
+    = label_tag(:program_source, "How did you learn about Scotty's House and our volunteer program?")
+    = text_area_tag(:program_source_body, nil, size: "40x4")
+    
+    = radio_button_tag(:reason, "class_credit")
+    = label_tag(:reason_class_credit, "Class Credit")
+    
+    = radio_button_tag(:reason, "org_credit")
+    = label_tag(:reason_org_credit, "Organization Credit")
+    
+    = radio_button_tag(:reason, "other")
+    = label_tag(:reason_other, "Other")
+    
+    = radio_button_tag(:employed, "yes")
+    = label_tag(:employed_yes, "Yes")
+    
+    = radio_button_tag(:employed, "no")
+    = label_tag(:employed_no, "No")
+    
+    = submit_tag 'Continue'
+  

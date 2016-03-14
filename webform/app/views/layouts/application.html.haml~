@@ -1,0 +1,16 @@
+-# The way layout works is that is sets a general structure to the page
+
+!!!
+%html
+  %head
+  %title Webform
+  %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
+  = stylesheet_link_tag 'application', 'media' => 'all', 'data-turbolinks-track' => true
+  = javascript_include_tag 'application', 'data-turbolinks-track' => true
+  
+  %header
+    #logo
+  
+  %body
+    .title Volunteer & Intern Application Form
+    = yield 

@@ -13,7 +13,7 @@ class WelcomeController < ApplicationController
   end
   
   def volunteerCheck
-    redirect_to welcome_general_info_path
+    redirect_to general_info_path
   end
   
   def general_info

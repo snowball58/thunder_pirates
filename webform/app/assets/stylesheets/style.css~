@@ -1,0 +1,12 @@
+header {
+	background-color: #33A4CE;
+	height: 
+}
+
+body {
+	font-size: 100%;
+}
+
+.title {
+	font-size: 300%;
+}
