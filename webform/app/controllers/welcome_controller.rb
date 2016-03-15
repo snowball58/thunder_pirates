@@ -1,4 +1,5 @@
 class WelcomeController < ApplicationController
+  
   def index
     
   end
@@ -7,9 +8,9 @@ class WelcomeController < ApplicationController
     redirect_to welcome_volunteer_path # go to next if everything is good
   end
   def volunteer
-    puts "This is the volunteer controller."
+    
   end
   def volunteerCheck
-    redirect_to :back # stay at current page if error checking fails
+    redirect_to welcome_volunteer_path # stay at current page if error checking fails
   end
 end

@@ -1,11 +1,73 @@
-#title Volunteer Page
+#title Volunteer Application
+
 %br
-#instruction Please enter your name:
-%input{:type=>"text", :placeholder => "Luke Skywalker"}
+%h2 General Information
+#instruction Name:
+%input{:type => "text", :id => "name", :placeholder => @name}
 %br
+
 %br
-#instruction Please enter an absurdly large amount of text :)
-%textarea{:rows => "12", :cols => "60"}
+#instruction Date of Birth:
+%input{:type => "text", :id => "birth", :placeholder => "MM/DD/YYYY"}
 %br
-= form_tag welcome_volunteer_path, :method => :post do
+
+%br
+#instruction Email Address:
+%input{:type => "text", :id => "email", :placeholder => "username@website.com"}
+%br
+
+%br
+#instruction Primary Phone Number:
+%input{:type => "text", :id => "phone1", :placeholder => "(555)555-5555"}
+%br
+
+%br
+#instruction Secondary Phone Number (Optional):
+%input{:type => "text", :id => "phone2", :placeholder => "(555)555-5555"}
+%br
+
+%br
+%h2 Mailing Address
+
+#instruction Street:
+%input{:type => "text", :id => "street"}
+
+#instruction City:
+%input{:type => "text", :id => "city"}
+
+#instruction State:
+%input{:type => "text", :id => "state"}
+
+#instruction Zip Code:
+%input{:type => "text", :id => "zip"}
+%br
+
+%br
+  Scotty's House Child Advocacy Center has several opportunities for Volunteers. All types of
+  %br
+  Volunteers are needed to make services available to families in our community, and we value
+  %br
+  any skills you may have to help us improve the community in which we live. Listed below are
+  %br
+  the current volunteer opportunities available at Scotty's House. Please check the areas in
+  %br
+  which you are most interested.
+  %br
+  - Welcome.volunteer_boxes.each do |box|
+    %br
+    = check_box_tag "boxes[#{box}]"
+    = box
+    %br
+  %br
+  = check_box_tag "outlying_box"
+  = "Outlying County Ambassador Program"
+  %br
+  = "If you checked above, what county?"
+  %input{:type => "text", :id => "outlying_tag"}
+%br
+
+%br
+= form_tag({:controller=>"welcome", :action=>"volunteerCheck"}) do
+  %input{:type => "text", :id => "test", :placeholder => session[:test]}
   = submit_tag 'Continue'
+%br
