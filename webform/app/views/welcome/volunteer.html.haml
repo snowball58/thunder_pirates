@@ -1,73 +1,74 @@
-#title Volunteer Application
+.main-title Volunteer Application
 
-%br
-%h2 General Information
-#instruction Name:
-%input{:type => "text", :id => "name", :placeholder => @name}
-%br
+-# The method attribute specifies how to send form data (GET or POST)
+-# GET is default and appends the data to the URL in name/value pairs URL?name=value&name=value
+-# POST sends data as HTTP post transaction 
+-# Form data is sent to the page specified in the action attribute
 
-%br
-#instruction Date of Birth:
-%input{:type => "text", :id => "birth", :placeholder => "MM/DD/YYYY"}
-%br
-
-%br
-#instruction Email Address:
-%input{:type => "text", :id => "email", :placeholder => "username@website.com"}
-%br
-
-%br
-#instruction Primary Phone Number:
-%input{:type => "text", :id => "phone1", :placeholder => "(555)555-5555"}
-%br
-
-%br
-#instruction Secondary Phone Number (Optional):
-%input{:type => "text", :id => "phone2", :placeholder => "(555)555-5555"}
-%br
-
-%br
-%h2 Mailing Address
-
-#instruction Street:
-%input{:type => "text", :id => "street"}
-
-#instruction City:
-%input{:type => "text", :id => "city"}
-
-#instruction State:
-%input{:type => "text", :id => "state"}
-
-#instruction Zip Code:
-%input{:type => "text", :id => "zip"}
-%br
-
-%br
-  Scotty's House Child Advocacy Center has several opportunities for Volunteers. All types of
-  %br
-  Volunteers are needed to make services available to families in our community, and we value
-  %br
-  any skills you may have to help us improve the community in which we live. Listed below are
-  %br
-  the current volunteer opportunities available at Scotty's House. Please check the areas in
-  %br
-  which you are most interested.
-  %br
-  - Welcome.volunteer_boxes.each do |box|
+=form_tag welcome_volunteer_path, :method => :post do
+  .form-item
+    %span Name:
+    = text_field_tag(:name)
+  
+  .form-item
+    %span Date of Birth:
+    = text_field_tag(:birth)
+    
+  .form-item
+    %span Email Address:
+    = text_field_tag(:email)
+    
+  .form-item
+    %span Primary Phone:
+    = text_field_tag(:phone1)
+    
+  .form-item
+    %span Secondary Phone(Optional):
+    = text_field_tag(:phone2)
+    
+  .form-item
+    %span Mailing Address:
+    = text_field_tag(:address)
+    
+  .form-item
+    %span Scotty's House Child Advocacy Center has several opportunities for Volunteers. All types of Volunteers
+    are needed to make services available to families in our community, and we value any skills you may have to
+    help us improve the community in which we live. Listed below are the current volunteer opportunities available 
+    at Scotty's House. Please check the areas in which you are interested:
     %br
-    = check_box_tag "boxes[#{box}]"
-    = box
+    = check_box_tag "areas[family]"
+    = "Family Care"
     %br
-  %br
-  = check_box_tag "outlying_box"
-  = "Outlying County Ambassador Program"
-  %br
-  = "If you checked above, what county?"
-  %input{:type => "text", :id => "outlying_tag"}
-%br
-
-%br
-= form_tag({:controller=>"welcome", :action=>"volunteerCheck"}) do
-  %input{:type => "text", :id => "test", :placeholder => session[:test]}
-  = submit_tag 'Continue'
-%br
+    = check_box_tag "areas[ambassador]"
+    = "Ambassador"
+    %br
+    = check_box_tag "areas[virtual]"
+    = "Virtual Volunteer"
+    %br
+    = check_box_tag "areas[medical]"
+    = "Medical Volunteer"
+    %br 
+    = check_box_tag "areas[counseling]"
+    = "Program/Counseling Internship"
+    %br 
+    %br
+    = check_box_tag "areas[outlying]"
+    = "Outlying County Ambassador Program"
+    %br
+    = "County:"
+    = text_field_tag(:county)
+    %br
+    %br
+    = check_box_tag "areas[additional]"
+    = "Additional Volunteer Opportunities"
+    %br
+    %span If you have Additional Volunteer Opportunities, please specify:
+    = text_area_tag(:additional)
+    
+  .form-item
+    %span Days/Times you will be able to volunteer:
+    = text_area_tag(:times)
+  
+  .form-item  
+    = submit_tag 'Continue', :class => "button"
+ 
