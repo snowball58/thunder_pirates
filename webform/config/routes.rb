@@ -1,3 +1,7 @@
+require 'FillablePdfForm'
+require 'TestPdfForm'
+require 'User'
+
 Rails.application.routes.draw do
   root 'welcome#index'
   get 'welcome/index'
@@ -10,6 +14,8 @@ Rails.application.routes.draw do
   
   get 'welcome/general_info', :to => 'welcome#general_info'
   post 'welcome/general_info', :to => 'welcome#general_info_check'
+  
+  get 'pdf', :to => 'welcome#pdf'
   
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
