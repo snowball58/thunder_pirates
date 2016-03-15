@@ -10,11 +10,9 @@ Rails.application.routes.draw do
   
   get 'welcome/general_info', :to => 'welcome#general_info'
   post 'welcome/general_info', :to => 'welcome#general_info_check'
-  
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
-  resources :volunteer, :controller => "welcome"
-  
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
