@@ -1,4 +1,4 @@
-.title General Information
+.main-title General Information
 
 -# The method attribute specifies how to send form data (GET or POST)
 -# GET is default and appends the data to the URL in name/value pairs URL?name=value&name=value
@@ -6,23 +6,45 @@
 -# Form data is sent to the page specified in the action attribute
 
 =form_tag welcome_general_info_path, :method => :post do
-  = label_tag(:program_source, "How did you learn about Scotty's House and our volunteer program?")
-  = text_area_tag(:program_source_body, nil, size: "40x4")
+  .form-item
+    %span How did you learn about Scotty's House and our volunteer program?
+    = text_area_tag(:program_source)
+  
+  .form-item
+    %span What would you like to gain from your volunteer experience?
+    = text_area_tag(:experience_gain)
+  
+  .form-item
+    %span Are you volunteering for:
+    = radio_button_tag(:reason, "class_credit")
+    = label_tag(:reason_class_credit, "Class Credit")
     
-  = radio_button_tag(:reason, "class_credit")
-  = label_tag(:reason_class_credit, "Class Credit")
-   
-  = radio_button_tag(:reason, "org_credit")
-  = label_tag(:reason_org_credit, "Organization Credit")
-   
-  = radio_button_tag(:reason, "other")
-  = label_tag(:reason_other, "Other")
-   
-  = radio_button_tag(:employed, "yes")
-  = label_tag(:employed_yes, "Yes")
+    %span Please provide the name of your instructor.
+    = text_field_tag(:instructor_name)
     
-  = radio_button_tag(:employed, "no")
-  = label_tag(:employed_no, "No")
+    = radio_button_tag(:reason, "org_credit")
+    = label_tag(:reason_org_credit, "Organization Credit")
     
-  = submit_tag 'Continue'
+    %span Please provide the name of your organization.
+    = text_field_tag(:organization_name)   
+    
+    = radio_button_tag(:reason, "other")
+    = label_tag(:reason_other, "Other")
+    
+    %span Please explain.
+    = text_field_tag(:explanation)
+       
+  .form-item
+    %span Are you currently employed? 
+    = radio_button_tag(:employed, "yes")
+    = label_tag(:employed_yes, "Yes")
+    
+    = radio_button_tag(:employed, "no")
+    = label_tag(:employed_no, "No")
+
+    %span Name of employer:  
+    = text_field_tag(:employer_name)
+  
+  .form-item  
+    = submit_tag 'Continue', :class => "button"
  

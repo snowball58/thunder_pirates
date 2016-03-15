@@ -17,6 +17,7 @@ class WelcomeController < ApplicationController
   end
   
   def general_info
+    @employment = params[:employed]
   end
   
   def general_info_check
