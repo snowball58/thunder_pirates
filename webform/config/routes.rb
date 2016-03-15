@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
   root 'welcome#index'
   get 'welcome/index'
-  post 'welcome/index', :to => 'welcome#indexCheck'
+  post 'welcome/index', :to => 'welcome#index_check'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
   get 'welcome/volunteer', :to => 'welcome#volunteer'
-  post 'welcome/volunteer', :to => 'welcome#volunteerCheck'
+  post 'welcome/volunteer', :to => 'welcome#volunteer_check'
   
   get 'welcome/general_info', :to => 'welcome#general_info'
   post 'welcome/general_info', :to => 'welcome#general_info_check'

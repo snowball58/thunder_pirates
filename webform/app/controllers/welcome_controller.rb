@@ -4,7 +4,7 @@ class WelcomeController < ApplicationController
     
   end
   
-  def indexCheck
+  def index_check
     # check input, other processing here
     redirect_to welcome_volunteer_path # go to next if everything is good
   end
@@ -13,7 +13,7 @@ class WelcomeController < ApplicationController
     
   end
   
-  def volunteerCheck
+  def volunteer_check
     redirect_to welcome_general_info_path
   end
   
