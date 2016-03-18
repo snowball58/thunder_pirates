@@ -15,22 +15,23 @@
     = text_area_tag(:experience_gain)
   
   .form-item
-    %span Are you volunteering for:
+    %span What are you volunteering for?
+    %br
     = radio_button_tag(:reason, "class_credit")
     = label_tag(:reason_class_credit, "Class Credit")
-    
+    %br
     %span Please provide the name of your instructor.
     = text_field_tag(:instructor_name)
     
     = radio_button_tag(:reason, "org_credit")
     = label_tag(:reason_org_credit, "Organization Credit")
-    
+    %br
     %span Please provide the name of your organization.
     = text_field_tag(:organization_name)   
     
     = radio_button_tag(:reason, "other")
     = label_tag(:reason_other, "Other")
-    
+    %br
     %span Please explain.
     = text_field_tag(:explanation)
        
@@ -41,7 +42,7 @@
     
     = radio_button_tag(:employed, "no")
     = label_tag(:employed_no, "No")
-
+    %br
     %span Name of employer:  
     = text_field_tag(:employer_name)
   

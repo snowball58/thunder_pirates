@@ -1,0 +1,31 @@
+.main-title Emergency Notification
+
+-# The method attribute specifies how to send form data (GET or POST)
+-# GET is default and appends the data to the URL in name/value pairs URL?name=value&name=value
+-# POST sends data as HTTP post transaction 
+-# Form data is sent to the page specified in the action attribute
+
+#subtitle Please list a person to contact in the event of an emergency.
+=form_tag welcome_emergency_notification_path, :method => :post do
+  .form-item
+    %span Name
+    = text_field_tag(:emergency_name)
+
+  .form-item
+    %span Primary Phone Number 
+    = text_field_tag(:emergency_primary_phone)
+
+  .form-item
+    %span Alternate Phone Number 
+    = text_field_tag(:emergency_secondary_phone)
+
+  .form-item
+    %span Address
+    = text_field_tag(:emergency_address)
+
+  .form-item
+    %span Relationship
+    = text_field_tag(:emergency_relationship)
+  
+  .form-item  
+    = submit_tag 'Continue', :class => "button"

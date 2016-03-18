@@ -1,11 +1,6 @@
 #title Scotty's House Volunteer & Intern Application
 %br
-#instruction Please enter your name:
-%input{:type=>"text", :placeholder => "Luke Skywalker"}
-%br
-%br
-#instruction Please enter an absurdly large amount of text :)
-%textarea{:rows => "12", :cols => "60"}
+#subtitle Welcome to the online Volunteer & Intern Application! Please click continue.
 %br
 = form_tag welcome_index_path, :method => :post do
-  = submit_tag 'Continue'
+  = submit_tag 'Continue', :class => "button"
