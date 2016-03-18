@@ -10,10 +10,11 @@ class WelcomeController < ApplicationController
   end
   
   def volunteer
-    
+    @test = session[:test]
   end
   
   def volunteer_check
+    session[:test] = params[:name]
     redirect_to welcome_general_info_path
   end
   
