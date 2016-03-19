@@ -1,0 +1,29 @@
+/ Scotty's House Volunteer WebForm
+/ Written in 2016 by: 
+/ Gustavo Estrela
+/ Logan Ford
+/ Patrick Herrington
+/ Noemie Nakamura
+/ Steven Snow
+/ Matthew Wiecek
+/ To the extent possible under law, the author(s) have dedicated all copyright and 
+/ related and neighboring rights to this software to the public domain worldwide. This software is distributed without any warranty.
+/ You should have received a copy of the CC0 Public Domain Dedication along with this software. If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
+
+.main-title Experience
+
+-# The method attribute specifies how to send form data (GET or POST)
+-# GET is default and appends the data to the URL in name/value pairs URL?name=value&name=value
+-# POST sends data as HTTP post transaction 
+-# Form data is sent to the page specified in the action attribute
+
+=form_tag welcome_experience_path, :method => :post do 
+  .form-item
+    %span Please list any previous Volunteer experience, particularly in working with children and families:
+  .form-item
+    %span How did you learn about Scotty's House and our volunteer program?
+    = text_area_tag(:program_source)
+  .form-item
+    %button
+      =link_to "lala", welcome_experience_path_
+

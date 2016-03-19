@@ -34,6 +34,13 @@ class WelcomeController < ApplicationController
   end
   
   def general_info_check
+    redirect_to welcome_experience_path
+  end
+
+  def experience
+  end
+
+  def experience_check
     redirect_to welcome_skills_path
   end
 

@@ -26,6 +26,9 @@ Rails.application.routes.draw do
   get 'welcome/general_info', :to => 'welcome#general_info'
   post 'welcome/general_info', :to => 'welcome#general_info_check'
 
+  get 'welcome/experience', :to => 'welcome#experience'
+  post 'welcome/experience', :to => 'welcome#experience_check'
+
   get 'welcome/skills', :to => 'welcome#skills'
   post 'welcome/skills', :to => 'welcome#skills_check'
 
