@@ -50,7 +50,23 @@ class WelcomeController < ApplicationController
   end
 
   def emergency_notification_check
-    redirect_to :back
+    redirect_to welcome_reference_form_emails_path
+  end
+  
+  def reference_form_emails
+   
+  end
+  
+  def reference_form_emails_check
+    redirect_to welcome_reference_form_path
+  end
+  
+  def reference_form
+   
+  end
+  
+  def reference_form_check
+    redirect_to welcome_reference_form_path
   end
   
   def pdf

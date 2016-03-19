@@ -32,6 +32,12 @@ Rails.application.routes.draw do
   get 'welcome/emergency_notification', :to => 'welcome#emergency_notification'
   post 'welcome/emergency_notification', :to => 'welcome#emergency_notification_check'
   
+  get 'welcome/reference_form_emails', :to => 'welcome#reference_form_emails'
+  post 'welcome/reference_form_emails', :to => 'welcome#reference_form_emails_check'
+  
+  get 'welcome/reference_form', :to => 'welcome#reference_form'
+  post 'welcome/reference_form', :to => 'welcome#reference_form_check'
+  
   get 'pdf', :to => 'welcome#pdf'
   
   # You can have the root of your site routed with "root"
