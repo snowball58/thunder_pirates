@@ -5,21 +5,27 @@ require 'User'
 Rails.application.routes.draw do
   root 'welcome#index'
   get 'welcome/index'
-  post 'welcome/index', :to => 'welcome#indexCheck'
+  post 'welcome/index', :to => 'welcome#index_check'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
   get 'welcome/volunteer', :to => 'welcome#volunteer'
-  post 'welcome/volunteer', :to => 'welcome#volunteerCheck'
+  post 'welcome/volunteer', :to => 'welcome#volunteer_check'
   
   get 'welcome/general_info', :to => 'welcome#general_info'
   post 'welcome/general_info', :to => 'welcome#general_info_check'
+
+  get 'welcome/skills', :to => 'welcome#skills'
+  post 'welcome/skills', :to => 'welcome#skills_check'
+
+  get 'welcome/emergency_notification', :to => 'welcome#emergency_notification'
+  post 'welcome/emergency_notification', :to => 'welcome#emergency_notification_check'
   
   get 'pdf', :to => 'welcome#pdf'
   
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
-
+  
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

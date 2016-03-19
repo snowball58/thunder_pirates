@@ -19,6 +19,13 @@
 	font-size:200%;
 }
 
+#subtitle { 
+	text-align:center;
+	font-family:"Avenir";
+	font-size:120%;
+}
+
+
 #instruction {
 	text-align: left;
 	font-family:"Avenir";
