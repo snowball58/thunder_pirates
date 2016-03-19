@@ -38,10 +38,18 @@ class WelcomeController < ApplicationController
   end
 
   def experience
+    @experiences = [{:lenght_of_time => "", :organization => "", :responsabilities => ""}]
+    @experiences << {:lenght_of_time => "lala", :organization => "lele", :responsabilities => ""}
+    flash[:experiences] = @experiences
   end
 
   def experience_check
     redirect_to welcome_skills_path
+  end
+
+  def new_experience
+    flash.keep
+    redirect_to experience
   end
 
   def skills
