@@ -27,10 +27,9 @@ class WelcomeController < ApplicationController
   def pdf
     #user = User.find(params[:id])
     user = User.new()
-    puts user.first_name
     #respond_to do |format|
       #format.pdf { send_file TestPdfForm.new(user).export, type: 'application/pdf' }
-    send_file TestPdfForm.new(user).export, type: 'application/pdf'
+    send_file TestPdfForm.new(user).export, type: 'application/pdf' , :disposition => 'inline'
     # =>end
   end
 

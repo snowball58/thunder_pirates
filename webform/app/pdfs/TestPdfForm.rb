@@ -6,7 +6,6 @@ class TestPdfForm < FillablePdfForm
   def initialize(user)
     @user = user
     super()
-    puts 'Hello\n\n\n\n\n\n'
   end
 
   protected
