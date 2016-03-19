@@ -1,0 +1,46 @@
+/ Scotty's House Volunteer WebForm
+/ Written in 2016 by: 
+/ Gustavo Estrela
+/ Logan Ford
+/ Patrick Herrington
+/ Noemie Nakamura
+/ Steven Snow
+/ Matthew Wiecek
+/ To the extent possible under law, the author(s) have dedicated all copyright and related and neighboring rights to this software to the public domain worldwide. This software is distributed without any warranty.
+/ You should have received a copy of the CC0 Public Domain Dedication along with this software. If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
+
+.main-title Volunteer Reference Form
+
+-# The method attribute specifies how to send form data (GET or POST)
+-# GET is default and appends the data to the URL in name/value pairs URL?name=value&name=value
+-# POST sends data as HTTP post transaction 
+-# Form data is sent to the page specified in the action attribute
+
+#subtitle Please provide the following information:
+=form_tag welcome_reference_form_path, :method => :post do
+  .form-item
+    %span Volunteer's Name
+    = text_field_tag(:reference_name)
+
+  .form-item
+    %span How long have you known this person and in what capacity? 
+    = text_area_tag(:reference_form_area_1)
+    
+  .form-item
+    %span In your opinion, is this person capable of working with children and families in a crisis sitation? Please tell us why:
+    = text_area_tag(:reference_form_area_2)
+    
+  .form-item
+    %span Does this person usually exercise good judgement? Please elaborate:
+    = text_area_tag(:reference_form_area_3)
+    
+  .form-item
+    %span How would this person relate to a child dealing with highly sensitive issues, and do you have any hesitation about this person working in this capacity? 
+    = text_area_tag(:reference_form_area_4)
+  
+  .form-item
+    %span Please share any additional pertinent information that would assist us in evaluating this person's involvement with our agency.
+    = text_area_tag(:reference_form_area_5)
+  
+  .form-item  
+    = submit_tag 'Continue', :class => "button"
