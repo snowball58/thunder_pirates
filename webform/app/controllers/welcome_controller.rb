@@ -34,7 +34,24 @@ class WelcomeController < ApplicationController
   end
   
   def general_info_check
+    redirect_to welcome_experience_path
+  end
+
+  def experience
+    @experiences = [{:lenght_of_time => "", :organization => "", :responsabilities => ""}]
+    @experiences << {:lenght_of_time => "lala", :organization => "lele", :responsabilities => ""}
+    flash[:experiences] = @experiences
+  end
+
+  def experience_check
     redirect_to welcome_skills_path
+  end
+
+  def new_experience
+    flash[:experiences]
+    logger.debug params
+    flash.keep
+    redirect_to welcome_experience_path
   end
 
   def skills
@@ -50,7 +67,23 @@ class WelcomeController < ApplicationController
   end
 
   def emergency_notification_check
-    redirect_to :back
+    redirect_to welcome_reference_form_emails_path
+  end
+  
+  def reference_form_emails
+   
+  end
+  
+  def reference_form_emails_check
+    redirect_to welcome_reference_form_path
+  end
+  
+  def reference_form
+   
+  end
+  
+  def reference_form_check
+    redirect_to welcome_reference_form_path
   end
   
   def pdf
