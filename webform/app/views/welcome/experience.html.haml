@@ -17,8 +17,8 @@
 -# POST sends data as HTTP post transaction 
 -# Form data is sent to the page specified in the action attribute
 
-params: 
-= params
+/ params: 
+/ = params
 
 = form_tag welcome_experience_path, :method => :post, :id => :experience_form do 
 
@@ -28,13 +28,31 @@ params:
   .form-item
     %span Please list any previous Volunteer experience, particularly in working with children and families:
 
-  - params[:nof_experiences].to_i.times do |i|
-    .form-item
-      %span Length of Time
-      = text_area_tag "length_of_time_#{i}", params["length_of_time_#{i}"]
+  %table{:style => "width:100%"}
+    %thead
+      %tr
+        %td Length of Time
+        %td Organization
+        %td Responsabilities
+    %tbody
+      - params[:nof_experiences].to_i.times do |i|
+        %tr
+          %td
+            .form-item
+              = text_area_tag "length_of_time_#{i}", params["length_of_time_#{i}"]
+          %td
+            .form-item
+              = text_area_tag "organization_#{i}", params["organization_#{i}"]
+          %td
+            .form-item
+              = text_area_tag "responsabilities_#{i}", params["responsabilities_#{i}"]
+
+  = submit_tag 'New Experience'
 
   .form-item
-    = submit_tag 'New Experience'
+    %span Do you have any experience with:
+
+
+
   .form-item  
-  .form-item  
-  .form-item  
+    = submit_tag 'Continue'
