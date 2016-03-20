@@ -20,15 +20,18 @@
 flash: 
 = flash[:experiences]
 
-= form_tag welcome_experience_path, :method => :post do 
+= form_tag welcome_experience_path, :method => :post, :id => :experience_form do 
   .form-item
     %span Please list any previous Volunteer experience, particularly in working with children and families:
 
-  - @experiences.each do |experience|
+  - @experiences.each_with_index do |experience, i|
     .form-item
       %span Length of Time
-      = text_area_tag :lenght_of_time, experience[:lenght_of_time]
+      = text_area_tag "length_of_time_#{i}", experience[:lenght_of_time]
 
   .form-item
-    %button
-      = link_to "lala", welcome_new_experience_path
+    %button 
+      = link_to "new entry", welcome_new_experience_path, :method => :post, :type => :submit
+
+  .form-item  
+    = submit_tag 'Continue', :class => "button"

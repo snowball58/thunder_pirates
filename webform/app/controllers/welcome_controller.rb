@@ -48,8 +48,10 @@ class WelcomeController < ApplicationController
   end
 
   def new_experience
+    flash[:experiences]
+    logger.debug params
     flash.keep
-    redirect_to experience
+    redirect_to welcome_experience_path
   end
 
   def skills
