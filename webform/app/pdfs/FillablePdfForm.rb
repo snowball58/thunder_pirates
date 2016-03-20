@@ -1,4 +1,4 @@
-#Copyright Adam Albrecht 2014, 
+#Copyright Adam Albrecht 2014, used with permission
 #Source: http://adamalbrecht.com/2014/01/31/pre-filling-pdf-form-templates-in-ruby-on-rails-with-pdftk/
 
 class FillablePdfForm
