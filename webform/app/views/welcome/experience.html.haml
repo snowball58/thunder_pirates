@@ -49,10 +49,40 @@
 
   = submit_tag 'New Experience'
 
+  %br
+  %br
+  %br
+
   .form-item
     %span Do you have any experience with:
+    %br
+    %br
+    %span Child Abuse?
+    = check_box_tag "child_abuse_check", nil, params["child_abuse_check"]
+    %br
+    %span If Yes, explain why:
+    = text_area_tag "child_abuse_text", params["child_abuse_text"]
+    
+    %br
+    %span Foster Care?
+    = check_box_tag "foster_care_check", nil, params["foster_care_check"]
+    %br
+    %span If Yes, explain why:
+    = text_area_tag "foster_care_text", params["foster_care_text"]
 
+    %br
+    %span Criminal, Junenile or Family Court System?
+    = check_box_tag "criminal_check", nil, params["criminal_check"]
+    %br
+    %span If Yes, explain why:
+    = text_area_tag "criminal_text", params["criminal_text"]
 
+    %br
+    %span Other Child Service Agencies?
+    = check_box_tag "agency_check", nil, params["agency_check"]
+    %br
+    %span If Yes, explain why:
+    = text_area_tag "agency_text", params["agency_text"]
 
   .form-item  
     = submit_tag 'Continue'
