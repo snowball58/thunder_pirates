@@ -38,20 +38,24 @@ class WelcomeController < ApplicationController
   end
 
   def experience
-    @experiences = [{:lenght_of_time => "", :organization => "", :responsabilities => ""}]
-    @experiences << {:lenght_of_time => "lala", :organization => "lele", :responsabilities => ""}
-    flash[:experiences] = @experiences
+    if params[:nof_experiences] == nil || params[:nof_experiences].to_i < 1
+      redirect_to welcome_experience_path :nof_experiences => 1
+    end
   end
 
   def experience_check
-    redirect_to welcome_skills_path
-  end
 
-  def new_experience
-    flash[:experiences]
+    logger.debug "params:"
     logger.debug params
-    flash.keep
-    redirect_to welcome_experience_path
+    logger.debug "number of experiences: #{params[:nof_experiences]}"
+    
+    if params[:commit] == "New Experience"
+      params[:nof_experiences] = params[:nof_experiences].to_i + 1
+      redirect_to welcome_experience_path params
+    elsif params[:commit] == "Continue"
+      redirect_to welcome_skills_path params
+    end
+
   end
 
   def skills

@@ -17,21 +17,26 @@
 -# POST sends data as HTTP post transaction 
 -# Form data is sent to the page specified in the action attribute
 
-flash: 
-= flash[:experiences]
+params: 
+= params
 
 = form_tag welcome_experience_path, :method => :post, :id => :experience_form do 
+
+  / hidden input to save the nof_experiences
+  = hidden_field_tag "nof_experiences", params[:nof_experiences]
+
   .form-item
     %span Please list any previous Volunteer experience, particularly in working with children and families:
 
-  - @experiences.each_with_index do |experience, i|
+  - params[:nof_experiences].to_i.times do |i|
     .form-item
       %span Length of Time
-      = text_area_tag "length_of_time_#{i}", experience[:lenght_of_time]
+      = text_area_tag "length_of_time_#{i}", params["length_of_time_#{i}"]
 
   .form-item
-    %button 
-      = link_to "new entry", welcome_new_experience_path, :method => :post, :type => :submit
-
+    = submit_tag 'New Experience'
   .form-item  
-    = submit_tag 'Continue', :class => "button"
+  .form-item  
+  .form-item  
+  .form-item  
+    = submit_tag 'Continue'

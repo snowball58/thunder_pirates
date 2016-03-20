@@ -28,8 +28,6 @@ Rails.application.routes.draw do
 
   get 'welcome/experience', :to => 'welcome#experience'
   post 'welcome/experience', :to => 'welcome#experience_check'
-  # I used this to create a 'dynamic' form where you can add multiple experiences
-  post 'welcome/new_experience', :to => 'welcome#new_experience'
 
   get 'welcome/skills', :to => 'welcome#skills'
   post 'welcome/skills', :to => 'welcome#skills_check'
