@@ -45,7 +45,7 @@ class Application
     #strings
     attr_reader :explainOther
     #box checked if not nil
-    attr_reader :employed?
+    attr_reader :employed
     #strings
     attr_reader :nameEmployer
     
