@@ -15,7 +15,7 @@ require 'User'
 
 Rails.application.routes.draw do
   root 'welcome#index'
-  get 'welcome/index'
+  get 'welcome/index', :to => 'welcome#index'
   post 'welcome/index', :to => 'welcome#index_check'
 
   # The priority is based upon order of creation: first created -> highest priority.
