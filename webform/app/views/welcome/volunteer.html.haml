@@ -19,7 +19,7 @@
 =form_tag welcome_volunteer_path, :method => :post do
   .form-item
     %span Name:
-    = text_field_tag(:name, @test)
+    = text_field_tag(:name)
   
   .form-item
     %span Date of Birth:
@@ -30,12 +30,12 @@
     = text_field_tag(:email)
     
   .form-item
-    %span Primary Phone:
-    = text_field_tag(:phone1)
+    %span Home Phone:
+    = text_field_tag(:home_phone)
     
   .form-item
-    %span Secondary Phone(Optional):
-    = text_field_tag(:phone2)
+    %span Cell Phone:
+    = text_field_tag(:cell_phone)
     
   .form-item
     %span Mailing Address:
