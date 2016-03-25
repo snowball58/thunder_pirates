@@ -4,6 +4,11 @@ ruby "2.3.0"
 
 group :test do
   gem 'cucumber-rails', :require => false
+  gem 'cucumber-rails-training-wheels'
+  #gem 'capybara'
+  gem 'launchy'
+  #gem 'rspec-rails'
+  gem 'simplecov'
   # database_cleaner is not required, but highly recommended
   gem 'database_cleaner'
 end
