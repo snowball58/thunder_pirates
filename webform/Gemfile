@@ -11,6 +11,8 @@ group :test do
   gem 'simplecov'
   # database_cleaner is not required, but highly recommended
   gem 'database_cleaner'
+  gem 'ZenTest'
+  gem 'rspec'
 end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

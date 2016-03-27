@@ -12,7 +12,7 @@ class TestPdfForm < FillablePdfForm
 
   def fill_out
     fill :date, Date.today.to_s
-    [:first_name, :last_name, :address, :address_2, :city, :state, :zip_code].each do |field|
+    [:first_name, :last_name, :middle_initial, :address, :address_2, :city, :state, :zip_code].each do |field|
       fill field, @user.send(field)
     end
     fill :age, case @user.age

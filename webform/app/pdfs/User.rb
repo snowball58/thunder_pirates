@@ -5,6 +5,7 @@
 
 class User
     attr_accessor :first_name
+    attr_accessor :middle_initial
     attr_accessor :last_name
     attr_accessor :address
     attr_accessor :address_2
@@ -15,6 +16,7 @@ class User
     
     def initialize
         @first_name = "first"
+        @middle_initial = 'mid'
         @last_name = 'last'
         @address = 'addr'
         @address_2 = 'addr2'
