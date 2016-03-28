@@ -2,9 +2,13 @@
 
 To get the application up and running:
 
+
 * Ruby Version: 2.3.0
 
 * Dependencies: PDFtk
+To install PDFtk, run: 
+sudo apt-get update
+sudo apt-get install pdftk
 
 To run tests, navigate to webform/
 * Run Cucumber: rake cucumber
