@@ -10,9 +10,3 @@ To run tests, navigate to webform/
 * Run Cucumber: rake cucumber
 * Run RSpec Tests: rspec spec
 * Heroku Link: https://secure-escarpment-46126.herokuapp.com/
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
