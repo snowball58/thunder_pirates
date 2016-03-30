@@ -1,7 +1,7 @@
 class Volunteer < ActiveRecord::Migration
   def up
     create_table :Volunteer do |t|
-      t.string:   :'Date of Application'
+      t.string  :'Date of Application'
       t.string	:'Date of Birth'
       t.string	:'Email Address'
       t.string	:'Phone Numbers'
