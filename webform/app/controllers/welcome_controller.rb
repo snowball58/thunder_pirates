@@ -21,7 +21,14 @@ class WelcomeController < ApplicationController
   end
   
   def volunteer
-    Volunteer.create!(:uniqueId => "TestID")
+    #convoluted example, but makes the point
+    b = Volunteer.new()
+    b.uniqueID = 'TestID'
+    b.save
+    a = Volunteer.find_by_uniqueID('TestID')
+    puts 'LOLOLOLO'
+    puts a == nil
+    puts 'LOLOLOLOLO'
   end
   
   def volunteer_check
