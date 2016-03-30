@@ -28,7 +28,7 @@
   .form-item
     %span Please list any previous Volunteer experience, particularly in working with children and families:
 
-  %table{:style => "width:100%"}
+  %table{:style => "width:100%", :id => "experiences"}
     %thead
       %tr
         %td Length of Time
@@ -47,7 +47,7 @@
             .form-item
               = text_area_tag "responsabilities_#{i}", params["responsabilities_#{i}"]
 
-  = submit_tag 'New Experience'
+  = submit_tag 'Add Experience'
 
   %br
   %br

@@ -44,7 +44,7 @@ class WelcomeController < ApplicationController
   end
 
   def experience_check
-    if params[:commit] == "New Experience"
+    if params[:commit] == "Add Experience"
       params[:nof_experiences] = params[:nof_experiences].to_i + 1
       redirect_to welcome_experience_path params
     elsif params[:commit] == "Continue"
