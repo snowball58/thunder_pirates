@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20160330213204) do
 
-  create_table "Reference", force: :cascade do |t|
+  create_table "references", force: :cascade do |t|
     t.string "Does this person usually exercise good judgment"
     t.string "Signature_4"
     t.string "Date_4"
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20160330213204) do
     t.string "VolunteerId"
   end
 
-  create_table "Volunteer", force: :cascade do |t|
+  create_table "volunteers", force: :cascade do |t|
     t.string "Date of Application"
     t.string "Date of Birth"
     t.string "Email Address"

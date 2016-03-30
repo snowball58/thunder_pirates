@@ -1,6 +1,6 @@
 class Reference < ActiveRecord::Migration
   def up
-    create_table :Reference do |t|
+    create_table :references do |t|
       t.string  :'Does this person usually exercise good judgment'
       t.string	:'Signature_4'
       t.string	:'Date_4'
@@ -16,6 +16,6 @@ class Reference < ActiveRecord::Migration
   end
 
   def down
-    drop_table :Reference
+    drop_table :references
   end
 end

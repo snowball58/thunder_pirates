@@ -1,8 +1,8 @@
 class VolunteerId < ActiveRecord::Migration
   def up
-    add_column :Volunteer, :uniqueID, :string
+    add_column :volunteers, :uniqueID, :string
   end
   def down
-    remove_column :Volunteer, :uniqueID, :string
+    remove_column :volunteers, :uniqueID, :string
   end
 end

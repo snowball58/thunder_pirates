@@ -1,6 +1,6 @@
 class Volunteer < ActiveRecord::Migration
   def up
-    create_table :Volunteer do |t|
+    create_table :volunteers do |t|
       t.string  :'Date of Application'
       t.string	:'Date of Birth'
       t.string	:'Email Address'
@@ -79,6 +79,6 @@ class Volunteer < ActiveRecord::Migration
   end
 
   def down
-    drop_table :Volunteer
+    drop_table :volunteers
   end
 end

@@ -21,7 +21,7 @@ class WelcomeController < ApplicationController
   end
   
   def volunteer
-    @test = session[:test]
+    Volunteer.create!(:uniqueId => "TestID")
   end
   
   def volunteer_check
