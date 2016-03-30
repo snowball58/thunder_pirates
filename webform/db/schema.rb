@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160330203012) do
+ActiveRecord::Schema.define(version: 20160330213204) do
 
   create_table "Reference", force: :cascade do |t|
     t.string "Does this person usually exercise good judgment"
@@ -25,6 +25,8 @@ ActiveRecord::Schema.define(version: 20160330203012) do
     t.string "Good judgment, elaborate"
     t.string "Do you have any hesitation about this person working in this capacity"
     t.string "Pertinent Information"
+    t.string "uniqueID"
+    t.string "VolunteerId"
   end
 
   create_table "Volunteer", force: :cascade do |t|
@@ -102,6 +104,7 @@ ActiveRecord::Schema.define(version: 20160330203012) do
     t.string "Emergency Phone"
     t.string "Emergency Address"
     t.string "Emergency Relationship"
+    t.string "uniqueID"
   end
 
 end
