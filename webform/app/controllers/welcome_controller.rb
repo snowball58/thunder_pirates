@@ -79,7 +79,7 @@ class WelcomeController < ApplicationController
     volunteer.MedicalVolunteer = params[:medical]
     volunteer.ProgramCounselingInternship = params[:counseling]
     volunteer.OutlyingCountyAmbassadorProgram = params[:outlying]
-    volunteer.AdditionalVolunteerOpportunities = params[:additional]
+    volunteer.AdditionalVolunteerOpportunities = params[:additional2]
     
     # save the changes made to the volunteer entry
     volunteer.save
