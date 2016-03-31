@@ -23,8 +23,11 @@ class WelcomeController < ApplicationController
   def volunteer
     #convoluted example, but makes the point
     if session[:uniqueID].blank? or not Volunteer.exists?(:uniqueID => session[:uniqueID])
-      b = Volunteer.new()
       uniqueID = SecureRandom.base64
+      while Volunteer.exists?(:uniqueID => uniqueID) do
+        uniqueID = SecureRandom.base64
+      end
+      b = Volunteer.new()
       b.uniqueID = uniqueID
       b.save
       session[:uniqueID] = uniqueID
