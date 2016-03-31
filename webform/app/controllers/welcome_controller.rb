@@ -143,11 +143,13 @@ class WelcomeController < ApplicationController
   
   def pdf
     #user = User.find(params[:id])
-    user = User.new()
+    #user = User.new()
     #respond_to do |format|
       #format.pdf { send_file TestPdfForm.new(user).export, type: 'application/pdf' }
-    send_file TestPdfForm.new(user).export, type: 'application/pdf' , :disposition => 'inline'
+    #send_file TestPdfForm.new(user).export, type: 'application/pdf' , :disposition => 'inline'
     # =>end
+    record = Volunteer.take
+    send_file ScottyPDF.new(record).export, type: 'application/pdf' , :disposition => 'inline', :stream => false
   end
 
 end
