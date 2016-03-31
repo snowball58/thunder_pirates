@@ -28,7 +28,7 @@ class WelcomeController < ApplicationController
     a = Volunteer.find_by_uniqueID('TestID')
     puts 'LOLOLOLO'
     puts a == nil
-    puts 'LOLOLOLOLO'
+    puts a[:uniqueID]
   end
   
   def volunteer_check
