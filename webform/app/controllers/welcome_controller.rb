@@ -27,7 +27,7 @@ class WelcomeController < ApplicationController
       while Volunteer.exists?(:uniqueID => uniqueID) do
         uniqueID = SecureRandom.base64
       end
-      b = Volunteer.new()
+      b = Volunteer.new
       b.uniqueID = uniqueID
       b.save
       session[:uniqueID] = uniqueID
