@@ -21,11 +21,71 @@ class WelcomeController < ApplicationController
   end
   
   def volunteer
-    @test = session[:test]
+    #convoluted example, but makes the point
+    if session[:uniqueID].blank? or not Volunteer.exists?(:uniqueID => session[:uniqueID])
+      uniqueID = SecureRandom.base64
+      while Volunteer.exists?(:uniqueID => uniqueID) do
+        uniqueID = SecureRandom.base64
+      end
+      b = Volunteer.new
+      b.uniqueID = uniqueID
+      b.save
+      session[:uniqueID] = uniqueID
+    else
+      volunteer = Volunteer.find_by_uniqueID(session[:uniqueID])
+      # query the text fields like this
+      @name = volunteer[:Name]
+      @birth = volunteer[:DateofBirth]
+      @email = volunteer[:EmailAddress]
+      @phone = volunteer[:PhoneNumbers]
+      @address = volunteer[:MailingAddress]
+      @county = volunteer[:County]
+      @additional = volunteer[:IfyouhaveselectedAdditionalVolunteerOpportunitiespleasespecify]
+      @times = volunteer[:DaysTimesyouwillbeavailabletovolunteer]
+      
+      # query check boxes like this
+      # if box is saved as not being checked, should have empty value in database!
+      # if box is saved as being checked, should have "Yes" as value for pdf purposes
+      @family_care = volunteer[:FamilyCare]
+      @ambassador = volunteer[:Ambassador]
+      @virtual_volunteer = volunteer[:VirtualVolunteer]
+      @medical_volunteer = volunteer[:MedicalVolunteer]
+      @counseling_internship = volunteer[:ProgramCounselingInternship]
+      @outlying_county = volunteer[:OutlyingCountyAmbassadorProgram] 
+      @additionl_opportunities = volunteer[:AdditionalVolunteerOpportunities]
+    end
   end
   
   def volunteer_check
-    session[:test] = params[:name]
+    #some fields might be required later
+    volunteer = Volunteer.find_by_uniqueID(session[:uniqueID])
+    
+    #this is how you change text fields in the database
+    volunteer.Name = params[:name]
+    volunteer.DateofBirth = params[:birth]
+    volunteer.EmailAddress = params[:email]
+    volunteer.PhoneNumbers = params[:phone]
+    volunteer.MailingAddress = params[:address]
+    volunteer.County = params[:county]
+    volunteer.IfyouhaveselectedAdditionalVolunteerOpportunitiespleasespecify = params[:additional]
+    volunteer.DaysTimesyouwillbeavailabletovolunteer = params[:times]
+    
+    #this is where I fill in the date of the application
+    time = Time.new
+    volunteer.DateofApplication = time.month.to_s + "/" + time.day.to_s + "/" + time.year.to_s
+    puts volunteer.DateofApplication
+    
+    #this is how to change check boxes in the database
+    volunteer.FamilyCare = params[:family]
+    volunteer.Ambassador = params[:ambassador]
+    volunteer.VirtualVolunteer = params[:virtual]
+    volunteer.MedicalVolunteer = params[:medical]
+    volunteer.ProgramCounselingInternship = params[:counseling]
+    volunteer.OutlyingCountyAmbassadorProgram = params[:outlying]
+    volunteer.AdditionalVolunteerOpportunities = params[:additional2]
+    
+    # save the changes made to the volunteer entry
+    volunteer.save
     redirect_to welcome_general_info_path
   end
   
@@ -86,11 +146,13 @@ class WelcomeController < ApplicationController
   
   def pdf
     #user = User.find(params[:id])
-    user = User.new()
+    #user = User.new()
     #respond_to do |format|
       #format.pdf { send_file TestPdfForm.new(user).export, type: 'application/pdf' }
-    send_file TestPdfForm.new(user).export, type: 'application/pdf' , :disposition => 'inline'
+    #send_file TestPdfForm.new(user).export, type: 'application/pdf' , :disposition => 'inline'
     # =>end
+    record = Volunteer.take
+    send_file ScottyPDF.new(record).export, type: 'application/pdf' , :disposition => 'inline', :stream => false
   end
 
 end

@@ -11,6 +11,7 @@
 
 require 'FillablePdfForm'
 require 'TestPdfForm'
+require 'ScottyPDF'
 require 'User'
 
 Rails.application.routes.draw do

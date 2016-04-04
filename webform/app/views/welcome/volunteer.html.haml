@@ -19,27 +19,23 @@
 =form_tag welcome_volunteer_path, :method => :post do
   .form-item
     %span Name:
-    = text_field_tag(:name)
+    = text_field_tag(:name, @name, :maxlength => "20")
   
   .form-item
     %span Date of Birth:
-    = text_field_tag(:birth)
+    = text_field_tag(:birth, @birth, :maxlength => "10", :placeholder => "MM/DD/YYYY")
     
   .form-item
     %span Email Address:
-    = text_field_tag(:email)
+    = text_field_tag(:email, @email, :maxlength => "30")
     
   .form-item
-    %span Home Phone:
-    = text_field_tag(:home_phone)
-    
-  .form-item
-    %span Cell Phone:
-    = text_field_tag(:cell_phone)
+    %span Phone Number(s):
+    = text_field_tag(:phone, @phone, :maxlength => "30")
     
   .form-item
     %span Mailing Address:
-    = text_field_tag(:address)
+    = text_field_tag(:address, @address, :maxlength => "30")
     
   .form-item
     %span Scotty's House Child Advocacy Center has several opportunities for Volunteers. All types of Volunteers
@@ -47,38 +43,39 @@
     help us improve the community in which we live. Listed below are the current volunteer opportunities available 
     at Scotty's House. Please check the areas in which you are interested:
     %br
-    = check_box_tag "areas[family]"
+    = check_box_tag(:family, "Yes", @family_care)
     = "Family Care"
     %br
-    = check_box_tag "areas[ambassador]"
+    = check_box_tag(:ambassador, "Yes", @ambassador)
     = "Ambassador"
     %br
-    = check_box_tag "areas[virtual]"
+    = check_box_tag(:virtual, "Yes", @virtual_volunteer)
     = "Virtual Volunteer"
     %br
-    = check_box_tag "areas[medical]"
+    = check_box_tag(:medical, "Yes", @medical_volunteer)
     = "Medical Volunteer"
     %br 
-    = check_box_tag "areas[counseling]"
+    = check_box_tag(:counseling, "Yes", @counseling_internship)
     = "Program/Counseling Internship"
     %br 
     %br
-    = check_box_tag "areas[outlying]"
+    = check_box_tag(:outlying, "Yes", @outlying_county)
     = "Outlying County Ambassador Program"
     %br
     = "County:"
-    = text_field_tag(:county)
+    /*Longest county name in Texas appears to be San Augistine, which is 13*/
+    = text_field_tag(:county, @county, :maxlength => "13")
     %br
     %br
-    = check_box_tag "areas[additional]"
+    = check_box_tag(:additional2, "Yes", @additionl_opportunities)
     = "Additional Volunteer Opportunities"
     %br
     %span If you have Additional Volunteer Opportunities, please specify:
-    = text_area_tag(:additional)
+    = text_area_tag(:additional, @additional, :maxlength => "30")
     
   .form-item
     %span Days/Times you will be able to volunteer:
-    = text_area_tag(:times)
+    = text_area_tag(:times, @times, :maxlength => "60")
     
   .form-item  
     = submit_tag 'Continue', :class => "button"

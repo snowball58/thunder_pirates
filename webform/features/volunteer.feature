@@ -30,7 +30,7 @@ Scenario: Skills click continue
 Scenario: Emergency click continue
 	Given the emergency_notification page is loaded
 	When the Continue button is clicked
-        Then the References title is displayed
+    Then the References title is displayed
 
 
 
