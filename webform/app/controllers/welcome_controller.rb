@@ -162,6 +162,7 @@ class WelcomeController < ApplicationController
       volunteer.ExperiencewithChildServiceYES = params[:agency_check]
       volunteer.ExperiencewithChildServiceNO = !params[:agency_check]
       volunteer.OtherChildServiceAgencies  = params[:agency_text]
+      volunteer.save
     end
 
     if params[:commit] == "Add Experience"
