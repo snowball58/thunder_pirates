@@ -98,31 +98,37 @@ class WelcomeController < ApplicationController
   end
 
   def experience
-    if params[:nof_experiences] == nil || params[:nof_experiences].to_i < 1
-      redirect_to welcome_experience_path :nof_experiences => 1
-    end
-
-    if (session[:uniqueID].blank?)
-      redirect_to welcome_index_page
-    end
-
+    
     volunteer = Volunteer.find_by_uniqueID(session[:uniqueID])
+    if volunteer == nil
+      flash[:notice] = "We couldn't find your data, start the form from the beggining."
+      redirect_to welcome_index_path
+    end
+
+    # Fix number of experiences parameter
+    if volunteer[:NofExperiences] == nil
+      volunteer.NofExperiences = 1
+    end
+    nof_experiences = volunteer[:NofExperiences]
+    if params[:nof_experiences] == nil || params[:nof_experiences].to_i != nof_experiences.to_i
+      redirect_to welcome_experience_path :nof_experiences => nof_experiences
+    end
 
     @length_of_time_1 = volunteer[:LengthofTime1]
     @length_of_time_2 = volunteer[:LengthofTime2]
     @length_of_time_3 = volunteer[:LengthofTime3]
     @length_of_time_4 = volunteer[:LengthofTime4]
     @length_of_time_5 = volunteer[:LengthofTime5]
-    # @organization_1 = volunteer[:Organization1]
-    # @organization_2 = volunteer[:Organization2]
-    # @organization_3 = volunteer[:Organization3]
-    # @organization_4 = volunteer[:Organization4]
-    # @organization_5 = volunteer[:Organization5]
-    # @responsabilities_1 = volunteer[:Responsabilities1]
-    # @responsabilities_2 = volunteer[:Responsabilities2]
-    # @responsabilities_3 = volunteer[:Responsabilities3]
-    # @responsabilities_4 = volunteer[:Responsabilities4]
-    # @responsabilities_5 = volunteer[:Responsabilities5]
+    @organization_1 = volunteer[:Organization1]
+    @organization_2 = volunteer[:Organization2]
+    @organization_3 = volunteer[:Organization3]
+    @organization_4 = volunteer[:Organization4]
+    @organization_5 = volunteer[:Organization5]
+    @responsabilities_1 = volunteer[:Responsabilities1]
+    @responsabilities_2 = volunteer[:Responsabilities2]
+    @responsabilities_3 = volunteer[:Responsabilities3]
+    @responsabilities_4 = volunteer[:Responsabilities4]
+    @responsabilities_5 = volunteer[:Responsabilities5]
     @child_abuse_check = volunteer[:child_abuse_check]
     @child_abuse_text = volunteer[:child_abuse_text]
     @foster_care_check = volunteer[:foster_care_check]
@@ -135,6 +141,7 @@ class WelcomeController < ApplicationController
 
   def experience_check
     volunteer = Volunteer.find_by_uniqueID(session[:uniqueID])
+    print "id: " + session[:uniqueID].to_s
 
     if volunteer != nil
       # todo: include other fields in the database
@@ -158,10 +165,11 @@ class WelcomeController < ApplicationController
     end
 
     if params[:commit] == "Add Experience"
-      params[:nof_experiences] = params[:nof_experiences].to_i + 1
-      redirect_to welcome_experience_path params
+      volunteer.NofExperiences = 1 + params[:nof_experiences].to_i
+      volunteer.save
+      redirect_to welcome_experience_path :nof_experiences => volunteer[:NofExperiences].to_s
     elsif params[:commit] == "Continue"
-      redirect_to welcome_skills_path params
+      redirect_to welcome_skills_path
     end
   end
 

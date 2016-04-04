@@ -36,16 +36,17 @@
         %td Responsabilities
     %tbody
       - params[:nof_experiences].to_i.times do |i|
+        - i = i + 1
         %tr
           %td
             .form-item
               = text_area_tag "length_of_time_#{i}", eval("@length_of_time_#{i}")
           %td
             .form-item
-              = text_area_tag "organization_#{i}", eval("organization_#{i}")
+              = text_area_tag "organization_#{i}", eval("@organization_#{i}")
           %td
             .form-item
-              = text_area_tag "responsabilities_#{i}", eval("responsabilities_#{i}")
+              = text_area_tag "responsabilities_#{i}", eval("@responsabilities_#{i}")
 
   = submit_tag 'Add Experience'
 
