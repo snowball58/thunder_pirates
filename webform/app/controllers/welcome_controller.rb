@@ -213,7 +213,7 @@ class WelcomeController < ApplicationController
       #format.pdf { send_file TestPdfForm.new(user).export, type: 'application/pdf' }
     #send_file TestPdfForm.new(user).export, type: 'application/pdf' , :disposition => 'inline'
     # =>end
-    record = Volunteer.take
+    record = Volunteer.find_by_uniqueID(session[:uniqueID])
     send_file ScottyPDF.new(record).export, type: 'application/pdf' , :disposition => 'inline', :stream => false
   end
 
