@@ -101,9 +101,62 @@ class WelcomeController < ApplicationController
     if params[:nof_experiences] == nil || params[:nof_experiences].to_i < 1
       redirect_to welcome_experience_path :nof_experiences => 1
     end
+
+    if (session[:uniqueID].blank?)
+      redirect_to welcome_index_page
+    end
+
+    volunteer = Volunteer.find_by_uniqueID(session[:uniqueID])
+
+    @length_of_time_1 = volunteer[:LengthofTime1]
+    @length_of_time_2 = volunteer[:LengthofTime2]
+    @length_of_time_3 = volunteer[:LengthofTime3]
+    @length_of_time_4 = volunteer[:LengthofTime4]
+    @length_of_time_5 = volunteer[:LengthofTime5]
+    # @organization_1 = volunteer[:Organization1]
+    # @organization_2 = volunteer[:Organization2]
+    # @organization_3 = volunteer[:Organization3]
+    # @organization_4 = volunteer[:Organization4]
+    # @organization_5 = volunteer[:Organization5]
+    # @responsabilities_1 = volunteer[:Responsabilities1]
+    # @responsabilities_2 = volunteer[:Responsabilities2]
+    # @responsabilities_3 = volunteer[:Responsabilities3]
+    # @responsabilities_4 = volunteer[:Responsabilities4]
+    # @responsabilities_5 = volunteer[:Responsabilities5]
+    @child_abuse_check = volunteer[:child_abuse_check]
+    @child_abuse_text = volunteer[:child_abuse_text]
+    @foster_care_check = volunteer[:foster_care_check]
+    @foster_care_text = volunteer[:foster_care_text]
+    @criminal_check = volunteer[:criminal_check]
+    @criminal_text = volunteer[:criminal_text]
+    @agency_check = volunteer[:agency_check]
+    @agency_text = volunteer[:agency_text]
   end
 
   def experience_check
+    volunteer = Volunteer.find_by_uniqueID(session[:uniqueID])
+
+    if volunteer != nil
+      # todo: include other fields in the database
+      volunteer.LengthofTime1 = params[:length_of_time_1]
+      volunteer.LengthofTime2 = params[:length_of_time_2]
+      volunteer.LengthofTime3 = params[:length_of_time_3]
+      volunteer.LengthofTime4 = params[:length_of_time_4]
+      volunteer.LengthofTime5 = params[:length_of_time_5]
+      volunteer.ExperiencewithChildAbuseYES = params[:child_abuse_check]
+      volunteer.ExperiencewithChildAbuseNO = !params[:child_abuse_check]
+      volunteer.ExperiencewithChildAbuse = params[:child_abuse_text]
+      volunteer.ExperiencewithFosterCareYES = params[:foster_care_check]
+      volunteer.ExperiencewithFosterCareNO = !params[:foster_care_check]
+      volunteer.ExperiencewithFosterCare = params[:foster_care_text]
+      volunteer.ExperiencewithCourtYES = params[:criminal_check]
+      volunteer.ExperiencewithCourtNO = !params[:criminal_check]
+      volunteer.CriminalJuvenileorFamilyCourtSystem = params[:criminal_text]
+      volunteer.ExperiencewithChildServiceYES = params[:agency_check]
+      volunteer.ExperiencewithChildServiceNO = !params[:agency_check]
+      volunteer.OtherChildServiceAgencies  = params[:agency_text]
+    end
+
     if params[:commit] == "Add Experience"
       params[:nof_experiences] = params[:nof_experiences].to_i + 1
       redirect_to welcome_experience_path params

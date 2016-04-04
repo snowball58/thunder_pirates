@@ -39,13 +39,13 @@
         %tr
           %td
             .form-item
-              = text_area_tag "length_of_time_#{i}", params["length_of_time_#{i}"]
+              = text_area_tag "length_of_time_#{i}", eval("@length_of_time_#{i}")
           %td
             .form-item
-              = text_area_tag "organization_#{i}", params["organization_#{i}"]
+              = text_area_tag "organization_#{i}", eval("organization_#{i}")
           %td
             .form-item
-              = text_area_tag "responsabilities_#{i}", params["responsabilities_#{i}"]
+              = text_area_tag "responsabilities_#{i}", eval("responsabilities_#{i}")
 
   = submit_tag 'Add Experience'
 
@@ -58,31 +58,31 @@
     %br
     %br
     %span Child Abuse?
-    = check_box_tag "child_abuse_check", nil, params["child_abuse_check"]
+    = check_box_tag "child_abuse_check", nil, @child_abuse_check
     %br
     %span If Yes, explain why:
-    = text_area_tag "child_abuse_text", params["child_abuse_text"]
+    = text_area_tag "child_abuse_text", @child_abuse_text
     
     %br
     %span Foster Care?
-    = check_box_tag "foster_care_check", nil, params["foster_care_check"]
+    = check_box_tag "foster_care_check", nil, @foster_care_check
     %br
     %span If Yes, explain why:
-    = text_area_tag "foster_care_text", params["foster_care_text"]
+    = text_area_tag "foster_care_text", @foster_care_text
 
     %br
     %span Criminal, Juvenile or Family Court System?
-    = check_box_tag "criminal_check", nil, params["criminal_check"]
+    = check_box_tag "criminal_check", nil, @criminal_check
     %br
     %span If Yes, explain why:
-    = text_area_tag "criminal_text", params["criminal_text"]
+    = text_area_tag "criminal_text", @criminal_text
 
     %br
     %span Other Child Service Agencies?
-    = check_box_tag "agency_check", nil, params["agency_check"]
+    = check_box_tag "agency_check", nil, @agency_check
     %br
     %span If Yes, explain why:
-    = text_area_tag "agency_text", params["agency_text"]
+    = text_area_tag "agency_text", @agency_text
 
   .form-item  
     = submit_tag 'Continue', :class => "button"
