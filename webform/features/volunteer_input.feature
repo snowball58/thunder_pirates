@@ -11,24 +11,10 @@ Scenario:
     
 Scenario: 
     Given the volunteer page is loaded
-    When name is filled in with Smitty Werbenjagermanjensen
-    And the Continue button is clicked
-    And the volunteer page is loaded
-    Then name does not contain Smitty Werbenjagermanjensen
-    
-Scenario: 
-    Given the volunteer page is loaded
     When birth is filled in with 10/17/1994
     And the Continue button is clicked
     And the volunteer page is loaded
     Then birth contains 10/17/1994
-    
-Scenario: 
-    Given the volunteer page is loaded
-    When birth is filled in with October 17, 1994
-    And the Continue button is clicked
-    And the volunteer page is loaded
-    Then birth does not contain October 17, 1994
     
 Scenario: 
     Given the volunteer page is loaded
@@ -39,24 +25,10 @@ Scenario:
     
 Scenario: 
     Given the volunteer page is loaded
-    When email is filled in with extremelylongunrealisticemailaddress@gmail.com
-    And the Continue button is clicked
-    And the volunteer page is loaded
-    Then email does not contain extremelylongunrealisticemailaddress@gmail.com
-    
-Scenario: 
-    Given the volunteer page is loaded
     When phone is filled in with (512)820-7406 (979)555-5555
     And the Continue button is clicked
     And the volunteer page is loaded
     Then phone contains (512)820-7406 (979)555-5555
-    
-Scenario: 
-    Given the volunteer page is loaded
-    When phone is filled in with (512)820-7406 (979)555-5555 (555)123-4567
-    And the Continue button is clicked
-    And the volunteer page is loaded
-    Then phone does not contain (512)820-7406 (979)555-5555 (555)123-4567
     
 Scenario: 
     Given the volunteer page is loaded
@@ -67,24 +39,10 @@ Scenario:
     
 Scenario: 
     Given the volunteer page is loaded
-    When address is filled in with 2001 Holleman Dr. W College Station,TX
-    And the Continue button is clicked
-    And the volunteer page is loaded
-    Then address does not contain 2001 Holleman Dr. W College Station,TX
-    
-Scenario: 
-    Given the volunteer page is loaded
     When county is filled in with Brazos
     And the Continue button is clicked
     And the volunteer page is loaded
     Then county contains Brazos
-    
-Scenario: 
-    Given the volunteer page is loaded
-    When county is filled in with East Baton Rouge
-    And the Continue button is clicked
-    And the volunteer page is loaded
-    Then county does not contain East Baton Rouge
     
 Scenario: 
     Given the volunteer page is loaded
