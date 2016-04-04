@@ -13,13 +13,17 @@ Scenario: Volunteer click continue
 	Then the General Information title is displayed
 	
 Scenario: General Info click continue
-	Given the general_info page is loaded
+	Given the index page is loaded
+	When the Continue button is clicked
+	And the general_info page is loaded
 	When the Continue button is clicked
 	Then the Experience title is displayed
 	
 Scenario: Experience click continue
-	Given the experience page is loaded
+	Given the index page is loaded
 	When the Continue button is clicked
+	And the experience page is loaded
+	And the Continue button is clicked
 	Then the Skills and Special Abilities title is displayed
 	
 Scenario: Skills click continue
