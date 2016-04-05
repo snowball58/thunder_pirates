@@ -173,27 +173,35 @@ class WelcomeController < ApplicationController
     @responsabilities_3 = volunteer[:Responsabilities3]
     @responsabilities_4 = volunteer[:Responsabilities4]
     @responsabilities_5 = volunteer[:Responsabilities5]
-    @child_abuse_check = volunteer[:child_abuse_check]
-    @child_abuse_text = volunteer[:child_abuse_text]
-    @foster_care_check = volunteer[:foster_care_check]
-    @foster_care_text = volunteer[:foster_care_text]
-    @criminal_check = volunteer[:criminal_check]
-    @criminal_text = volunteer[:criminal_text]
-    @agency_check = volunteer[:agency_check]
-    @agency_text = volunteer[:agency_text]
+    @child_abuse_check = volunteer[:ExperiencewithChildAbuseYES]
+    @child_abuse_text = volunteer[:ExperiencewithChildAbuse]
+    @foster_care_check = volunteer[:ExperiencewithFosterCareYES]
+    @foster_care_text = volunteer[:ExperiencewithFosterCare]
+    @criminal_check = volunteer[:ExperiencewithCourtYES]
+    @criminal_text = volunteer[:CriminalJuvenileorFamilyCourtSystem]
+    @agency_check = volunteer[:ExperiencewithChildServiceYES]
+    @agency_text = volunteer[:OtherChildServiceAgencies]
   end
 
   def experience_check
     volunteer = Volunteer.find_by_uniqueID(session[:uniqueID])
-    print "id: " + session[:uniqueID].to_s
 
     if volunteer != nil
-      # todo: include other fields in the database
       volunteer.LengthofTime1 = params[:length_of_time_1]
       volunteer.LengthofTime2 = params[:length_of_time_2]
       volunteer.LengthofTime3 = params[:length_of_time_3]
       volunteer.LengthofTime4 = params[:length_of_time_4]
       volunteer.LengthofTime5 = params[:length_of_time_5]
+      volunteer.Organization1 = params[:organization_1]
+      volunteer.Organization2 = params[:organization_2]
+      volunteer.Organization3 = params[:organization_3]
+      volunteer.Organization4 = params[:organization_4]
+      volunteer.Organization5 = params[:organization_5]
+      volunteer.Responsibilities1 = params[:resposabilities_1]
+      volunteer.Responsibilities2 = params[:resposabilities_2]
+      volunteer.Responsibilities3 = params[:resposabilities_3]
+      volunteer.Responsibilities4 = params[:resposabilities_4]
+      volunteer.Responsibilities5 = params[:resposabilities_5]
       volunteer.ExperiencewithChildAbuseYES = params[:child_abuse_check]
       volunteer.ExperiencewithChildAbuseNO = !params[:child_abuse_check]
       volunteer.ExperiencewithChildAbuse = params[:child_abuse_text]
@@ -258,7 +266,7 @@ class WelcomeController < ApplicationController
     #send_file TestPdfForm.new(user).export, type: 'application/pdf' , :disposition => 'inline'
     # =>end
     record = Volunteer.find_by_uniqueID(session[:uniqueID])
-    send_file ScottyPDF.new(record).export, type: 'application/pdf' , :disposition => 'inline', :stream => false
+    send_file ScottyPDF.new(record).export('/tmp/#{SecureRandom.uuid}.pdf'), type: 'application/pdf' , :disposition => 'inline', :stream => false
   end
 
 end
