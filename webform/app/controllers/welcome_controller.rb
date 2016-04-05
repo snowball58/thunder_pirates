@@ -233,18 +233,85 @@ class WelcomeController < ApplicationController
   end
 
   def skills
+    
+    volunteer = Volunteer.find_by_uniqueID(session[:uniqueID])
+    if volunteer == nil
+      flash[:notice] = "We couldn't find your data, start the form from the beggining."
+      redirect_to welcome_index_path
+    end
 
+    @multilingual_speaker = volunteer[:SpeakotherlanguageYES]
+    @speaking_languages = volunteer[:Speaklanguage]
+    @multilingual_reader = volunteer[:LiterateotherlanguageYES]
+    @reading_languages = volunteer[:Literatelanguage]
+    @impaired_experience = volunteer[:ExperiencewithblinddeafpersonsYES]
+    @impaired_capacity = volunteer[:Experiencewithblinddeafpersons]
+    @handicapped_experience = volunteer[:ExperiencewithhandicappersonsYES]
+    @handicapped_capacity = volunteer[:Experiencewithhandicappersons]
   end
 
   def skills_check
+    volunteer = Volunteer.find_by_uniqueID(session[:uniqueID])
+
+    if volunteer != nil
+      volunteer.SpeakotherlanguageYES = params[:multilingual_speaker]
+      if volunteer.SpeakotherlanguageYES == "Yes"
+        volunteer.SpeakotherlanguageNO = "no"
+      else 
+        volunteer.SpeakotherlanguageNO = "Yes"
+      end
+      volunteer.Speaklanguage = params[:speaking_languages]
+      volunteer.LiterateotherlanguageYES = params[:multilingual_reader]
+      if volunteer.LiterateotherlanguageYES == "Yes"
+        volunteer.LiterateotherlanguageNO = "no"
+      else 
+        volunteer.LiterateotherlanguageNO = "Yes"
+      end
+      volunteer.Literatelanguage = params[:reading_languages]
+      volunteer.ExperiencewithblinddeafpersonsYES = params[:impaired_experience]
+      if volunteer.ExperiencewithblinddeafpersonsYES == "Yes"
+        volunteer.ExperiencewithblinddeafpersonsNO = "no"
+      else 
+        volunteer.ExperiencewithblinddeafpersonsNO = "Yes"
+      end
+      volunteer.Experiencewithblinddeafpersons = params[:impaired_capacity]
+      volunteer.ExperiencewithhandicappersonsYES = params[:handicapped_experience]
+      if volunteer.ExperiencewithhandicappersonsYES == "Yes" 
+        volunteer.ExperiencewithhandicappersonsNO = "no"
+      else 
+        volunteer.ExperiencewithhandicappersonsNO = "Yes"
+      end
+      volunteer.Experiencewithhandicappersons = params[:handicapped_capacity]
+      volunteer.save
+    end
     redirect_to welcome_emergency_notification_path
   end
 
   def emergency_notification
+    volunteer = Volunteer.find_by_uniqueID(session[:uniqueID])
+    if volunteer == nil
+      flash[:notice] = "We couldn't find your data, start the form from the beggining."
+      redirect_to welcome_index_path
+    end
 
+    @emergency_name = volunteer[:EmergencyName]
+    @emergency_primary_phone = volunteer[:EmergencyPhone]
+    @emergency_address = volunteer[:EmergencyAddress]
+    @emergency_relationship = volunteer[:EmergencyRelationship]
   end
 
   def emergency_notification_check
+    
+    volunteer = Volunteer.find_by_uniqueID(session[:uniqueID])
+
+    if volunteer != nil
+      volunteer.EmergencyName = params[:emergency_name]
+      volunteer.EmergencyPhone = params[:emergency_primary_phone]
+      volunteer.EmergencyAddress = params[:emergency_address]
+      volunteer.EmergencyRelationship = params[:emergency_relationship]
+      volunteer.save
+    end
+    
     redirect_to welcome_reference_form_emails_path
   end
   
