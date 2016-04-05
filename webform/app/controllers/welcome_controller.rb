@@ -12,7 +12,18 @@
 class WelcomeController < ApplicationController
   
   def index
-    
+  
+  end
+
+  # This function finds the user in the database. If he's not, the user will be 
+  # redirected to the index
+  def checkin_user
+    volunteer = Volunteer.find_by_uniqueID(session[:uniqueID])
+    if volunteer == nil
+      flash[:notice] = "We couldn't find your data, start the form from the beggining."
+      redirect_to welcome_index_path and return
+    end
+    volunteer
   end
   
   def index_check
@@ -91,10 +102,8 @@ class WelcomeController < ApplicationController
   
   def general_info
     # Check that the current user has an ID set on first page
-    volunteer = Volunteer.find_by_uniqueID(session[:uniqueID])
-    if volunteer == nil
-      redirect_to welcome_index_path
-    end
+    volunteer = checkin_user
+    return if !volunteer
     
     @program_source		= volunteer[:HowdidyoulearnaboutScottysHouseandourVolunteerProgram]
     @experience_gain	= volunteer[:Whatwouldyouliketogainfromyourvolunteerexperience]
@@ -111,10 +120,8 @@ class WelcomeController < ApplicationController
   
   def general_info_check
     # Check that the current user has an ID set on first page
-    volunteer = Volunteer.find_by_uniqueID(session[:uniqueID])
-    if volunteer == nil
-      redirect_to welcome_index_path
-    end
+    volunteer = checkin_user
+    return if !volunteer
     
     volunteer.HowdidyoulearnaboutScottysHouseandourVolunteerProgram	= params[:program_source]
     volunteer.Whatwouldyouliketogainfromyourvolunteerexperience 	= params[:experience_gain]
@@ -148,12 +155,8 @@ class WelcomeController < ApplicationController
   end
 
   def experience
-    
-    volunteer = Volunteer.find_by_uniqueID(session[:uniqueID])
-    if volunteer == nil
-      flash[:notice] = "We couldn't find your data, start the form from the beggining."
-      redirect_to welcome_index_path and return
-    end
+    volunteer = checkin_user
+    return if !volunteer
 
     # Fix number of experiences parameter
     if volunteer[:NofExperiences] == nil
@@ -193,7 +196,8 @@ class WelcomeController < ApplicationController
   end
 
   def experience_check
-    volunteer = Volunteer.find_by_uniqueID(session[:uniqueID])
+    volunteer = checkin_user
+    return if !volunteer
 
     no_checkbox_map = Hash.new ""
     no_checkbox_map[nil] = "Yes"
@@ -244,11 +248,8 @@ class WelcomeController < ApplicationController
 
   def skills
     
-    volunteer = Volunteer.find_by_uniqueID(session[:uniqueID])
-    if volunteer == nil
-      flash[:notice] = "We couldn't find your data, start the form from the beggining."
-      redirect_to welcome_index_path
-    end
+    volunteer = checkin_user
+    return if !volunteer
 
     @multilingual_speaker = volunteer[:SpeakotherlanguageYES]
     @speaking_languages = volunteer[:Speaklanguage]
@@ -298,11 +299,8 @@ class WelcomeController < ApplicationController
   end
 
   def emergency_notification
-    volunteer = Volunteer.find_by_uniqueID(session[:uniqueID])
-    if volunteer == nil
-      flash[:notice] = "We couldn't find your data, start the form from the beggining."
-      redirect_to welcome_index_path
-    end
+    volunteer = checkin_user
+    return if !volunteer
 
     @emergency_name = volunteer[:EmergencyName]
     @emergency_primary_phone = volunteer[:EmergencyPhone]
