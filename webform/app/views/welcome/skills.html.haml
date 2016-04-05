@@ -19,44 +19,32 @@
 =form_tag welcome_skills_path, :method => :post do
   .form-item
     %span Do you speak any languages other than English?
-    = radio_button_tag(:multilingual_speaker, "Yes", @multilingual_speaker)
-    = label_tag(:multilingual_speaker_yes, "Yes")
+    = check_box_tag(:multilingual_speaker, "Yes", @multilingual_speaker)
 
-    = radio_button_tag(:multilingual_speaker, "no", @multilingual_speaker)
-    = label_tag(:multilingual_speaker_no, "No")
     %br
     %span If so, what language(s)?
     = text_field_tag(:speaking_languages, @speaking_languages)
 
   .form-item
     %span Do you read/write in any language other than English?
-    = radio_button_tag(:multilingual_reader, "Yes", @multilingual_reader)
-    = label_tag(:multilingual_reader_yes, "Yes")
+    = check_box_tag(:multilingual_reader, "Yes", @multilingual_reader)
 
-    = radio_button_tag(:multilingual_reader, "no", @multilingual_reader)
-    = label_tag(:multilingual_reader_no, "No")
     %br
     %span If so, what language(s)?
     = text_field_tag(:reading_languages, @reading_languages)
 
   .form-item
     %span Do you have any experience with blind or hearing impaired persons?
-    = radio_button_tag(:impaired_experience, "Yes", @impaired_experience)
-    = label_tag(:impaired_experience_yes, "Yes")
-
-    = radio_button_tag(:impaired_experience, "no", @impaired_experience)
-    = label_tag(:impaired_experience_no, "No")
+    = check_box_tag(:impaired_experience, "Yes", @impaired_experience)
+    
     %br
     %span If so, in what capacity?
     = text_area_tag(:impaired_capacity, @impaired_capacity)
 
   .form-item
     %span Do you have any experience with handicapped persons?
-    = radio_button_tag(:handicapped_experience, "Yes", @handicapped_experience)
-    = label_tag(:handicapped_experience_yes, "Yes")
+    = check_box_tag(:handicapped_experience, "Yes", @handicapped_experience)
 
-    = radio_button_tag(:handicapped_experience, "no", @handicapped_experience)
-    = label_tag(:handicapped_experience_no, "No")
     %br
     %span If so, in what capacity?
     = text_area_tag(:handicapped_capacity, @handicapped_capacity)
