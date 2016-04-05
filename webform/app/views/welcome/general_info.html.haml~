@@ -55,7 +55,7 @@
     = label_tag(:employed_no, "No")
     %br
     %span Name of employer:  
-    = text_field_tag(:employer_name, @employer_name)
+    = text_field_tag(:employer_name)
   
   .form-item  
     = submit_tag 'Continue', :class => "button"
