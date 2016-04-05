@@ -121,19 +121,25 @@ class WelcomeController < ApplicationController
     
     reason = params[:reason]
     if reason == "class_credit" then
-      volunteer.ClassCredit = reason
+      volunteer.ClassCredit = "Yes"
+      volunteer.OrganizationCredit = "No"      
+      volunteer.Other = "No"
       volunteer.NameofInstructor = params[:instructor_name]
     elsif reason == "org_credit" then
-      volunteer.OrganizationCredit = reason
+      volunteer.ClassCredit = "No"
+      volunteer.OrganizationCredit = "Yes"      
+      volunteer.Other = "No"
       volunteer.NameofOrganization = params[:organization_name]
     elsif reason == "other" then
-      volunteer.Other = reason
+      volunteer.ClassCredit = "No"
+      volunteer.OrganizationCredit = "No"      
+      volunteer.Other = "Yes"
       volunteer.OtherPleaseexplain = params[:explanation]
     end
           
     employment = params[:employed]
     if employment == "yes" then
-      volunteer.CurrentlyEmployed = employment
+      volunteer.CurrentlyEmployed = "Yes"
       volunteer.NameofEmployer = params[:employer_name]
     end
     
