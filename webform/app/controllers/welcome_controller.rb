@@ -129,22 +129,20 @@ class WelcomeController < ApplicationController
     @responsabilities_3 = volunteer[:Responsabilities3]
     @responsabilities_4 = volunteer[:Responsabilities4]
     @responsabilities_5 = volunteer[:Responsabilities5]
-    @child_abuse_check = volunteer[:child_abuse_check]
-    @child_abuse_text = volunteer[:child_abuse_text]
-    @foster_care_check = volunteer[:foster_care_check]
-    @foster_care_text = volunteer[:foster_care_text]
-    @criminal_check = volunteer[:criminal_check]
-    @criminal_text = volunteer[:criminal_text]
-    @agency_check = volunteer[:agency_check]
-    @agency_text = volunteer[:agency_text]
+    @child_abuse_check = volunteer[:ExperiencewithChildAbuseYES]
+    @child_abuse_text = volunteer[:ExperiencewithChildAbuse]
+    @foster_care_check = volunteer[:ExperiencewithFosterCareYES]
+    @foster_care_text = volunteer[:ExperiencewithFosterCare]
+    @criminal_check = volunteer[:ExperiencewithCourtYES]
+    @criminal_text = volunteer[:CriminalJuvenileorFamilyCourtSystem]
+    @agency_check = volunteer[:ExperiencewithChildServiceYES]
+    @agency_text = volunteer[:OtherChildServiceAgencies]
   end
 
   def experience_check
     volunteer = Volunteer.find_by_uniqueID(session[:uniqueID])
-    print "id: " + session[:uniqueID].to_s
 
     if volunteer != nil
-      # todo: include other fields in the database
       volunteer.LengthofTime1 = params[:length_of_time_1]
       volunteer.LengthofTime2 = params[:length_of_time_2]
       volunteer.LengthofTime3 = params[:length_of_time_3]
