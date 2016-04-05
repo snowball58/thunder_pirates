@@ -152,12 +152,15 @@ class WelcomeController < ApplicationController
     volunteer = Volunteer.find_by_uniqueID(session[:uniqueID])
     if volunteer == nil
       flash[:notice] = "We couldn't find your data, start the form from the beggining."
-      redirect_to welcome_index_path
+      redirect_to welcome_index_path and return
     end
 
     # Fix number of experiences parameter
     if volunteer[:NofExperiences] == nil
       volunteer.NofExperiences = 1
+    end
+    if volunteer[:NofExperiences] > 5
+      volunteer.NofExperiences = 5
     end
     nof_experiences = volunteer[:NofExperiences]
     if params[:nof_experiences] == nil || params[:nof_experiences].to_i != nof_experiences.to_i
@@ -229,8 +232,10 @@ class WelcomeController < ApplicationController
     end
 
     if params[:commit] == "Add Experience"
-      volunteer.NofExperiences = 1 + params[:nof_experiences].to_i
-      volunteer.save
+      if params[:nof_experiences].to_i < 5
+        volunteer.NofExperiences = 1 + params[:nof_experiences].to_i
+        volunteer.save
+      end
       redirect_to welcome_experience_path :nof_experiences => volunteer[:NofExperiences].to_s
     elsif params[:commit] == "Continue"
       redirect_to welcome_skills_path
