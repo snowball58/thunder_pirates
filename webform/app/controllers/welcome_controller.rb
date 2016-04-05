@@ -84,7 +84,7 @@ class WelcomeController < ApplicationController
     #this is where I fill in the date of the application
     time = Time.new
     volunteer.DateofApplication = time.month.to_s + "/" + time.day.to_s + "/" + time.year.to_s
-    puts volunteer.DateofApplication
+    #puts volunteer.DateofApplication
     
     #this is how to change check boxes in the database
     volunteer.FamilyCare = params[:family]
