@@ -19,7 +19,7 @@
 =form_tag welcome_skills_path, :method => :post do
   .form-item
     %span Do you speak any languages other than english?
-    = radio_button_tag(:multilingual_speaker, "yes")
+    = radio_button_tag(:multilingual_speaker, "Yes")
     = label_tag(:multilingual_speaker_yes, "Yes")
 
     = radio_button_tag(:multilingual_speaker, "no")
@@ -30,7 +30,7 @@
 
   .form-item
     %span Do you read/write in any language other than English?
-    = radio_button_tag(:multilingual_reader, "yes")
+    = radio_button_tag(:multilingual_reader, "Yes")
     = label_tag(:multilingual_reader_yes, "Yes")
 
     = radio_button_tag(:multilingual_reader, "no")
@@ -41,7 +41,7 @@
 
   .form-item
     %span Do you have any experience with blind or hearing impaired persons?
-    = radio_button_tag(:impaired_experience, "yes")
+    = radio_button_tag(:impaired_experience, "Yes")
     = label_tag(:impaired_experience_yes, "Yes")
 
     = radio_button_tag(:impaired_experience, "no")
@@ -52,7 +52,7 @@
 
   .form-item
     %span Do you have any experience with handicapped persons?
-    = radio_button_tag(:handicapped_experience, "yes")
+    = radio_button_tag(:handicapped_experience, "Yes")
     = label_tag(:handicapped_experience_yes, "Yes")
 
     = radio_button_tag(:handicapped_experience, "no")

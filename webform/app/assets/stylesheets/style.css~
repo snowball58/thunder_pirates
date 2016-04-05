@@ -35,6 +35,10 @@ textarea {
 }
 
 .horizontal-center {
+<<<<<<< HEAD
+=======
+	/*position: fixed;*/
+>>>>>>> f15b7533430544dbd6b9c0145dd06e52ea43307b
 	position: absolute;
 	left: 50%;
 	transform: translate(-50%, 0);
