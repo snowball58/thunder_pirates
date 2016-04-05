@@ -142,6 +142,9 @@ class WelcomeController < ApplicationController
   def experience_check
     volunteer = Volunteer.find_by_uniqueID(session[:uniqueID])
 
+    no_checkbox_map = Hash.new ""
+    no_checkbox_map[nil] = "Yes"
+
     if volunteer != nil
       volunteer.LengthofTime1 = params[:length_of_time_1]
       volunteer.LengthofTime2 = params[:length_of_time_2]
@@ -159,16 +162,18 @@ class WelcomeController < ApplicationController
       volunteer.Responsibilities4 = params[:resposabilities_4]
       volunteer.Responsibilities5 = params[:resposabilities_5]
       volunteer.ExperiencewithChildAbuseYES = params[:child_abuse_check]
-      volunteer.ExperiencewithChildAbuseNO = !params[:child_abuse_check]
+
+
+      volunteer.ExperiencewithChildAbuseNO = no_checkbox_map[params[:child_abuse_check]]
       volunteer.ExperiencewithChildAbuse = params[:child_abuse_text]
       volunteer.ExperiencewithFosterCareYES = params[:foster_care_check]
-      volunteer.ExperiencewithFosterCareNO = !params[:foster_care_check]
+      volunteer.ExperiencewithFosterCareNO = no_checkbox_map[params[:foster_care_check]]
       volunteer.ExperiencewithFosterCare = params[:foster_care_text]
       volunteer.ExperiencewithCourtYES = params[:criminal_check]
-      volunteer.ExperiencewithCourtNO = !params[:criminal_check]
+      volunteer.ExperiencewithCourtNO = no_checkbox_map[params[:criminal_check]]
       volunteer.CriminalJuvenileorFamilyCourtSystem = params[:criminal_text]
       volunteer.ExperiencewithChildServiceYES = params[:agency_check]
-      volunteer.ExperiencewithChildServiceNO = !params[:agency_check]
+      volunteer.ExperiencewithChildServiceNO = no_checkbox_map[params[:agency_check]]
       volunteer.OtherChildServiceAgencies  = params[:agency_text]
       volunteer.save
     end
