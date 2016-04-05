@@ -27,11 +27,15 @@ Scenario: Experience click continue
 	Then the Skills and Special Abilities title is displayed
 	
 Scenario: Skills click continue
-	Given the skills page is loaded
+	Given the index page is loaded
+	When the Continue button is clicked
+	And the skills page is loaded
 	When the Continue button is clicked
 	Then the Emergency Notification title is displayed
 	
 Scenario: Emergency click continue
+	Given the index page is loaded
+	When the Continue button is clicked
 	Given the emergency_notification page is loaded
 	When the Continue button is clicked
     Then the References title is displayed

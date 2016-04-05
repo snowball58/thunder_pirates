@@ -12,7 +12,18 @@
 class WelcomeController < ApplicationController
   
   def index
-    
+  
+  end
+
+  # This function finds the user in the database. If he's not, the user will be 
+  # redirected to the index
+  def checkin_user
+    volunteer = Volunteer.find_by_uniqueID(session[:uniqueID])
+    if volunteer == nil
+      flash[:notice] = "We couldn't find your data, start the form from the beggining."
+      redirect_to welcome_index_path and return
+    end
+    volunteer
   end
   
   def index_check
@@ -73,7 +84,7 @@ class WelcomeController < ApplicationController
     #this is where I fill in the date of the application
     time = Time.new
     volunteer.DateofApplication = time.month.to_s + "/" + time.day.to_s + "/" + time.year.to_s
-    puts volunteer.DateofApplication
+    #puts volunteer.DateofApplication
     
     #this is how to change check boxes in the database
     volunteer.FamilyCare = params[:family]
@@ -91,10 +102,8 @@ class WelcomeController < ApplicationController
   
   def general_info
     # Check that the current user has an ID set on first page
-    volunteer = Volunteer.find_by_uniqueID(session[:uniqueID])
-    if volunteer == nil
-      redirect_to welcome_index_path
-    end
+    volunteer = checkin_user
+    return if !volunteer
     
     @program_source		= volunteer[:HowdidyoulearnaboutScottysHouseandourVolunteerProgram]
     @experience_gain	= volunteer[:Whatwouldyouliketogainfromyourvolunteerexperience]
@@ -111,10 +120,8 @@ class WelcomeController < ApplicationController
   
   def general_info_check
     # Check that the current user has an ID set on first page
-    volunteer = Volunteer.find_by_uniqueID(session[:uniqueID])
-    if volunteer == nil
-      redirect_to welcome_index_path
-    end
+    volunteer = checkin_user
+    return if !volunteer
     
     volunteer.HowdidyoulearnaboutScottysHouseandourVolunteerProgram	= params[:program_source]
     volunteer.Whatwouldyouliketogainfromyourvolunteerexperience 	= params[:experience_gain]
@@ -148,16 +155,15 @@ class WelcomeController < ApplicationController
   end
 
   def experience
-    
-    volunteer = Volunteer.find_by_uniqueID(session[:uniqueID])
-    if volunteer == nil
-      flash[:notice] = "We couldn't find your data, start the form from the beggining."
-      redirect_to welcome_index_path
-    end
+    volunteer = checkin_user
+    return if !volunteer
 
     # Fix number of experiences parameter
     if volunteer[:NofExperiences] == nil
       volunteer.NofExperiences = 1
+    end
+    if volunteer[:NofExperiences] > 5
+      volunteer.NofExperiences = 5
     end
     nof_experiences = volunteer[:NofExperiences]
     if params[:nof_experiences] == nil || params[:nof_experiences].to_i != nof_experiences.to_i
@@ -190,7 +196,11 @@ class WelcomeController < ApplicationController
   end
 
   def experience_check
-    volunteer = Volunteer.find_by_uniqueID(session[:uniqueID])
+    volunteer = checkin_user
+    return if !volunteer
+
+    no_checkbox_map = Hash.new ""
+    no_checkbox_map[nil] = "Yes"
 
     if volunteer != nil
       volunteer.LengthofTime1 = params[:length_of_time_1]
@@ -209,23 +219,27 @@ class WelcomeController < ApplicationController
       volunteer.Responsibilities4 = params[:resposabilities_4]
       volunteer.Responsibilities5 = params[:resposabilities_5]
       volunteer.ExperiencewithChildAbuseYES = params[:child_abuse_check]
-      volunteer.ExperiencewithChildAbuseNO = !params[:child_abuse_check]
+
+
+      volunteer.ExperiencewithChildAbuseNO = no_checkbox_map[params[:child_abuse_check]]
       volunteer.ExperiencewithChildAbuse = params[:child_abuse_text]
       volunteer.ExperiencewithFosterCareYES = params[:foster_care_check]
-      volunteer.ExperiencewithFosterCareNO = !params[:foster_care_check]
+      volunteer.ExperiencewithFosterCareNO = no_checkbox_map[params[:foster_care_check]]
       volunteer.ExperiencewithFosterCare = params[:foster_care_text]
       volunteer.ExperiencewithCourtYES = params[:criminal_check]
-      volunteer.ExperiencewithCourtNO = !params[:criminal_check]
+      volunteer.ExperiencewithCourtNO = no_checkbox_map[params[:criminal_check]]
       volunteer.CriminalJuvenileorFamilyCourtSystem = params[:criminal_text]
       volunteer.ExperiencewithChildServiceYES = params[:agency_check]
-      volunteer.ExperiencewithChildServiceNO = !params[:agency_check]
+      volunteer.ExperiencewithChildServiceNO = no_checkbox_map[params[:agency_check]]
       volunteer.OtherChildServiceAgencies  = params[:agency_text]
       volunteer.save
     end
 
     if params[:commit] == "Add Experience"
-      volunteer.NofExperiences = 1 + params[:nof_experiences].to_i
-      volunteer.save
+      if params[:nof_experiences].to_i < 5
+        volunteer.NofExperiences = 1 + params[:nof_experiences].to_i
+        volunteer.save
+      end
       redirect_to welcome_experience_path :nof_experiences => volunteer[:NofExperiences].to_s
     elsif params[:commit] == "Continue"
       redirect_to welcome_skills_path
@@ -234,11 +248,8 @@ class WelcomeController < ApplicationController
 
   def skills
     
-    volunteer = Volunteer.find_by_uniqueID(session[:uniqueID])
-    if volunteer == nil
-      flash[:notice] = "We couldn't find your data, start the form from the beggining."
-      redirect_to welcome_index_path
-    end
+    volunteer = checkin_user
+    return if !volunteer
 
     @multilingual_speaker = volunteer[:SpeakotherlanguageYES]
     @speaking_languages = volunteer[:Speaklanguage]
@@ -288,11 +299,8 @@ class WelcomeController < ApplicationController
   end
 
   def emergency_notification
-    volunteer = Volunteer.find_by_uniqueID(session[:uniqueID])
-    if volunteer == nil
-      flash[:notice] = "We couldn't find your data, start the form from the beggining."
-      redirect_to welcome_index_path
-    end
+    volunteer = checkin_user
+    return if !volunteer
 
     @emergency_name = volunteer[:EmergencyName]
     @emergency_primary_phone = volunteer[:EmergencyPhone]
