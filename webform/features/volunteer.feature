@@ -25,6 +25,10 @@ Scenario: Experience click continue
 	And the experience page is loaded
 	And the Continue button is clicked
 	Then the Skills and Special Abilities title is displayed
+
+Scenario: User starts form from experience page
+	Given the experience page is loaded
+	Then the Scotty's House Volunteer & Intern Application title is displayed
 	
 Scenario: Skills click continue
 	Given the index page is loaded

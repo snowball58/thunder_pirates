@@ -105,17 +105,17 @@ class WelcomeController < ApplicationController
     volunteer = checkin_user
     return if !volunteer
     
-    @program_source		= volunteer[:HowdidyoulearnaboutScottysHouseandourVolunteerProgram]
-    @experience_gain	= volunteer[:Whatwouldyouliketogainfromyourvolunteerexperience]
-    @reason_class_credit= volunteer[:ClassCredit]
-    @instructor_name	= volunteer[:NameofInstructor]    
-    @reason_org_credit	= volunteer[:OrganizationCredit]
-    @organization_name	= volunteer[:NameofOrganization]              
-    @reason_other		= volunteer[:Other]
-    @explanation		= volunteer[:OtherPleaseexplain]              
-    @employed			= volunteer[:CurrentlyEmployed]
-	@employer_name		= volunteer[:NameofEmployer]
-	
+    @program_source = volunteer[:HowdidyoulearnaboutScottysHouseandourVolunteerProgram]
+    @experience_gain = volunteer[:Whatwouldyouliketogainfromyourvolunteerexperience]
+    @reason_class_credit = volunteer[:ClassCredit]
+    @instructor_name = volunteer[:NameofInstructor]    
+    @reason_org_credit = volunteer[:OrganizationCredit]
+    @organization_name = volunteer[:NameofOrganization]              
+    @reason_other = volunteer[:Other]
+    @explanation = volunteer[:OtherPleaseexplain]              
+    @employed = volunteer[:CurrentlyEmployed]
+    @employer_name = volunteer[:NameofEmployer]
+  
   end
   
   def general_info_check
@@ -123,8 +123,8 @@ class WelcomeController < ApplicationController
     volunteer = checkin_user
     return if !volunteer
     
-    volunteer.HowdidyoulearnaboutScottysHouseandourVolunteerProgram	= params[:program_source]
-    volunteer.Whatwouldyouliketogainfromyourvolunteerexperience 	= params[:experience_gain]
+    volunteer.HowdidyoulearnaboutScottysHouseandourVolunteerProgram = params[:program_source]
+    volunteer.Whatwouldyouliketogainfromyourvolunteerexperience   = params[:experience_gain]
     
     reason = params[:reason]
     if reason == "class_credit" then
@@ -219,8 +219,6 @@ class WelcomeController < ApplicationController
       volunteer.Responsibilities4 = params[:resposabilities_4]
       volunteer.Responsibilities5 = params[:resposabilities_5]
       volunteer.ExperiencewithChildAbuseYES = params[:child_abuse_check]
-
-
       volunteer.ExperiencewithChildAbuseNO = no_checkbox_map[params[:child_abuse_check]]
       volunteer.ExperiencewithChildAbuse = params[:child_abuse_text]
       volunteer.ExperiencewithFosterCareYES = params[:foster_care_check]
@@ -244,6 +242,7 @@ class WelcomeController < ApplicationController
     elsif params[:commit] == "Continue"
       redirect_to welcome_skills_path
     end
+
   end
 
   def skills
