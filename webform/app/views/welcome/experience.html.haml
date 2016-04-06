@@ -46,7 +46,7 @@
               = text_area_tag "organization_#{i}", eval("@organization_#{i}")
           %td
             .form-item
-              = text_area_tag "responsabilities_#{i}", eval("@responsabilities_#{i}")
+              = text_area_tag "responsibilities_#{i}", eval("@responsibilities_#{i}")
 
   = submit_tag 'Add Experience', :class => "button"
 
@@ -60,8 +60,6 @@
     %br
     %span Child Abuse?
     = check_box_tag :child_abuse_check, "Yes", @child_abuse_check
-    
-
 
     %br
     %span If Yes, explain why:
