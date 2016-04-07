@@ -83,6 +83,7 @@ class WelcomeController < ApplicationController
     
     #this is where I fill in the date of the application
     time = Time.new
+    volunteer.date_modified = DateTime.new
     volunteer.DateofApplication = time.month.to_s + "/" + time.day.to_s + "/" + time.year.to_s
     #puts volunteer.DateofApplication
     
@@ -149,7 +150,7 @@ class WelcomeController < ApplicationController
       volunteer.CurrentlyEmployed = "Yes"
       volunteer.NameofEmployer = params[:employer_name]
     end
-    
+    volunteer.date_modified = DateTime.new
     volunteer.save
     redirect_to welcome_experience_path
   end
@@ -230,6 +231,7 @@ class WelcomeController < ApplicationController
       volunteer.ExperiencewithChildServiceYES = params[:agency_check]
       volunteer.ExperiencewithChildServiceNO = no_checkbox_map[params[:agency_check]]
       volunteer.OtherChildServiceAgencies  = params[:agency_text]
+      volunteer.date_modified = DateTime.new
       volunteer.save
     end
 
@@ -292,6 +294,7 @@ class WelcomeController < ApplicationController
         volunteer.ExperiencewithhandicappersonsNO = "Yes"
       end
       volunteer.Experiencewithhandicappersons = params[:handicapped_capacity]
+      volunteer.date_modified = DateTime.new
       volunteer.save
     end
     redirect_to welcome_emergency_notification_path
@@ -316,6 +319,7 @@ class WelcomeController < ApplicationController
       volunteer.EmergencyPhone = params[:emergency_primary_phone]
       volunteer.EmergencyAddress = params[:emergency_address]
       volunteer.EmergencyRelationship = params[:emergency_relationship]
+      volunteer.date_modified = DateTime.new
       volunteer.save
     end
     
