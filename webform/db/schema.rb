@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160406215136) do
+ActiveRecord::Schema.define(version: 20160406222803) do
 
   create_table "references", force: :cascade do |t|
     t.string   "Signature_4"
@@ -29,6 +29,9 @@ ActiveRecord::Schema.define(version: 20160406215136) do
     t.string   "VolunteerId"
     t.datetime "date_modified"
   end
+
+  add_index "references", ["date_modified"], name: "index_references_on_date_modified"
+  add_index "references", ["uniqueID"], name: "index_references_on_uniqueID"
 
   create_table "volunteers", force: :cascade do |t|
     t.string   "County"
@@ -110,5 +113,8 @@ ActiveRecord::Schema.define(version: 20160406215136) do
     t.integer  "NofExperiences"
     t.datetime "date_modified"
   end
+
+  add_index "volunteers", ["date_modified"], name: "index_volunteers_on_date_modified"
+  add_index "volunteers", ["uniqueID"], name: "index_volunteers_on_uniqueID"
 
 end
