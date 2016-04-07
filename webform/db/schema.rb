@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160406222803) do
+ActiveRecord::Schema.define(version: 20160407204041) do
 
   create_table "references", force: :cascade do |t|
     t.string   "Signature_4"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20160406222803) do
     t.datetime "date_modified"
   end
 
+  add_index "references", ["Howlonghaveyouknownthisperson"], name: "index_references_on_Howlonghaveyouknownthisperson"
   add_index "references", ["date_modified"], name: "index_references_on_date_modified"
   add_index "references", ["uniqueID"], name: "index_references_on_uniqueID"
 
@@ -114,6 +115,7 @@ ActiveRecord::Schema.define(version: 20160406222803) do
     t.datetime "date_modified"
   end
 
+  add_index "volunteers", ["EmergencyName"], name: "index_volunteers_on_EmergencyName"
   add_index "volunteers", ["date_modified"], name: "index_volunteers_on_date_modified"
   add_index "volunteers", ["uniqueID"], name: "index_volunteers_on_uniqueID"
 
