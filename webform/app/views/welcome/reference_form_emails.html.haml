@@ -32,3 +32,6 @@
   
   .form-item  
     = submit_tag 'Continue', :class => "button"
+  
+  .form-item
+    = link_to 'Reference Link', 'https://csce431-project-matthewwiecek.c9users.io/welcome/reference_form?unique_id=' + @ref_id.to_s

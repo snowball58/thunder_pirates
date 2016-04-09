@@ -327,18 +327,46 @@ class WelcomeController < ApplicationController
   end
   
   def reference_form_emails
-   
+    volunteer = checkin_user
+    return if !volunteer
+    @ref_id = session[:uniqueID]
+    #@reference_email_1 = volunteer[]
+    #@reference_email_2
+    #@reference_email_3
   end
   
   def reference_form_emails_check
+    volunteer = Volunteer.find_by_uniqueID(session[:uniqueID])
+    
+    if volunteer != nil
+      #need way to set emails
+      #volunteer.date_modified = DateTime.new
+      volunteer.save
+    end
+    
     redirect_to welcome_reference_form_path
   end
   
   def reference_form
-   
+    r = Reference.new
+    r.uniqueID = params[:uniqueID]
+    r.save
   end
   
   def reference_form_check
+    reference = Reference.find_by_uniqueID(session[:uniqueID])
+    
+      if reference != nil
+        reference.VolunteerName = params[:reference_name]
+        reference.Howlonghaveyouknownthisperson = params[:reference_form_area_1]
+        reference.Cableincrisissituationwhy = params[:reference_form_area_2]
+        reference.Doesthispersonusuallyexercisegoodjudgment = params[:reference_form_area_3]
+        reference.Doyouhaveanyhesitationaboutthispersonworkinginthiscapacity = params[:reference_form_area_4]
+        reference.PertinentInformation = params[:reference_form_area_5]
+        #reference.date_modified = DateTime.new
+        reference.save
+      end
+    
     redirect_to welcome_reference_form_path
   end
   
