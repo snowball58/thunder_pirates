@@ -348,9 +348,11 @@ class WelcomeController < ApplicationController
   end
   
   def reference_form
-    r = Reference.new
-    r.uniqueID = params[:uniqueID]
-    r.save
+    if params[:uniqueID] != nil
+      r = Reference.new
+      r.uniqueID = params[:uniqueID]
+      r.save
+    end
   end
   
   def reference_form_check
