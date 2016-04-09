@@ -1,0 +1,9 @@
+When(/^I choose "([^"]*)" from the "([^"]*)" options$/) do |button, group|
+  id = group + "_" + button
+  page.choose(id)
+end
+
+Then(/^"([^"]*)" from the "([^"]*)" options should not be chosen$/) do |button, group|
+  id = group + "_" + button	
+  find_field(id).should_not == 'checked'
+end
