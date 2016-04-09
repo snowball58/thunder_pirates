@@ -20,10 +20,10 @@ Scenario:
     Then organization_1 contains Some Organization
 
 Scenario:
-    When responsibilities_1 is filled in with Some Responsabilities
+    When responsibilities_1 is filled in with Some Responsibilities
     And the Continue button is clicked
     And the experience page is loaded
-    Then responsibilities_1 contains Some Responsabilities
+    Then responsibilities_1 contains Some Responsibilities
 
 Scenario:
     When I check child_abuse_check
