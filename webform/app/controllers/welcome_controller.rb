@@ -348,9 +348,9 @@ class WelcomeController < ApplicationController
   end
   
   def reference_form
-    if params[:uniqueID] != nil
+    if params[:ref_id] != nil
       r = Reference.new
-      r.uniqueID = params[:uniqueID]
+      r.VolunteerId = params[:ref_id]
       r.save
     end
   end

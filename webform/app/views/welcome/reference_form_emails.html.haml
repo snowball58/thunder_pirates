@@ -34,4 +34,4 @@
     = submit_tag 'Continue', :class => "button"
   
   .form-item
-    = link_to 'Reference Link', 'https://secure-escarpment-46126.herokuapp.com/welcome/reference_form?unique_id=' + @ref_id.to_s
+    = link_to 'Reference Link', welcome_reference_form_path(:ref_id => @ref_id.to_s)
