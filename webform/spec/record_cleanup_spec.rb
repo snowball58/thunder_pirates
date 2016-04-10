@@ -13,7 +13,7 @@ describe 'rake Task' do
     let!(:old_incomplete_reference) { Reference.create(:date_modified => Time.now - (60*60*25)) }
     let!(:old_complete_reference) { Reference.create(:date_modified => Time.now - (60*60*24*31), :Howlonghaveyouknownthisperson => '12')}
     let!(:recent_incomplete_reference) { Reference.create(:date_modified => Time.now) }
-    let!(:recent_complete_reference) { Reference.create(:date_modified => Time.now, "Howlonghaveyouknownthisperson => '12') }
+    let!(:recent_complete_reference) { Reference.create(:date_modified => Time.now, :Howlonghaveyouknownthisperson => '12') }
     let!(:blank_record) { Volunteer.create() }
     let!(:blank_ref) { Reference.create() }
     
