@@ -71,6 +71,9 @@ class WelcomeController < ApplicationController
     #some fields might be required later
     volunteer = Volunteer.find_by_uniqueID(session[:uniqueID])
     
+    #set timestamp modified
+    volunteer.date_modified = Time.now
+    
     #this is how you change text fields in the database
     volunteer.Name = params[:name]
     volunteer.DateofBirth = params[:birth]
