@@ -333,9 +333,6 @@ class WelcomeController < ApplicationController
     volunteer = checkin_user
     return if !volunteer
     @ref_id = session[:uniqueID]
-    #@reference_email_1 = volunteer[]
-    #@reference_email_2
-    #@reference_email_3
   end
   
   def reference_form_emails_check
@@ -351,15 +348,34 @@ class WelcomeController < ApplicationController
   end
   
   def reference_form
-    if params[:ref_id] != nil
-      r = Reference.new
-      r.VolunteerId = params[:ref_id]
-      r.save
+    if params[:ref_id] != nil && session[:ref_unique_id] == nil
+      uID = SecureRandom.base64
+      while Reference.exists?(:uniqueID => uID) do
+        uID = SecureRandom.base64
+      end
+      b = Reference.new
+      b.uniqueID = uID
+      b.VolunteerId = params[:ref_id]
+      b.date_modified = Time.now
+      b.save
+      session[:ref_unique_id] = uID
+    end
+    if (params[:ref_id] == nil && session[:ref_unique_id] != nil) or (params[:ref_id] != nil && session[:ref_unique_id] != nil)
+      reference = Reference.find_by_uniqueID(session[:ref_unique_id])
+      @reference_name = reference.VolunteerName
+      @reference_form_area_1 = reference.Howlonghaveyouknownthisperson
+      @reference_form_area_2 = reference.Cableincrisissituationwhy
+      @reference_form_area_3 = reference.Doesthispersonusuallyexercisegoodjudgment
+      @reference_form_area_4 = reference.Doyouhaveanyhesitationaboutthispersonworkinginthiscapacity
+      @reference_form_area_5 = reference.PertinentInformation
+    end
+    if params[:ref_id] == nil && session[:ref_unique_id] == nil
+      #need an error page to redirect to
     end
   end
   
   def reference_form_check
-    reference = Reference.find_by_uniqueID(session[:uniqueID])
+    reference = Reference.find_by_uniqueID(session[:ref_unique_id])
     
       if reference != nil
         reference.VolunteerName = params[:reference_name]

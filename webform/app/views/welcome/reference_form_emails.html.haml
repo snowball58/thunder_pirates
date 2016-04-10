@@ -30,8 +30,5 @@
     %span Reference 3
     = text_field_tag(:reference_email_3)
   
-  .form-item  
-    = submit_tag 'Continue', :class => "button"
-  
   .form-item
     = link_to 'Reference Link', welcome_reference_form_path(:ref_id => @ref_id.to_s)
