@@ -71,6 +71,9 @@ class WelcomeController < ApplicationController
     #some fields might be required later
     volunteer = Volunteer.find_by_uniqueID(session[:uniqueID])
     
+    #set timestamp modified
+    volunteer.date_modified = Time.now
+    
     #this is how you change text fields in the database
     volunteer.Name = params[:name]
     volunteer.DateofBirth = params[:birth]
@@ -124,6 +127,7 @@ class WelcomeController < ApplicationController
     volunteer = checkin_user
     return if !volunteer
     
+    volunteer.date_modified = Time.now
     volunteer.HowdidyoulearnaboutScottysHouseandourVolunteerProgram = params[:program_source]
     volunteer.Whatwouldyouliketogainfromyourvolunteerexperience   = params[:experience_gain]
     
@@ -150,7 +154,6 @@ class WelcomeController < ApplicationController
       volunteer.CurrentlyEmployed = "Yes"
       volunteer.NameofEmployer = params[:employer_name]
     end
-    #volunteer.date_modified = DateTime.new
     volunteer.save
     redirect_to welcome_experience_path
   end
@@ -231,7 +234,7 @@ class WelcomeController < ApplicationController
       volunteer.ExperiencewithChildServiceYES = params[:agency_check]
       volunteer.ExperiencewithChildServiceNO = no_checkbox_map[params[:agency_check]]
       volunteer.OtherChildServiceAgencies  = params[:agency_text]
-      #volunteer.date_modified = DateTime.new
+      volunteer.date_modified = Time.now
       volunteer.save
     end
 
@@ -294,7 +297,7 @@ class WelcomeController < ApplicationController
         volunteer.ExperiencewithhandicappersonsNO = "Yes"
       end
       volunteer.Experiencewithhandicappersons = params[:handicapped_capacity]
-      #volunteer.date_modified = DateTime.new
+      volunteer.date_modified = Time.now
       volunteer.save
     end
     redirect_to welcome_emergency_notification_path
@@ -319,7 +322,7 @@ class WelcomeController < ApplicationController
       volunteer.EmergencyPhone = params[:emergency_primary_phone]
       volunteer.EmergencyAddress = params[:emergency_address]
       volunteer.EmergencyRelationship = params[:emergency_relationship]
-      #volunteer.date_modified = DateTime.new
+      volunteer.date_modified = Time.now
       volunteer.save
     end
     
@@ -327,18 +330,64 @@ class WelcomeController < ApplicationController
   end
   
   def reference_form_emails
-   
+    volunteer = checkin_user
+    return if !volunteer
+    @ref_id = session[:uniqueID]
   end
   
   def reference_form_emails_check
+    volunteer = Volunteer.find_by_uniqueID(session[:uniqueID])
+    
+    if volunteer != nil
+      #need way to set emails
+      volunteer.date_modified = Time.now
+      volunteer.save
+    end
+    
     redirect_to welcome_reference_form_path
   end
   
   def reference_form
-   
+    if params[:ref_id] != nil && session[:ref_unique_id] == nil
+      uID = SecureRandom.base64
+      while Reference.exists?(:uniqueID => uID) do
+        uID = SecureRandom.base64
+      end
+      b = Reference.new
+      b.uniqueID = uID
+      b.VolunteerId = params[:ref_id]
+      b.date_modified = Time.now
+      b.save
+      session[:ref_unique_id] = uID
+    end
+    if (params[:ref_id] == nil && session[:ref_unique_id] != nil) or (params[:ref_id] != nil && session[:ref_unique_id] != nil)
+      reference = Reference.find_by_uniqueID(session[:ref_unique_id])
+      @reference_name = reference.VolunteerName
+      @reference_form_area_1 = reference.Howlonghaveyouknownthisperson
+      @reference_form_area_2 = reference.Cableincrisissituationwhy
+      @reference_form_area_3 = reference.Doesthispersonusuallyexercisegoodjudgment
+      @reference_form_area_4 = reference.Doyouhaveanyhesitationaboutthispersonworkinginthiscapacity
+      @reference_form_area_5 = reference.PertinentInformation
+    end
+    if params[:ref_id] == nil && session[:ref_unique_id] == nil
+      #need an error page to redirect to
+    end
   end
   
   def reference_form_check
+    reference = Reference.find_by_uniqueID(session[:ref_unique_id])
+    
+      if reference != nil
+        reference.VolunteerName = params[:reference_name]
+        reference.Howlonghaveyouknownthisperson = params[:reference_form_area_1]
+        reference.Cableincrisissituationwhy = params[:reference_form_area_2]
+        reference.Doesthispersonusuallyexercisegoodjudgment = params[:reference_form_area_3]
+        reference.Doyouhaveanyhesitationaboutthispersonworkinginthiscapacity = params[:reference_form_area_4]
+        reference.PertinentInformation = params[:reference_form_area_5]
+        reference.date_modified = Time.now
+        reference.save
+      end
+    
     redirect_to welcome_reference_form_path
   end
   
