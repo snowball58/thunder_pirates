@@ -12,11 +12,9 @@ body {
 
 header {
 	background-color: #34a2d3;
-	box-shadow: 0px 2px 5px #888888;
+	box-shadow: 0px 3px 10px #888888;
 	height: 100px;
 	width: 100%;
-	position: relative;
-	z-index: 1;
 }
 
 input {
@@ -40,6 +38,10 @@ textarea {
 	position: absolute;
 	left: 50%;
 	transform: translate(-50%, 0);
+}
+
+.center-test {
+	margin: 0 auto;
 }
 
 .button {
@@ -73,12 +75,7 @@ textarea {
 	padding: 5% 10%;
 	width: 80%;
 	height: auto;
-	min-height: 100%;
-}
-
-.main-header {
-	height: 100px;
-	position: relative;
+	min-height: 100%;	
 }
 
 .main-title {
