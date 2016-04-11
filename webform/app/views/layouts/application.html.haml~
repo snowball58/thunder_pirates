@@ -15,7 +15,6 @@
     
     .main-wrapper.horizontal-center
       .main-header
-        %div
-          = image_tag("logo.png", :class => 'horizontal-center')
+        = image_tag("logo.jpeg", :alt => 'logo', :class => 'horizontal-center')
       .main-content
         = yield 

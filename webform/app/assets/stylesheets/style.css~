@@ -16,6 +16,7 @@ header {
 	height: 100px;
 	width: 100%;
 	position: relative;
+	z-index: 1;
 }
 
 input {
@@ -64,6 +65,10 @@ textarea {
 	font-size: 200%;
 	font-weight: 700;
 	margin-top: 2%;
+}
+
+#logo {
+	max-width: 30%;
 }
 
 .main-wrapper {
