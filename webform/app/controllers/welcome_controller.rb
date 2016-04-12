@@ -414,12 +414,10 @@ class WelcomeController < ApplicationController
       end
       args = Hash.new
       args[:name] = volunteer.Name
-      args[:url] = "<Put url for reference1 form here>"
-      VolunteerMailer.application_email("reference", params[:reference_email_1], args).deliver
-      args[:url] = "<Put url for reference2 form here>"
-      VolunteerMailer.application_email("reference", params[:reference_email_2], args).deliver
-      args[:url] = "<Put url for reference3 form here>"
-      VolunteerMailer.application_email("reference", params[:reference_email_3], args).deliver
+      args[:url] = url_for(action: 'reference_form', controller: 'welcome') + "?ref_id=" + session[:uniqueID]
+      VolunteerMailer.application_email("reference", params[:reference_email_1], args).deliver_now
+      VolunteerMailer.application_email("reference", params[:reference_email_2], args).deliver_now
+      VolunteerMailer.application_email("reference", params[:reference_email_3], args).deliver_now
     end
     redirect_to welcome_reference_form_path
   end
