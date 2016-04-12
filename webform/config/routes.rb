@@ -15,7 +15,12 @@ require 'ScottyPDF'
 require 'User'
 
 Rails.application.routes.draw do
-  devise_for :auth_users
+  #devise_for :auth_users
+  devise_for :auth_users, controllers: { sessions: "admin/sessions" }, :skip => [:registrations]
+  as :user do
+    get 'users/edit' => 'devise/registrations#edit', :as => 'edit_user_registration'    
+    put 'users' => 'devise/registrations#update', :as => 'user_registration'            
+  end
   root 'welcome#index'
   get 'welcome/index', :to => 'welcome#index'
   post 'welcome/index', :to => 'welcome#index_check'
