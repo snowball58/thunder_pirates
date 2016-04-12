@@ -12,3 +12,7 @@
 .main-title Main Admin Page
 %br
 .subtitle Howdy!
+%br
+= button_to('Logout', destroy_auth_user_session_path, :method => :delete)
+%br  
+= link_to("Change your password", edit_auth_user_registration_path)
