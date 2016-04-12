@@ -48,8 +48,12 @@ class WelcomeController < ApplicationController
       @name = volunteer[:Name]
       @birth = volunteer[:DateofBirth]
       @email = volunteer[:EmailAddress]
-      @phone = volunteer[:PhoneNumbers]
-      @address = volunteer[:MailingAddress]
+      @home_phone = volunteer[:HomePhone]
+      @cell_phone = volunteer[:CellPhone]
+      @street = volunteer[:Street]
+      @city = volunteer[:City]
+      @state = volunteer[:State]
+      @zip = volunteer[:Zip]
       @county = volunteer[:County]
       @additional = volunteer[:IfyouhaveselectedAdditionalVolunteerOpportunitiespleasespecify]
       @times = volunteer[:DaysTimesyouwillbeavailabletovolunteer]
@@ -68,6 +72,7 @@ class WelcomeController < ApplicationController
   end
   
   def volunteer_check
+    
     #some fields might be required later
     volunteer = Volunteer.find_by_uniqueID(session[:uniqueID])
     
@@ -78,8 +83,21 @@ class WelcomeController < ApplicationController
     volunteer.Name = params[:name]
     volunteer.DateofBirth = params[:birth]
     volunteer.EmailAddress = params[:email]
-    volunteer.PhoneNumbers = params[:phone]
-    volunteer.MailingAddress = params[:address]
+    volunteer.HomePhone = params[:home_phone]
+    volunteer.CellPhone = params[:cell_phone]
+    numbers = ""
+    if(not params[:home_phone].blank?)
+      numbers = "Home: " + params[:home_phone] + "     "
+    end
+    if(not params[:cell_phone].blank?)
+      numbers = numbers + "Cell: " + params[:cell_phone]
+    end
+    volunteer.PhoneNumbers = numbers
+    volunteer.Street = params[:street]
+    volunteer.City = params[:city]
+    volunteer.State = params[:state]
+    volunteer.Zip = params[:zip]
+    volunteer.MailingAddress = params[:street] + ", " + params[:city] + ", " + params[:state] + ", " + params[:zip]
     volunteer.County = params[:county]
     volunteer.IfyouhaveselectedAdditionalVolunteerOpportunitiespleasespecify = params[:additional]
     volunteer.DaysTimesyouwillbeavailabletovolunteer = params[:times]
@@ -99,8 +117,51 @@ class WelcomeController < ApplicationController
     volunteer.OutlyingCountyAmbassadorProgram = params[:outlying]
     volunteer.AdditionalVolunteerOpportunities = params[:additional2]
     
-    # save the changes made to the volunteer entry
+    #save before checking to save other input from user
     volunteer.save
+    
+    # check for required fields before moving on to the next page
+    if params[:name].blank?
+      flash[:notice] = "Name field required."
+      redirect_to welcome_volunteer_path
+      return
+    end
+    if params[:birth].blank?
+      flash[:notice] = "Date of Birth field required."
+      redirect_to welcome_volunteer_path
+      return
+    end
+    if params[:email].blank?
+      flash[:notice] = "Email field required."
+      redirect_to welcome_volunteer_path
+      return
+    end
+    if params[:street].blank?
+      flash[:notice] = "Street Address / Appartment Number field required."
+      redirect_to welcome_volunteer_path
+      return
+    end
+    if params[:city].blank?
+      flash[:notice] = "City field required."
+      redirect_to welcome_volunteer_path
+      return
+    end
+    if params[:state].blank?
+      flash[:notice] = "State field required."
+      redirect_to welcome_volunteer_path
+      return
+    end
+    if params[:zip].blank?
+      flash[:notice] = "Zip Code field required."
+      redirect_to welcome_volunteer_path
+      return
+    end
+    if params[:home_phone].blank? and params[:cell_phone].blank?
+      flash[:notice] = "At least one phone number required."
+      redirect_to welcome_volunteer_path
+      return
+    end
+
     redirect_to welcome_general_info_path
   end
   
