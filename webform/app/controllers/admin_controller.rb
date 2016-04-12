@@ -16,4 +16,25 @@ class AdminController < ApplicationController
   
   end
   
+  def new_user
+      puts 'Hi'
+  end
+  
+  def create_user
+      user = AuthUser.new(:email => params[:email], :password => params[:password], :password_confirmation => params[:password_confirmation])
+      user.save
+      redirect_to auth_user_root_path
+  end
+  
+  def show_users
+    @users = AuthUser.find_each
+  end
+  
+  def delete_user
+    user = AuthUser.find(params[:id])
+    user.destroy
+    
+    redirect_to admin_show_users_path
+  end
+  
 end

@@ -1,0 +1,10 @@
+%table
+    %thead
+        %tr
+            %th E-mail address
+            %th Delete
+    %tbody
+    - @users.each do |user|
+        %tr
+            %td= user.email
+            %td= button_to 'delete', admin_delete_user_path(:id => user.id), :method => :delete
