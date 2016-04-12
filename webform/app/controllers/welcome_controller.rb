@@ -404,11 +404,23 @@ class WelcomeController < ApplicationController
     volunteer = Volunteer.find_by_uniqueID(session[:uniqueID])
     
     if volunteer != nil
-      #need way to set emails
       volunteer.date_modified = Time.now
       volunteer.save
+      flash[:notice] = nil
+      if params[:reference_email_1].blank? or params[:reference_email_2].blank? or params[:reference_email_3].blank?
+        flash[:notice] = "Must provide 3 emails."
+        redirect_to welcome_reference_form_emails_path
+        return
+      end
+      args = Hash.new
+      args[:name] = volunteer.Name
+      args[:url] = "<Put url for reference1 form here>"
+      VolunteerMailer.application_email("reference", params[:reference_email_1], args).deliver
+      args[:url] = "<Put url for reference2 form here>"
+      VolunteerMailer.application_email("reference", params[:reference_email_2], args).deliver
+      args[:url] = "<Put url for reference3 form here>"
+      VolunteerMailer.application_email("reference", params[:reference_email_3], args).deliver
     end
-    
     redirect_to welcome_reference_form_path
   end
   
