@@ -12,10 +12,10 @@
 class WelcomeController < ApplicationController
   
   def index
-    args = Array.new
-    args[0] = "#{Rails.root}/Adam_Albrecht_Copyright_Release.pdf"
-    args[1] = "#{Rails.root}/lib/pdf_templates/test_form.pdf"
-    VolunteerMailer.application_email("submission", "stevensnow58@gmail.com", args).deliver_now
+    #args = Array.new
+    #args[0] = "#{Rails.root}/Adam_Albrecht_Copyright_Release.pdf"
+    #args[1] = "#{Rails.root}/lib/pdf_templates/test_form.pdf"
+    #VolunteerMailer.application_email("submission", "stevensnow58@gmail.com", args).deliver_now
   end
 
   # This function finds the user in the database. If he's not, the user will be 
