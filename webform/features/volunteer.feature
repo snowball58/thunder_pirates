@@ -9,7 +9,15 @@ Scenario: Index click continue
 
 Scenario: Volunteer click continue
 	Given the volunteer page is loaded
-	When the Continue button is clicked
+	When name is filled in with asdf
+	And birth is filled in with asdf
+	And email is filled in with asdf
+	And home_phone is filled in with asdf
+	And street is filled in with asdf
+	And city is filled in with asdf
+	And state is filled in with asdf
+	And zip is filled in with asdf
+	And the Continue button is clicked
 	Then the General Information title is displayed
 	
 Scenario: General Info click continue
