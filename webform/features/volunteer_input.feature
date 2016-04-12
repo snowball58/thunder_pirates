@@ -25,17 +25,45 @@ Scenario:
     
 Scenario: 
     Given the volunteer page is loaded
-    When phone is filled in with (512)820-7406 (979)555-5555
+    When home_phone is filled in with (555)555-5555
     And the Continue button is clicked
     And the volunteer page is loaded
-    Then phone contains (512)820-7406 (979)555-5555
+    Then home_phone contains (555)555-5555
     
 Scenario: 
     Given the volunteer page is loaded
-    When address is filled in with 2201 Ezra Ct. Cedar Park,TX
+    When cell_phone is filled in with (555)555-5555
     And the Continue button is clicked
     And the volunteer page is loaded
-    Then address contains 2201 Ezra Ct. Cedar Park,TX
+    Then cell_phone contains (555)555-5555
+    
+Scenario: 
+    Given the volunteer page is loaded
+    When street is filled in with 2201 Ezra Ct.
+    And the Continue button is clicked
+    And the volunteer page is loaded
+    Then street contains 2201 Ezra Ct.
+    
+Scenario: 
+    Given the volunteer page is loaded
+    When city is filled in with College Station
+    And the Continue button is clicked
+    And the volunteer page is loaded
+    Then city contains College Station
+    
+Scenario: 
+    Given the volunteer page is loaded
+    When state is filled in with Texas
+    And the Continue button is clicked
+    And the volunteer page is loaded
+    Then state contains Texas
+    
+Scenario: 
+    Given the volunteer page is loaded
+    When zip is filled in with 77777
+    And the Continue button is clicked
+    And the volunteer page is loaded
+    Then zip contains 77777
     
 Scenario: 
     Given the volunteer page is loaded

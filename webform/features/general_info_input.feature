@@ -27,19 +27,8 @@ Scenario:
 	And "other" from the "reason" options should not be chosen
 	
 Scenario:
-	When instructor_name is filled in with "Patch Adams"
-	And the Continue button is clicked
-	And the general_info page is loaded	
-	Then instructor_name contains "Patch Adams"
-	
-Scenario:
 	When I choose "yes" from the "employed" options
 	And the Continue button is clicked
 	And the general_info page is loaded	
 	Then "no" from the "employed" options should not be chosen
 
-Scenario:
-	When employer_name is filled in with "Charlie's Chocolate Factory"
-	And the Continue button is clicked
-	And the general_info page is loaded	
-	Then employer_name contains "Charlie's Chocolate Factory"
