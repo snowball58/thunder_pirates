@@ -15,6 +15,7 @@ require 'ScottyPDF'
 require 'User'
 
 Rails.application.routes.draw do
+  devise_for :auth_users
   root 'welcome#index'
   get 'welcome/index', :to => 'welcome#index'
   post 'welcome/index', :to => 'welcome#index_check'
