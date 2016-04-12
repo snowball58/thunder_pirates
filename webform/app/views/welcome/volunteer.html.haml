@@ -16,6 +16,9 @@
 -# POST sends data as HTTP post transaction 
 -# Form data is sent to the page specified in the action attribute
 
+.alert
+  = flash[:notice]
+
 =form_tag welcome_volunteer_path, :method => :post do
   .form-item
     %span Name:
@@ -30,12 +33,28 @@
     = text_field_tag(:email, @email)
     
   .form-item
-    %span Phone Number(s):
-    = text_field_tag(:phone, @phone)
+    %span Home Phone:
+    = text_field_tag(:home_phone, @home_phone)
     
   .form-item
-    %span Mailing Address:
-    = text_field_tag(:address, @address)
+    %span Cell Phone:
+    = text_field_tag(:cell_phone, @cell_phone)
+    
+  .form-item
+    %span Street Address / Appartment Number:
+    = text_field_tag(:street, @street)
+    
+  .form-item
+    %span City:
+    = text_field_tag(:city, @city)
+    
+  .form-item
+    %span State:
+    = text_field_tag(:state, @state)
+    
+  .form-item
+    %span Zip Code:
+    = text_field_tag(:zip, @zip)
     
   .form-item
     %span Scotty's House Child Advocacy Center has several opportunities for Volunteers. All types of Volunteers
