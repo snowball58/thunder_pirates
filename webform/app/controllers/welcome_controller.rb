@@ -12,7 +12,7 @@
 class WelcomeController < ApplicationController
   
   def index
-  
+    VolunteerMailer.test_email.deliver_now
   end
 
   # This function finds the user in the database. If he's not, the user will be 
