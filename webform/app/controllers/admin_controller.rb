@@ -11,6 +11,7 @@
 
 class AdminController < ApplicationController
   before_filter :authenticate_auth_user!
+  layout 'admin'
   def index
   
   end
