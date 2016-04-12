@@ -1,3 +1,6 @@
+Current user is 
+= @current_email
+
 %table
     %thead
         %tr
@@ -8,3 +11,6 @@
         %tr
             %td= user.email
             %td= button_to 'delete', admin_delete_user_path(:id => user.id), :method => :delete
+            
+%br
+= link_to("Admin", auth_user_root_path)

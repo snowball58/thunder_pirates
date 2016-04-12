@@ -27,7 +27,8 @@ class AdminController < ApplicationController
   end
   
   def show_users
-    @users = AuthUser.find_each
+    @current_email = current_auth_user.email
+    @users = AuthUser.where('email != ? ', current_auth_user.email)
   end
   
   def delete_user
