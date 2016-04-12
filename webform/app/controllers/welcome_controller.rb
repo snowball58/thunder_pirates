@@ -12,7 +12,9 @@
 class WelcomeController < ApplicationController
   
   def index
-    VolunteerMailer.test_email.deliver_now
+    args = Hash.new
+    args[:url] = "https://stackoverflow.com/questions/2249431/put-a-link-in-a-flashnotice"
+    VolunteerMailer.application_email("applicant", "stevensnow58@gmail.com", args).deliver_now
   end
 
   # This function finds the user in the database. If he's not, the user will be 
