@@ -407,8 +407,8 @@ class WelcomeController < ApplicationController
       volunteer.date_modified = Time.now
       volunteer.save
       flash[:notice] = nil
-      if params[:reference_email_1].blank? or params[:reference_email_2].blank? or params[:reference_email_3].blank?
-        flash[:notice] = "Must provide 3 emails."
+      if not (EmailValidator.valid?(params[:reference_email_1]) and EmailValidator.valid?(params[:reference_email_2]) and EmailValidator.valid?(params[:reference_email_3]))
+        flash[:notice] = "Must provide 3 valid emails."
         redirect_to welcome_reference_form_emails_path
         return
       end
