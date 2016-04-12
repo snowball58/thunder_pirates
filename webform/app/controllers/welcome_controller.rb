@@ -120,6 +120,7 @@ class WelcomeController < ApplicationController
     #save before checking to save other input from user
     volunteer.save
     
+    flash[:notice] = nil;
     # check for required fields before moving on to the next page
     if params[:name].blank?
       flash[:notice] = "Name field required."
