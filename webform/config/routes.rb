@@ -21,6 +21,8 @@ Rails.application.routes.draw do
     get 'users/edit' => 'devise/registrations#edit', :as => 'edit_user_registration'    
     put 'users' => 'devise/registrations#update', :as => 'user_registration'            
   end
+  resources :admin
+  
   root 'welcome#index'
   get 'welcome/index', :to => 'welcome#index'
   post 'welcome/index', :to => 'welcome#index_check'
