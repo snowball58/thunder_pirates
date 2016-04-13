@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 ruby "2.3.0"
 
+require 'open-uri'
+
 group :test do
   gem 'cucumber-rails', :require => false
   gem 'cucumber-rails-training-wheels'
