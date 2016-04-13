@@ -12,6 +12,7 @@
 require 'FillablePdfForm'
 require 'TestPdfForm'
 require 'ScottyPDF'
+require 'RefPDF'
 require 'User'
 
 Rails.application.routes.draw do
@@ -55,6 +56,8 @@ Rails.application.routes.draw do
   post 'welcome/reference_form', :to => 'welcome#reference_form_check'
   
   get 'pdf', :to => 'welcome#pdf'
+  
+  get 'refpdf', :to => 'welcome#refpdf'
   
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
