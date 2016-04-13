@@ -1,0 +1,18 @@
+-# The way layout works is that is sets a general structure to the page
+-# Then, with yield, additional content is integrated
+
+!!!
+%html
+  %head
+  %title Application Form
+  %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
+  = stylesheet_link_tag 'admin.css'
+  
+  %body
+    %header
+      #header-title.horizontal-center Admin Area
+    
+    .main-wrapper.horizontal-center
+      .main-header
+      .main-content
+        = yield 

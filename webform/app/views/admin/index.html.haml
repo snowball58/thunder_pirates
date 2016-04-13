@@ -1,0 +1,22 @@
+/ Scotty's House Volunteer WebForm
+/ Written in 2016 by: 
+/ Gustavo Estrela
+/ Logan Ford
+/ Patrick Herrington
+/ Noemie Nakamura
+/ Steven Snow
+/ Matthew Wiecek
+/ To the extent possible under law, the author(s) have dedicated all copyright and related and neighboring rights to this software to the public domain worldwide. This software is distributed without any warranty.
+/ You should have received a copy of the CC0 Public Domain Dedication along with this software. If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
+
+.main-title Main Admin Page
+%br
+.subtitle Howdy!
+%br
+= button_to('Logout', destroy_auth_user_session_path, :method => :delete)
+%br  
+= link_to("Change your password", edit_auth_user_registration_path)
+%br
+= link_to("Create new account", admin_new_user_path)
+%br
+= link_to("Show users", admin_show_users_path)
