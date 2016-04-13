@@ -7,11 +7,11 @@ Rake::Task.define_task(:environment)
 
 describe 'rake Task' do
     let!(:old_incomplete_record) { Volunteer.create(:date_modified => Time.now - (60*60*25)) }
-    let!(:old_complete_record) { Volunteer.create(:date_modified => Time.now - (60*60*24*31), :EmergencyName => 'dude') }
+    let!(:old_complete_record) { Volunteer.create(:date_modified => Time.now - (60*60*24*61), :EmergencyName => 'dude') }
     let!(:recent_incomplete_record) { Volunteer.create(:date_modified => Time.now) }
     let!(:recent_complete_record) { Volunteer.create(:date_modified => Time.now, :EmergencyName => 'dude') }
     let!(:old_incomplete_reference) { Reference.create(:date_modified => Time.now - (60*60*25)) }
-    let!(:old_complete_reference) { Reference.create(:date_modified => Time.now - (60*60*24*31), :Howlonghaveyouknownthisperson => '12')}
+    let!(:old_complete_reference) { Reference.create(:date_modified => Time.now - (60*60*24*61), :Howlonghaveyouknownthisperson => '12')}
     let!(:recent_incomplete_reference) { Reference.create(:date_modified => Time.now) }
     let!(:recent_complete_reference) { Reference.create(:date_modified => Time.now, :Howlonghaveyouknownthisperson => '12') }
     let!(:blank_record) { Volunteer.create() }
@@ -40,12 +40,12 @@ describe 'rake Task' do
         Rake::Task['db:longEraseData'].invoke
         Volunteer.find_each do |rec|
             if rec.date_modified != nil
-                expect(rec.date_modified).to be > Time.now - (60*60*24*30)
+                expect(rec.date_modified).to be > Time.now - (60*60*24*60)
             end
         end
         Reference.find_each do |rec|
             if rec.date_modified != nil
-                expect(rec.date_modified).to be > Time.now - (60*60*24*30)
+                expect(rec.date_modified).to be > Time.now - (60*60*24*60)
             end
         end
     end
