@@ -461,6 +461,10 @@ class WelcomeController < ApplicationController
         reference.PertinentInformation = params[:reference_form_area_5]
         reference.date_modified = Time.now
         reference.save
+        if Reference.count(reference.VolunteerId) >= 3
+          # triggers the sending of the entire application
+          # includes volunteer pdf and all reference pdfs for that volunteer
+        end
       end
     
     redirect_to welcome_reference_form_path
