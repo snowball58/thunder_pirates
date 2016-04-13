@@ -6,10 +6,11 @@ class VolunteerMailer < ApplicationMailer
         if type == "submission"
             title = 'Completed Volunteer Application'
             body = 'This is an automated message containing a completed volunteer application!'
-            args.each do |dir|
-                filename = dir.split("/").last
-                attachments[filename] = File.read(dir)
-            end
+            attachments["application.pdf"] = File.read(args[0])
+            #args.each do |dir|
+                #filename = dir.split("/").last
+                #attachments[filename] = File.read(dir)
+            #end
             mail(to: receiver, subject: title, body: body)
         elsif type == "reference"
             title = "Scotty's House Applicant Reference Request"

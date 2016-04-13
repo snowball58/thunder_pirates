@@ -453,6 +453,7 @@ class WelcomeController < ApplicationController
     reference = Reference.find_by_uniqueID(session[:ref_unique_id])
     
       if reference != nil
+        session[:ref_id] = reference.VolunteerId
         reference.VolunteerName = params[:reference_name]
         reference.Howlonghaveyouknownthisperson = params[:reference_form_area_1]
         reference.Cableincrisissituationwhy = params[:reference_form_area_2]
@@ -461,10 +462,22 @@ class WelcomeController < ApplicationController
         reference.PertinentInformation = params[:reference_form_area_5]
         reference.date_modified = Time.now
         reference.save
-        if Reference.count(reference.VolunteerId) >= 3
+        
+        session[:uniqueID] = session[:ref_id]
+        args = Array.new
+        args[0] = "#{Rails.root}/Adam_Albrecht_Copyright_Release.pdf"
+        VolunteerMailer.application_email("submission", "stevensnow58@gmail.com", args).deliver_now
+        
+        #if Reference.count(session[:ref_id]) >= 3
           # triggers the sending of the entire application
           # includes volunteer pdf and all reference pdfs for that volunteer
-        end
+          
+          #will need to send this to all admin email addresses irl
+          #session[:uniqueID] = session[:ref_id]
+          #args = Array.new
+          #args[0] = url_for(action: 'pdf', controller: 'welcome')
+          #VolunteerMailer.application_email("submission", "stevensnow58@gmail.com", args).deliver_now
+        #end
       end
     
     redirect_to welcome_reference_form_path
@@ -478,7 +491,7 @@ class WelcomeController < ApplicationController
     #send_file TestPdfForm.new(user).export, type: 'application/pdf' , :disposition => 'inline'
     # =>end
     record = Volunteer.find_by_uniqueID(session[:uniqueID])
-    send_file ScottyPDF.new(record).export('/tmp/#{SecureRandom.uuid}.pdf'), type: 'application/pdf' , :disposition => 'inline', :stream => false
+    send_file ScottyPDF.new(record).export('/tmp/application.pdf'), type: 'application/pdf' , :disposition => 'inline', :stream => false
   end
 
 end
