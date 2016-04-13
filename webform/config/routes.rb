@@ -15,7 +15,7 @@ require 'ScottyPDF'
 require 'User'
 
 Rails.application.routes.draw do
-  #devise_for :auth_users
+  default_url_options host: Rails.application.config.domain
   devise_for :auth_users, controllers: { sessions: "admin/sessions" }, :skip => [:registrations]
   as :auth_user do
     get 'auth_users/edit' => 'devise/registrations#edit', :as => 'edit_auth_user_registration'    
