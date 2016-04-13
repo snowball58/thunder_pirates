@@ -30,8 +30,8 @@ namespace :db do
   
   desc "erases completed applications older than 30 days"
   task longEraseData: :environment do
-    Volunteer.where('date_modified < ? ', (Time.now - (60*60*24*30))).delete_all
-    Reference.where('date_modified < ? ', (Time.now - (60*60*24*30))).delete_all
+    Volunteer.where('date_modified < ? ', (Time.now - (60*60*24*60))).delete_all
+    Reference.where('date_modified < ? ', (Time.now - (60*60*24*60))).delete_all
   end
   
   desc "seed initial account"

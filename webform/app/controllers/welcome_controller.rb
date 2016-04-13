@@ -497,5 +497,10 @@ class WelcomeController < ApplicationController
     record = Volunteer.find_by_uniqueID(session[:uniqueID])
     send_file ScottyPDF.new(record).export('/tmp/application.pdf'), type: 'application/pdf' , :disposition => 'inline', :stream => false
   end
+  
+  def refpdf
+     record = Reference.find_by_uniqueID(session[:ref_unique_id])
+     send_file RefPDF.new(record).export('/tmp/Ref.pdf'), type: 'application/pdf' , :disposition => 'inline', :stream => false
+  end
 
 end
