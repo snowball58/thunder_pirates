@@ -464,10 +464,13 @@ class WelcomeController < ApplicationController
         reference.date_modified = Time.now
         reference.save
         
-        session[:uniqueID] = session[:ref_id]
         args = Array.new
-        args[0] = "#{Rails.root}/Adam_Albrecht_Copyright_Release.pdf"
-        VolunteerMailer.application_email("submission", "stevensnow58@gmail.com", args).deliver_now
+        args[0] = session[:ref_id]
+        #VolunteerMailer.application_email("app_submission", "stevensnow58@gmail.com", args).deliver_now
+        users = AuthUser.all
+        users.each do |user|
+          VolunteerMailer.application_email("app_submission", user.email, args).deliver_now
+        end
         
         #if Reference.count(session[:ref_id]) >= 3
           # triggers the sending of the entire application

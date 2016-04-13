@@ -3,14 +3,11 @@ class VolunteerMailer < ApplicationMailer
         # receiver is the email to be sent to
         # directory is the full directory of the pdf to be attached
         # type should be "Application" or "Reference"
-        if type == "submission"
+        if type == "app_submission"
             title = 'Completed Volunteer Application'
             body = 'This is an automated message containing a completed volunteer application!'
-            attachments["application.pdf"] = File.read(args[0])
-            #args.each do |dir|
-                #filename = dir.split("/").last
-                #attachments[filename] = File.read(dir)
-            #end
+            record = Volunteer.find_by_uniqueID(args[0])
+            attachments["application.pdf"] = File.read(ScottyPDF.new(record).export('/tmp/application.pdf'))
             mail(to: receiver, subject: title, body: body)
         elsif type == "reference"
             title = "Scotty's House Applicant Reference Request"
