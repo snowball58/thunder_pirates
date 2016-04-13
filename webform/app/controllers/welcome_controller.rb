@@ -405,11 +405,21 @@ class WelcomeController < ApplicationController
     volunteer = Volunteer.find_by_uniqueID(session[:uniqueID])
     
     if volunteer != nil
-      #need way to set emails
       volunteer.date_modified = Time.now
       volunteer.save
+      flash[:notice] = nil
+      if not (EmailValidator.valid?(params[:reference_email_1]) and EmailValidator.valid?(params[:reference_email_2]) and EmailValidator.valid?(params[:reference_email_3]))
+        flash[:notice] = "Must provide 3 valid emails."
+        redirect_to welcome_reference_form_emails_path
+        return
+      end
+      args = Hash.new
+      args[:name] = volunteer.Name
+      args[:url] = url_for(action: 'reference_form', controller: 'welcome') + "?ref_id=" + session[:uniqueID]
+      VolunteerMailer.application_email("reference", params[:reference_email_1], args).deliver_now
+      VolunteerMailer.application_email("reference", params[:reference_email_2], args).deliver_now
+      VolunteerMailer.application_email("reference", params[:reference_email_3], args).deliver_now
     end
-    
     redirect_to welcome_reference_form_path
   end
   
@@ -452,6 +462,10 @@ class WelcomeController < ApplicationController
         reference.PertinentInformation = params[:reference_form_area_5]
         reference.date_modified = Time.now
         reference.save
+        if Reference.count(reference.VolunteerId) >= 3
+          # triggers the sending of the entire application
+          # includes volunteer pdf and all reference pdfs for that volunteer
+        end
       end
     
     redirect_to welcome_reference_form_path

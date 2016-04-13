@@ -17,6 +17,10 @@
 -# Form data is sent to the page specified in the action attribute
 
 #subtitle Please provide the emails of your references:
+
+.alert
+  = flash[:notice]
+  
 =form_tag welcome_reference_form_emails_path, :method => :post do
   .form-item
     %span Reference 1
@@ -32,3 +36,6 @@
   
   .form-item
     = link_to 'Reference Link', welcome_reference_form_path(:ref_id => @ref_id.to_s)
+    
+  .form-item  
+    = submit_tag 'Submit', :class => "button"
