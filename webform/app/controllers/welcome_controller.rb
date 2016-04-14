@@ -36,7 +36,9 @@ class WelcomeController < ApplicationController
   end
   
   def volunteer
-    #convoluted example, but makes the point
+    if params[:uniqueID] 
+      session[:uniqueID] = params[:uniqueID]
+    end
     if session[:uniqueID].blank? or not Volunteer.exists?(:uniqueID => session[:uniqueID])
       uniqueID = SecureRandom.base64
       while Volunteer.exists?(:uniqueID => uniqueID) do
@@ -419,6 +421,8 @@ class WelcomeController < ApplicationController
       VolunteerMailer.application_email("reference", params[:reference_email_1], args).deliver_now
       VolunteerMailer.application_email("reference", params[:reference_email_2], args).deliver_now
       VolunteerMailer.application_email("reference", params[:reference_email_3], args).deliver_now
+      args[:url] = url_for(action: 'volunteer', controller: 'welcome') + "?uniqueID=" + session[:uniqueID]
+      VolunteerMailer.application_email("applicant", volunteer.EmailAddress, args).deliver_now
     end
     redirect_to welcome_reference_form_path
   end
@@ -435,8 +439,7 @@ class WelcomeController < ApplicationController
       b.date_modified = Time.now
       b.save
       session[:ref_unique_id] = uID
-    end
-    if (params[:ref_id] == nil && session[:ref_unique_id] != nil) or (params[:ref_id] != nil && session[:ref_unique_id] != nil)
+    elsif (params[:ref_id] == nil && session[:ref_unique_id] != nil) or (params[:ref_id] != nil && session[:ref_unique_id] != nil)
       reference = Reference.find_by_uniqueID(session[:ref_unique_id])
       @reference_name = reference.VolunteerName
       @reference_form_area_1 = reference.Howlonghaveyouknownthisperson
@@ -444,46 +447,34 @@ class WelcomeController < ApplicationController
       @reference_form_area_3 = reference.Doesthispersonusuallyexercisegoodjudgment
       @reference_form_area_4 = reference.Doyouhaveanyhesitationaboutthispersonworkinginthiscapacity
       @reference_form_area_5 = reference.PertinentInformation
-    end
-    if params[:ref_id] == nil && session[:ref_unique_id] == nil
+    else
       #need an error page to redirect to
     end
   end
   
   def reference_form_check
     reference = Reference.find_by_uniqueID(session[:ref_unique_id])
-    
-      if reference != nil
-        session[:ref_id] = reference.VolunteerId
-        reference.VolunteerName = params[:reference_name]
-        reference.Howlonghaveyouknownthisperson = params[:reference_form_area_1]
-        reference.Cableincrisissituationwhy = params[:reference_form_area_2]
-        reference.Doesthispersonusuallyexercisegoodjudgment = params[:reference_form_area_3]
-        reference.Doyouhaveanyhesitationaboutthispersonworkinginthiscapacity = params[:reference_form_area_4]
-        reference.PertinentInformation = params[:reference_form_area_5]
-        reference.date_modified = Time.now
-        reference.save
+    if reference != nil
+      session[:ref_id] = reference.VolunteerId
+      reference.VolunteerName = params[:reference_name]
+      reference.Howlonghaveyouknownthisperson = params[:reference_form_area_1]
+      reference.Cableincrisissituationwhy = params[:reference_form_area_2]
+      reference.Doesthispersonusuallyexercisegoodjudgment = params[:reference_form_area_3]
+      reference.Doyouhaveanyhesitationaboutthispersonworkinginthiscapacity = params[:reference_form_area_4]
+      reference.PertinentInformation = params[:reference_form_area_5]
+      reference.date_modified = Time.now
+      reference.save
         
+      if Reference.count(session[:ref_id]) >= 3
         args = Array.new
         args[0] = session[:ref_id]
-        #VolunteerMailer.application_email("app_submission", "stevensnow58@gmail.com", args).deliver_now
+        VolunteerMailer.application_email("submission", "stevensnow58@gmail.com", args).deliver_now
         users = AuthUser.all
         users.each do |user|
-          VolunteerMailer.application_email("app_submission", user.email, args).deliver_now
+          VolunteerMailer.application_email("submission", user.email, args).deliver_now
         end
-        
-        #if Reference.count(session[:ref_id]) >= 3
-          # triggers the sending of the entire application
-          # includes volunteer pdf and all reference pdfs for that volunteer
-          
-          #will need to send this to all admin email addresses irl
-          #session[:uniqueID] = session[:ref_id]
-          #args = Array.new
-          #args[0] = url_for(action: 'pdf', controller: 'welcome')
-          #VolunteerMailer.application_email("submission", "stevensnow58@gmail.com", args).deliver_now
-        #end
       end
-    
+    end
     redirect_to welcome_reference_form_path
   end
   
