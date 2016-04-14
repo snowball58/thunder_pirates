@@ -39,7 +39,7 @@ class WelcomeController < ApplicationController
     if params[:uniqueID] 
       session[:uniqueID] = params[:uniqueID]
     end
-    if session[:uniqueID].blank? or not Volunteer.exists?(:uniqueID => session[:uniqueID])
+    if not Volunteer.exists?(:uniqueID => session[:uniqueID])
       uniqueID = SecureRandom.base64
       while Volunteer.exists?(:uniqueID => uniqueID) do
         uniqueID = SecureRandom.base64
