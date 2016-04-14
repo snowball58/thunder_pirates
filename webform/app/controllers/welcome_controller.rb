@@ -13,10 +13,7 @@ class WelcomeController < ApplicationController
   layout 'welcome'
   
   def index
-    #args = Array.new
-    #args[0] = "#{Rails.root}/Adam_Albrecht_Copyright_Release.pdf"
-    #args[1] = "#{Rails.root}/lib/pdf_templates/test_form.pdf"
-    #VolunteerMailer.application_email("submission", "stevensnow58@gmail.com", args).deliver_now
+
   end
 
   # This function finds the user in the database. If he's not, the user will be 
@@ -410,17 +407,34 @@ class WelcomeController < ApplicationController
       volunteer.date_modified = Time.now
       volunteer.save
       flash[:notice] = nil
-      if not (EmailValidator.valid?(params[:reference_email_1]) and EmailValidator.valid?(params[:reference_email_2]) and EmailValidator.valid?(params[:reference_email_3]))
-        flash[:notice] = "Must provide 3 valid emails."
+      #if not (EmailValidator.valid?(params[:reference_email_1]) and EmailValidator.valid?(params[:reference_email_2]) and EmailValidator.valid?(params[:reference_email_3]))
+      if not (params[:reference_email_1].blank? or EmailValidator.valid?(params[:reference_email_1]))
+        flash[:notice] = "Invalid email for Reference 1."
         redirect_to welcome_reference_form_emails_path
         return
       end
+      if not (params[:reference_email_2].blank? or EmailValidator.valid?(params[:reference_email_2]))
+        flash[:notice] = "Invalid email for Reference 2."
+        redirect_to welcome_reference_form_emails_path
+        return
+      end
+      if not (params[:reference_email_3].blank? or EmailValidator.valid?(params[:reference_email_3]))
+        flash[:notice] = "Invalid email for Reference 3."
+        redirect_to welcome_reference_form_emails_path
+        return
+      end 
       args = Hash.new
       args[:name] = volunteer.Name
       args[:url] = url_for(action: 'reference_form', controller: 'welcome') + "?ref_id=" + session[:uniqueID]
-      VolunteerMailer.application_email("reference", params[:reference_email_1], args).deliver_now
-      VolunteerMailer.application_email("reference", params[:reference_email_2], args).deliver_now
-      VolunteerMailer.application_email("reference", params[:reference_email_3], args).deliver_now
+      if not params[:reference_email_1].blank?
+        VolunteerMailer.application_email("reference", params[:reference_email_1], args).deliver_now
+      end
+      if not params[:reference_email_2].blank?
+        VolunteerMailer.application_email("reference", params[:reference_email_2], args).deliver_now
+      end
+      if not params[:reference_email_3].blank?
+        VolunteerMailer.application_email("reference", params[:reference_email_3], args).deliver_now
+      end
       args[:url] = url_for(action: 'volunteer', controller: 'welcome') + "?uniqueID=" + session[:uniqueID]
       VolunteerMailer.application_email("applicant", volunteer.EmailAddress, args).deliver_now
     end
@@ -468,7 +482,8 @@ class WelcomeController < ApplicationController
       if Reference.count(session[:ref_id]) >= 3
         args = Array.new
         args[0] = session[:ref_id]
-        VolunteerMailer.application_email("submission", "stevensnow58@gmail.com", args).deliver_now
+        # email to myself for testing purposes
+        #VolunteerMailer.application_email("submission", "stevensnow58@gmail.com", args).deliver_now
         users = AuthUser.all
         users.each do |user|
           VolunteerMailer.application_email("submission", user.email, args).deliver_now

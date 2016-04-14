@@ -2,15 +2,19 @@ class VolunteerMailer < ApplicationMailer
     def application_email(type, receiver, args)
         # receiver is the email to be sent to
         # directory is the full directory of the pdf to be attached
-        # type should be "Application" or "Reference"
+        # type should be "submission", "reference", or applicant
         if type == "submission"
+            # I destroy the volunteer and all references after getting the pdfs
+            # do this because application process is now complete
             title = 'Completed Volunteer Application'
             body = 'This is an automated message containing a completed volunteer application!'
             record = Volunteer.find_by_uniqueID(args[0])
             refs = Reference.where(:VolunteerId => args[0])
             attachments["application.pdf"] = File.read(ScottyPDF.new(record).export('/tmp/application.pdf'))
+            record.destroy
             refs.each do |ref|
                 attachments["#{ref.uniqueID}.pdf"] = File.read(RefPDF.new(ref).export('/tmp/Ref.pdf'))
+                ref.destroy
             end
             mail(to: receiver, subject: title, body: body)
         elsif type == "reference"
