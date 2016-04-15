@@ -484,6 +484,8 @@ class WelcomeController < ApplicationController
       reference.date_modified = Time.now
       reference.save
         
+        
+      ######### This part to be moved to confirmation page, if one is made for references
       if Reference.count(session[:ref_id]) >= 3
         args = Array.new
         args[0] = session[:ref_id]
@@ -494,6 +496,8 @@ class WelcomeController < ApplicationController
           VolunteerMailer.application_email("submission", user.email, args).deliver_now
         end
       end
+      ######### This part to be moved to confirmation page
+      
     end
     redirect_to welcome_reference_form_path
   end
