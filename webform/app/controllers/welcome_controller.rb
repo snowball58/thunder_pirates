@@ -486,7 +486,7 @@ class WelcomeController < ApplicationController
         
         
       ######### This part to be moved to confirmation page, if one is made for references
-      if Reference.count(session[:ref_id]) >= 3
+      if Reference.count(:VolunteerId => session[:ref_id]) >= 3
         args = Array.new
         args[0] = session[:ref_id]
         # email to myself for testing purposes
