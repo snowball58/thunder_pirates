@@ -409,20 +409,23 @@ class WelcomeController < ApplicationController
       flash[:notice] = nil
       #if not (EmailValidator.valid?(params[:reference_email_1]) and EmailValidator.valid?(params[:reference_email_2]) and EmailValidator.valid?(params[:reference_email_3]))
       if not (params[:reference_email_1].blank? or EmailValidator.valid?(params[:reference_email_1]))
-        flash[:notice] = "Invalid email for Reference 1."
+        flash[:notice] = "Invalid email for Reference 1. Please enter valid email or leave blank."
         redirect_to welcome_reference_form_emails_path
         return
       end
       if not (params[:reference_email_2].blank? or EmailValidator.valid?(params[:reference_email_2]))
-        flash[:notice] = "Invalid email for Reference 2."
+        flash[:notice] = "Invalid email for Reference 2. Please enter valid email or leave blank."
         redirect_to welcome_reference_form_emails_path
         return
       end
       if not (params[:reference_email_3].blank? or EmailValidator.valid?(params[:reference_email_3]))
-        flash[:notice] = "Invalid email for Reference 3."
+        flash[:notice] = "Invalid email for Reference 3. Please enter valid email or leave blank."
         redirect_to welcome_reference_form_emails_path
         return
       end 
+      
+      
+      ######### This part to be moved to confirmation page
       args = Hash.new
       args[:name] = volunteer.Name
       args[:url] = url_for(action: 'reference_form', controller: 'welcome') + "?ref_id=" + session[:uniqueID]
@@ -437,6 +440,8 @@ class WelcomeController < ApplicationController
       end
       args[:url] = url_for(action: 'volunteer', controller: 'welcome') + "?uniqueID=" + session[:uniqueID]
       VolunteerMailer.application_email("applicant", volunteer.EmailAddress, args).deliver_now
+      ######### This part to be moved to confirmation page
+      
     end
     redirect_to welcome_reference_form_path
   end
