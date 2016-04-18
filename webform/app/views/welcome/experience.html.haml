@@ -20,6 +20,8 @@
 / params: 
 / = params
 
+%link{:rel => :stylesheet, :type => :"text/css", :href => "/assets/css/style"}
+
 = form_tag welcome_experience_path, :method => :post, :id => :experience_form do 
 
   / hidden input to save the nof_experiences
@@ -28,7 +30,7 @@
   .form-item
     %span Please list any previous Volunteer experience, particularly in working with children and families:
 
-  %table{:style => "width:100%", :id => "experiences"}
+  %table{:style => "width:100%", :id => "experiences", :border => "0px"}
     %thead
       %tr
         %td Length of Time

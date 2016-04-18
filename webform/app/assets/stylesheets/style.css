@@ -36,6 +36,10 @@ textarea {
 	width: 100%;
 }
 
+td, th {
+ 	border: none;
+}
+
 .horizontal-center {
 	position: absolute;
 	left: 50%;
