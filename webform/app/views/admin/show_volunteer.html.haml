@@ -11,28 +11,28 @@
 
 .main-title Review Application
 
-.subtitle Name:
-= @volunteer.Name
+%span 
+	= "Name: #{@volunteer.Name}"
 %br
 %br
 
-%span Date of birth:
-= @volunteer.DateofBirth
+%span 
+	= "Date of birth: #{@volunteer.DateofBirth}"
 %br
 %br
 
-%span Email address:
-= @volunteer.EmailAddress
+%span 
+	= "Email address: #{@volunteer.EmailAddress}"
 %br
 %br
 
-%span Phone numbers:
-= @volunteer.PhoneNumbers
+%span 
+	= "Phone numbers: #{@volunteer.PhoneNumbers}"
 %br
 %br
 
-%span MailingAddress
-= @volunteer.MailingAddress
+%span 
+	= "MailingAddress #{@volunteer.MailingAddress}"
 %br
 %br
 
@@ -42,4 +42,4 @@
 %br
 %br
 
-= button_to "Back to user queries", admin_query_volunteer_path
+= button_to "Back to user queries", admin_query_volunteer_path, :class => "smaller-button"

@@ -13,10 +13,12 @@
 %br
 .subtitle Howdy!
 %br
-= button_to('Logout', destroy_auth_user_session_path, :method => :delete)
+= button_to('Logout', destroy_auth_user_session_path, :method => :delete, :class => "smaller-button")
 %br  
 = link_to("Change your password", edit_auth_user_registration_path)
 %br
 = link_to("Create new account", admin_new_user_path)
 %br
 = link_to("Show users", admin_show_users_path)
+%br
+= link_to("Search application", admin_query_volunteer_path)
