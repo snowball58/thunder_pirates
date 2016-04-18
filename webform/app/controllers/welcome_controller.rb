@@ -397,6 +397,7 @@ class WelcomeController < ApplicationController
   def reference_form_emails
     volunteer = checkin_user
     return if !volunteer
+    @root = root_url.to_s.chomp("/")
     @ref_id = session[:uniqueID]
   end
   
@@ -447,7 +448,7 @@ class WelcomeController < ApplicationController
   end
   
   def reference_form
-    if params[:ref_id] != nil && session[:ref_unique_id] == nil
+    if params[:ref_id] != nil && session[:ref_unique_id] == nil or params[:ref_id] != nil && session[:ref_unique_id] != nil
       uID = SecureRandom.base64
       while Reference.exists?(:uniqueID => uID) do
         uID = SecureRandom.base64
@@ -458,7 +459,7 @@ class WelcomeController < ApplicationController
       b.date_modified = Time.now
       b.save
       session[:ref_unique_id] = uID
-    elsif (params[:ref_id] == nil && session[:ref_unique_id] != nil) or (params[:ref_id] != nil && session[:ref_unique_id] != nil)
+    elsif params[:ref_id] == nil && session[:ref_unique_id] != nil
       reference = Reference.find_by_uniqueID(session[:ref_unique_id])
       @reference_name = reference.VolunteerName
       @reference_form_area_1 = reference.Howlonghaveyouknownthisperson
@@ -468,6 +469,7 @@ class WelcomeController < ApplicationController
       @reference_form_area_5 = reference.PertinentInformation
     else
       #need an error page to redirect to
+      @reference_name = "Error"
     end
   end
   
@@ -484,6 +486,33 @@ class WelcomeController < ApplicationController
       reference.date_modified = Time.now
       reference.save
         
+      flash[:notice] = nil;
+      # check for required fields before moving on to the next page
+      if params[:reference_name].blank?
+        flash[:notice] = "Name field required."
+        redirect_to welcome_reference_form_path
+        return
+      end
+      if params[:reference_form_area_1].blank?
+        flash[:notice] = "Must answer: \"How long have you known this person?\""
+        redirect_to welcome_reference_form_path
+        return
+      end
+      if params[:reference_form_area_2].blank?
+        flash[:notice] = "Must answer: \"Are they capable in a crisis situation?\""
+        redirect_to welcome_reference_form_path
+        return
+      end
+      if params[:reference_form_area_3].blank?
+        flash[:notice] = "Must answer: \"Does this person usually exercise good judgement?\""
+        redirect_to welcome_reference_form_path
+        return
+      end
+      if params[:reference_form_area_4].blank?
+        flash[:notice] = "Must answer: \"Do you have any hesitations about this persons capacity?\""
+        redirect_to welcome_reference_form_path
+        return
+      end
         
       ######### This part to be moved to confirmation page, if one is made for references
       if Reference.count(:VolunteerId => session[:ref_id]) >= 3

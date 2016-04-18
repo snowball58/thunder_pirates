@@ -17,30 +17,34 @@
 -# Form data is sent to the page specified in the action attribute
 
 #subtitle Please provide the following information:
+
+.alert
+  = flash[:notice]
+
 =form_tag welcome_reference_form_path, :method => :post do
   .form-item
     %span Volunteer's Name
-    = text_field_tag(:reference_name)
+    = text_field_tag(:reference_name, @reference_name)
 
   .form-item
     %span How long have you known this person and in what capacity? 
-    = text_area_tag(:reference_form_area_1)
+    = text_area_tag(:reference_form_area_1, @reference_form_area_1)
     
   .form-item
     %span In your opinion, is this person capable of working with children and families in a crisis sitation? Please tell us why:
-    = text_area_tag(:reference_form_area_2)
+    = text_area_tag(:reference_form_area_2, @reference_form_area_2)
     
   .form-item
     %span Does this person usually exercise good judgement? Please elaborate:
-    = text_area_tag(:reference_form_area_3)
+    = text_area_tag(:reference_form_area_3, @reference_form_area_3)
     
   .form-item
     %span How would this person relate to a child dealing with highly sensitive issues, and do you have any hesitation about this person working in this capacity? 
-    = text_area_tag(:reference_form_area_4)
+    = text_area_tag(:reference_form_area_4, @reference_form_area_4)
   
   .form-item
     %span Please share any additional pertinent information that would assist us in evaluating this person's involvement with our agency.
-    = text_area_tag(:reference_form_area_5)
+    = text_area_tag(:reference_form_area_5, @reference_form_area_5)
   
   .form-item  
     = submit_tag 'Finished', :class => "button"

@@ -35,7 +35,22 @@
     = text_field_tag(:reference_email_3)
   
   .form-item
-    = link_to 'Reference Link', welcome_reference_form_path(:ref_id => @ref_id.to_s)
+    = 'In order for this application to be completed and sent to Scotty\'s House three references must be provided. There are two ways of completing this requirement.'
+    
+  .form-item
+    = '     1) Fill in the emails above and hit the submit button below, and the neccessary information will be sent to their emails.'
+  
+  .form-item
+    = '     2) Distribute the link below to each of the references manually.'
+    
+  .form-item
+    = 'These references must be completed within 60 days of submitting this application, or it will be dropped.'
+  
+  .form-item
+    = 'Reference Link:'
+  
+  .form-item
+    =@root + welcome_reference_form_path(:ref_id => @ref_id.to_s).to_s
     
   .form-item  
     = submit_tag 'Submit', :class => "button"
