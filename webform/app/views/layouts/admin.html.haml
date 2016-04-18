@@ -13,6 +13,9 @@
       #header-title.horizontal-center Admin Area
     
     .main-wrapper.horizontal-center
+      - flash.each do |key, value|
+        .alert 
+          = "#{value}"
       .main-header
       .main-content
         = yield 

@@ -9,16 +9,28 @@
 / To the extent possible under law, the author(s) have dedicated all copyright and related and neighboring rights to this software to the public domain worldwide. This software is distributed without any warranty.
 / You should have received a copy of the CC0 Public Domain Dedication along with this software. If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
 
-.main-title Main Admin Page
+.main-title Search for Volunteer Application
+
+= form_tag admin_query_volunteer_path, :method => :post do
+	.form-item
+		%span Type the user name:
+		= text_field_tag :volunteer_name
+		
+	.form-item  
+		= submit_tag 'Search', :class => "smaller-button"
+
+
+Applications found:
 %br
-.subtitle Howdy!
-%br
-= button_to('Logout', destroy_auth_user_session_path, :method => :delete, :class => "smaller-button")
-%br  
-= link_to("Change your password", edit_auth_user_registration_path)
-%br
-= link_to("Create new account", admin_new_user_path)
-%br
-= link_to("Show users", admin_show_users_path)
-%br
-= link_to("Search application", admin_query_volunteer_path)
+%table
+	%thead
+		%tr
+			%td Name
+			%td Email
+	%tbody
+	- @volunteers.each do |volunteer|
+		%tr
+			%td
+				= link_to volunteer.Name, admin_show_volunteer_path(volunteer.id)
+			%td 
+				= volunteer.EmailAddress

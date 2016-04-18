@@ -9,16 +9,37 @@
 / To the extent possible under law, the author(s) have dedicated all copyright and related and neighboring rights to this software to the public domain worldwide. This software is distributed without any warranty.
 / You should have received a copy of the CC0 Public Domain Dedication along with this software. If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
 
-.main-title Main Admin Page
+.main-title Review Application
+
+%span 
+	= "Name: #{@volunteer.Name}"
 %br
-.subtitle Howdy!
 %br
-= button_to('Logout', destroy_auth_user_session_path, :method => :delete, :class => "smaller-button")
-%br  
-= link_to("Change your password", edit_auth_user_registration_path)
+
+%span 
+	= "Date of birth: #{@volunteer.DateofBirth}"
 %br
-= link_to("Create new account", admin_new_user_path)
 %br
-= link_to("Show users", admin_show_users_path)
+
+%span 
+	= "Email address: #{@volunteer.EmailAddress}"
 %br
-= link_to("Search application", admin_query_volunteer_path)
+%br
+
+%span 
+	= "Phone numbers: #{@volunteer.PhoneNumbers}"
+%br
+%br
+
+%span 
+	= "MailingAddress #{@volunteer.MailingAddress}"
+%br
+%br
+
+
+%span Days available for volunteer
+= @volunteer.DaysTimesyouwillbeavailabletovolunteer
+%br
+%br
+
+= button_to "Back to user queries", admin_query_volunteer_path, :class => "smaller-button"
