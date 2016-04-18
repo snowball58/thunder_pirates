@@ -39,7 +39,8 @@ textarea {
 table {
   border-spacing: 0.5rem;
 }
-td, th {
+
+.admin-th, .admin-td {
   border: 1px solid #999;
   padding: 0.5rem;
   text-align: left;
@@ -47,6 +48,19 @@ td, th {
 
 .horizontal-center {
 	position: absolute;
+	left: 50%;
+	transform: translate(-50%, 0);
+}
+
+.alert {
+	font-size: 110%;
+	background-color: #ffeeee;
+	border: 1px solid #ff0000;
+	padding: .2%;
+	border-radius: 4px;
+	color: #ff0000;
+	position: fixed;
+	margin-top: .5%;
 	left: 50%;
 	transform: translate(-50%, 0);
 }

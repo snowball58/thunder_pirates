@@ -38,4 +38,19 @@ class AdminController < ApplicationController
     redirect_to admin_show_users_path
   end
   
+  def query_volunteer
+    name_query = params[:volunteers_name]
+    name_query
+    @volunteers = Volunteer.where("Name LIKE ?", "%#{params[:volunteer_name]}%")
+  end
+
+  def show_volunteer
+    @volunteer = Volunteer.find_by_id(params[:id])
+    
+    if @volunteer == nil
+      flash[:notice] = "We couldn't find this application, please query again"
+      redirect_to admin_query_volunteer_path
+    end
+
+  end
 end
