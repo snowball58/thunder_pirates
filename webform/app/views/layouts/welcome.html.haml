@@ -12,6 +12,9 @@
   %body
     %header
       #header-title.horizontal-center Volunteer & Intern Application Form
+      - flash.each do |key, value|
+        .alert 
+          = "#{value}"
     
 
     .main-wrapper.horizontal-center
@@ -20,6 +23,3 @@
       .main-content
         = yield 
 
-    - flash.each do |key, value|
-      .alert 
-        = "#{value}"
