@@ -27,6 +27,8 @@ Rails.application.routes.draw do
   get 'admin/show_users' => 'admin#show_users'
   delete 'admin/delete_user' => 'admin#delete_user'
   get 'admin' => 'admin#index', as: :auth_user_root # creates user_root_path
+  get 'admin/query_volunteer' => 'admin#query_volunteer'
+  get 'admin/show_volunteer/:id' => 'admin#show_volunteer'
   
   root 'welcome#index'
   get 'welcome/index', :to => 'welcome#index'
