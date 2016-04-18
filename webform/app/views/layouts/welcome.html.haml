@@ -13,8 +13,13 @@
     %header
       #header-title.horizontal-center Volunteer & Intern Application Form
     
+
     .main-wrapper.horizontal-center
       .main-header
         = image_tag("logo.png", :alt => 'logo', :id => 'logo', :class => 'horizontal-center')
       .main-content
         = yield 
+
+    - flash.each do |key, value|
+      .alert 
+        = "#{value}"
