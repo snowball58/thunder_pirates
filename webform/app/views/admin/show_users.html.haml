@@ -4,13 +4,14 @@ Current user is
 %table
     %thead
         %tr
-            %th E-mail address
-            %th Delete
+            %th.admin-th E-mail address
+            
     %tbody
     - @users.each do |user|
         %tr
-            %td= user.email
-            %td= button_to 'delete', admin_delete_user_path(:id => user.id), :method => :delete
+            %td.admin-td user.email
+            %td.admin-td
+                = button_to 'delete', admin_delete_user_path(:id => user.id), :method => :delete
             
 %br
 = link_to("Admin", auth_user_root_path)
