@@ -28,7 +28,7 @@ input[type=text] {
 }
 
 input[type=text]:focus {
-    border: 1px solid #34a2d3;
+	border: 1px solid #34a2d3;
 }
 
 textarea { 
@@ -37,7 +37,7 @@ textarea {
 }
 
 td, th {
- 	border: none;
+	border: none;
 }
 
 .horizontal-center {
@@ -65,7 +65,7 @@ td, th {
 }
 
 #header-title {
-	color: #ffffff;	
+	color: #ffffff;
 	font-size: 200%;
 	font-weight: 700;
 	margin-top: 2%;
