@@ -13,7 +13,7 @@ class WelcomeController < ApplicationController
   layout 'welcome'
   
   def index
-
+    ActionMailer::Base.default_url_options = {:host => request.host_with_port}
   end
 
   # This function finds the user in the database. If he's not, the user will be 
