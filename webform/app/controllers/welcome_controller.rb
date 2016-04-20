@@ -430,25 +430,6 @@ class WelcomeController < ApplicationController
         redirect_to welcome_reference_form_emails_path
         return
       end 
-      
-      
-      ######### This part to be moved to confirmation page
-      args = Hash.new
-      args[:name] = volunteer.Name
-      args[:url] = url_for(action: 'reference_form', controller: 'welcome') + "?ref_id=" + session[:uniqueID]
-      if not params[:reference_email_1].blank?
-        VolunteerMailer.application_email("reference", params[:reference_email_1], args).deliver_now
-      end
-      if not params[:reference_email_2].blank?
-        VolunteerMailer.application_email("reference", params[:reference_email_2], args).deliver_now
-      end
-      if not params[:reference_email_3].blank?
-        VolunteerMailer.application_email("reference", params[:reference_email_3], args).deliver_now
-      end
-      args[:url] = url_for(action: 'volunteer', controller: 'welcome') + "?uniqueID=" + session[:uniqueID]
-      VolunteerMailer.application_email("applicant", volunteer.EmailAddress, args).deliver_now
-      ######### This part to be moved to confirmation page
-      
     end
     redirect_to welcome_reference_form_path
   end
