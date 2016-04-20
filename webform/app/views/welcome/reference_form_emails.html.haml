@@ -21,15 +21,15 @@
 =form_tag welcome_reference_form_emails_path, :method => :post do
   .form-item
     %span Reference 1
-    = text_field_tag(:reference_email_1)
+    = text_field_tag(:reference_email_1, @reference_email_1)
     
   .form-item
     %span Reference 2
-    = text_field_tag(:reference_email_2)
+    = text_field_tag(:reference_email_2, @reference_email_2)
     
   .form-item
     %span Reference 3
-    = text_field_tag(:reference_email_3)
+    = text_field_tag(:reference_email_3, @reference_email_3)
   
   .form-item
     = 'In order for this application to be completed and sent to Scotty\'s House three references must be provided. There are two ways of completing this requirement.'
