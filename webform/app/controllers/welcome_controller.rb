@@ -431,7 +431,7 @@ class WelcomeController < ApplicationController
         return
       end 
     end
-    redirect_to welcome_reference_form_path
+    redirect_to welcome_review_path
   end
   
   def reference_form
