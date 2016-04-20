@@ -25,7 +25,7 @@ class VolunteerMailer < ApplicationMailer
         elsif type == "applicant"
             title = "Application Confirmation - Scotty's House"
             body = "Thank you for applying to volunteer at Scotty's House Child Advocacy Center!\n\n"
-            body = body + "You can view your application with this link: " + args[:url] + "\n\n"
+            #body = body + "You can view your application with this link: " + args[:url] + "\n\n"
             body = body + "The application will not be considered until all references are submitted."
             mail(to: receiver, subject: title, body: body)
         else
