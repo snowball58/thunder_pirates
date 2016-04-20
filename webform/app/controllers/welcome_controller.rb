@@ -399,6 +399,9 @@ class WelcomeController < ApplicationController
     return if !volunteer
     @root = root_url.to_s.chomp("/")
     @ref_id = session[:uniqueID]
+    @reference_email_1 = session[:reference_email_1]
+    @reference_email_2 = session[:reference_email_2]
+    @reference_email_3 = session[:reference_email_3]
   end
   
   def reference_form_emails_check
@@ -409,6 +412,9 @@ class WelcomeController < ApplicationController
       volunteer.save
       flash[:notice] = nil
       #if not (EmailValidator.valid?(params[:reference_email_1]) and EmailValidator.valid?(params[:reference_email_2]) and EmailValidator.valid?(params[:reference_email_3]))
+      session[:reference_email_1] = params[:reference_email_1]
+      session[:reference_email_2] = params[:reference_email_2]
+      session[:reference_email_3] = params[:reference_email_3]
       if not (params[:reference_email_1].blank? or EmailValidator.valid?(params[:reference_email_1]))
         flash[:notice] = "Invalid email for Reference 1. Please enter valid email or leave blank."
         redirect_to welcome_reference_form_emails_path
