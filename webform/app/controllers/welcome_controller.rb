@@ -517,7 +517,62 @@ class WelcomeController < ApplicationController
     end
     redirect_to welcome_reference_form_path
   end
+
+  def review
+    volunteer = checkin_user
+    return if !volunteer
+    
+    #Review Personal Information
+    @name = volunteer[:Name]
+    @birth = volunteer[:DateofBirth]
+    @email = volunteer[:EmailAddress]
+    @home_phone = volunteer[:HomePhone]
+    @cell_phone = volunteer[:CellPhone]
+    @street = volunteer[:Street]
+    @city = volunteer[:City]
+    @state = volunteer[:State]
+    @zip = volunteer[:Zip]
+    @times = volunteer[:DaysTimesyouwillbeavailabletovolunteer]
+    
+    #General Information
+    @program_source = volunteer[:HowdidyoulearnaboutScottysHouseandourVolunteerProgram]
+    @experience_gain = volunteer[:Whatwouldyouliketogainfromyourvolunteerexperience]
+    
+    #Emergency Notification Information
+    @emergency_name = volunteer[:EmergencyName]
+    @emergency_primary_phone = volunteer[:EmergencyPhone]
+    @emergency_address = volunteer[:EmergencyAddress]
+    @emergency_relationship = volunteer[:EmergencyRelationship]
+    
+    #Reference Emails
+    @reference_email_1 = session[:reference_email_1]
+    @reference_email_2 = session[:reference_email_2]
+    @reference_email_3 = session[:reference_email_3]
+  end
   
+  def review_check
+     volunteer = Volunteer.find_by_uniqueID(session[:uniqueID])
+    if volunteer != nil
+      ######### This part to be moved to confirmation page
+      args = Hash.new
+      args[:name] = volunteer.Name
+      args[:url] = url_for(action: 'reference_form', controller: 'welcome') + "?ref_id=" + session[:uniqueID]
+      if not params[:reference_email_1].blank?
+        VolunteerMailer.application_email("reference", params[:reference_email_1], args).deliver_now
+      end
+      if not params[:reference_email_2].blank?
+        VolunteerMailer.application_email("reference", params[:reference_email_2], args).deliver_now
+      end
+      if not params[:reference_email_3].blank?
+        VolunteerMailer.application_email("reference", params[:reference_email_3], args).deliver_now
+      end
+      args[:url] = url_for(action: 'volunteer', controller: 'welcome') + "?uniqueID=" + session[:uniqueID]
+      VolunteerMailer.application_email("applicant", volunteer.EmailAddress, args).deliver_now
+      ######### This part to be moved to confirmation page
+    end
+    redirect_to welcome_index_path
+  end
+
   def pdf
     #user = User.find(params[:id])
     #user = User.new()
