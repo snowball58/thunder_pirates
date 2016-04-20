@@ -381,15 +381,33 @@ class WelcomeController < ApplicationController
   def emergency_notification_check
     
     volunteer = Volunteer.find_by_uniqueID(session[:uniqueID])
-
-    if volunteer != nil
+    return if !volunteer
+    if params[:emergency_name].blank?
+      flash[:notice] = "Please enter a name for your emergency contact."
+      redirect_to welcome_emergency_notification_path
+      return
+    end
+    if params[:emergency_primary_phone].blank?
+      flash[:notice] = "Please enter a phone number for your emergency contact."
+      redirect_to welcome_emergency_notification_path
+      return
+    end
+    if params[:emergency_address].blank?
+      flash[:notice] = "Please enter an address for your emergency contact."
+      redirect_to welcome_emergency_notification_path
+      return
+    end
+    if params[:emergency_relationship].blank?
+      flash[:notice] = "Please enter your relationship with your emergency contact."
+      redirect_to welcome_emergency_notification_path
+      return
+    end
       volunteer.EmergencyName = params[:emergency_name]
       volunteer.EmergencyPhone = params[:emergency_primary_phone]
       volunteer.EmergencyAddress = params[:emergency_address]
       volunteer.EmergencyRelationship = params[:emergency_relationship]
       volunteer.date_modified = Time.now
       volunteer.save
-    end
     
     redirect_to welcome_reference_form_emails_path
   end
