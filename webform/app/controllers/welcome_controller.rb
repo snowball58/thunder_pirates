@@ -135,8 +135,8 @@ class WelcomeController < ApplicationController
       redirect_to welcome_volunteer_path
       return
     end
-    if params[:email].blank?
-      flash[:notice] = "Email field required."
+    if not EmailValidator.valid?(params[:email])
+      flash[:notice] = "Valid email required."
       redirect_to welcome_volunteer_path
       return
     end
