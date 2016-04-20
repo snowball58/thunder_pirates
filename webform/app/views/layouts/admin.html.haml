@@ -15,18 +15,18 @@
 !!!
 %html
   %head
-  %title Application Form
+  %title Administrator Page
   %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
   = stylesheet_link_tag 'admin.css'
   
   %body
     %header
-      #header-title.horizontal-center Admin Area
+      #header-title.horizontal-center Administrator Page
     
     .main-wrapper.horizontal-center
-      - flash.each do |key, value|
-        .alert 
-          = "#{value}"
+      // -if not flash[:notice].blank?
+      //   .alert
+      //     = flash[:notice]
       .main-header
       .main-content
         = yield 

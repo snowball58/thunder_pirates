@@ -12,7 +12,7 @@ body {
 
 header {
 	background-color: #3d3d5c;
-	box-shadow: 0px 2px 5px #888888;
+	box-shadow: 0px 2px 10px #000000;
 	height: 100px;
 	width: 100%;
 	position: relative;
@@ -66,14 +66,14 @@ table {
 	border: 1px solid #3d3d5c;
 	border-radius: 4px;
 	color: #3d3d5c;
-	width: 25%;
+	width: 35%;
 	padding: 1%;
 	font-size: 100%;
 	font-weight: bold;
 	text-align: center;
 	text-decoration:none;
 	position: absolute;
-	left: 12.5%;
+	left: 50%;
 	transform: translate(-50%, 0);
 }
 
@@ -123,7 +123,7 @@ table {
 }
 
 .main-header {
-	height: 100px;
+	height: 0px;
 	position: relative;
 }
 

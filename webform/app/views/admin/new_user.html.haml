@@ -9,19 +9,21 @@
 / To the extent possible under law, the author(s) have dedicated all copyright and related and neighboring rights to this software to the public domain worldwide. This software is distributed without any warranty.
 / You should have received a copy of the CC0 Public Domain Dedication along with this software. If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
 
-.main-title New User
+.main-title Add a New Administrator
 
 =form_tag admin_new_user_path, :method => :post do
   .form-item
-    %span email
+    %span.subtitle Email
     %br
     = email_field_tag(:email)
     %br
-    %span default password (Note: the user should change this password after first use!)
+    %br
+    %span.subtitle Password (Note: The password must be 8 characters or longer.)
     %br
     = password_field_tag(:password)
     %br
-    %span confirm password
+    %br
+    %span.subtitle Confirm Password
     %br
     = password_field_tag(:password_confirmation)
     
