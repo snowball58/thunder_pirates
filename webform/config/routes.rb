@@ -58,6 +58,9 @@ Rails.application.routes.draw do
   get 'welcome/reference_form', :to => 'welcome#reference_form'
   post 'welcome/reference_form', :to => 'welcome#reference_form_check'
   
+  get 'welcome/review', :to => 'welcome#review'
+  post 'welcome/review', :to => 'welcome#review_check'
+
   get 'pdf', :to => 'welcome#pdf'
   
   get 'refpdf', :to => 'welcome#refpdf'
