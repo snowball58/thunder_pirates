@@ -20,7 +20,8 @@ Current user is
     %tbody
     - @users.each do |user|
         %tr
-            %td.admin-td user.email
+            %td.admin-td 
+                =user.email
             %td.admin-td
                 = button_to 'delete', admin_delete_user_path(:id => user.id), :method => :delete
             
