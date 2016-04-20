@@ -23,8 +23,9 @@
   %body
     %header
       #header-title.horizontal-center Volunteer & Intern Application Form
-      .alert
-        = flash[:notice]
+      -if not flash[:notice].blank?
+        .alert
+          = flash[:notice]
     
 
     .main-wrapper.horizontal-center
