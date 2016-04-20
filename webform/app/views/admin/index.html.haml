@@ -9,16 +9,19 @@
 / To the extent possible under law, the author(s) have dedicated all copyright and related and neighboring rights to this software to the public domain worldwide. This software is distributed without any warranty.
 / You should have received a copy of the CC0 Public Domain Dedication along with this software. If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
 
-.main-title Main Admin Page
+.main-title Welcome to the Admin Home Page!
 %br
-.subtitle Howdy!
+.subtitle Howdy! What would you like to do?
+= button_to('Logout', destroy_auth_user_session_path, :method => :delete, :class => "admin-button")
 %br
-= button_to('Logout', destroy_auth_user_session_path, :method => :delete, :class => "smaller-button")
-%br  
-= link_to("Change your password", edit_auth_user_registration_path)
 %br
-= link_to("Create new account", admin_new_user_path)
+= link_to("Change your password", edit_auth_user_registration_path, :class => "admin-button")
 %br
-= link_to("Show users", admin_show_users_path)
 %br
-= link_to("Search application", admin_query_volunteer_path)
+= link_to("Create new account", admin_new_user_path, :class => "admin-button")
+%br
+%br
+= link_to("Show users", admin_show_users_path, :class => "admin-button")
+%br
+%br
+= link_to("Search application", admin_query_volunteer_path, :class => "admin-button")
