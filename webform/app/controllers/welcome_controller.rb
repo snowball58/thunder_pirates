@@ -550,7 +550,6 @@ class WelcomeController < ApplicationController
   def review
     volunteer = checkin_user
     return if !volunteer
-    
     #Review Personal Information
     @name = volunteer[:Name]
     @birth = volunteer[:DateofBirth]
@@ -613,6 +612,8 @@ class WelcomeController < ApplicationController
   def status
     if params[:vol_id] != nil
       session[:uniqueID] = params[:vol_id]
+      volunteer = checkin_user
+      @name = volunteer[:Name]
       @root = root_url.to_s.chomp("/")
       @ref_count = 0
       @ref1 = "Not Recevied"

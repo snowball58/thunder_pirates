@@ -16,19 +16,19 @@
 -# POST sends data as HTTP post transaction 
 -# Form data is sent to the page specified in the action attribute
 
-#subtitle Please provide the emails of your references:
+#subtitle Please provide emails of your references:
   
 =form_tag welcome_reference_form_emails_path, :method => :post do
   .form-item
-    %span Reference 1
+    %span.subtitle Reference 1
     = text_field_tag(:reference_email_1, @reference_email_1)
     
   .form-item
-    %span Reference 2
+    %span.subtitle Reference 2
     = text_field_tag(:reference_email_2, @reference_email_2)
     
   .form-item
-    %span Reference 3
+    %span.subtitle Reference 3
     = text_field_tag(:reference_email_3, @reference_email_3)
   
   .form-item
@@ -44,10 +44,10 @@
     = 'These references must be completed within 60 days of submitting this application, or it will be dropped.'
   
   .form-item
-    = 'Reference Link:'
+    = 'You can send other references this Reference Link:'
   
   .form-item
-    =@root + welcome_reference_form_path(:ref_id => @ref_id.to_s).to_s
+    =link_to(@root + welcome_reference_form_path(:ref_id => @ref_id.to_s).to_s, @root + welcome_reference_form_path(:ref_id => @ref_id.to_s).to_s)
     
   .form-item  
     = submit_tag 'Review', :class => "button"
