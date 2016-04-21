@@ -461,8 +461,7 @@ class WelcomeController < ApplicationController
       b = Reference.new
       b.uniqueID = uID
       b.date_modified = Time.now
-      b.VolunteerId = nil
-      b.Signature_4 = params[:ref_id] #use to temp hold volID
+      b.VolunteerId = params[:ref_id]
       session[:ref_unique_id] = uID
       b.save
     elsif params[:ref_id] == nil && session[:ref_unique_id] != nil
@@ -481,8 +480,9 @@ class WelcomeController < ApplicationController
   
   def reference_form_check
     reference = Reference.find_by_uniqueID(session[:ref_unique_id])
-    return if !reference
-    #session[:ref_id] = reference.VolunteerId
+    if !reference
+      return
+    end
     reference.ReferenceName = params[:your_name]
     reference.VolunteerName = params[:reference_name]
     reference.Howlonghaveyouknownthisperson = params[:reference_form_area_1]
@@ -526,20 +526,22 @@ class WelcomeController < ApplicationController
       return
     end
     
-    
-    reference.VolunteerId = reference.Signature_4
     reference.save
       
-    ######### This part to be moved to confirmation page, if one is made for references
-    if Reference.count(:VolunteerId => session[:ref_id]) >= 3
+    ######### This part to be moved to confirmation page, if one is made for reference
+    puts Reference.where('"VolunteerId" = ? and "ReferenceName" IS NOT NULL', reference.VolunteerId).count
+    if Reference.where('"VolunteerId" = ? and "ReferenceName" IS NOT NULL', reference.VolunteerId).count >= 3
       args = Array.new
-      args[0] = session[:ref_id]
+      args[0] = reference.VolunteerId
+      puts "jownvjwdnvdnvwijdnvidnviuwdnviwdvnwidvniwudvneuivnwieudvniwuvn"
+      puts args[0]
+      puts "jownvjwdnvdnvwijdnvidnviuwdnviwdvnwidvniwudvneuivnwieudvniwuvn"
       # email to myself for testing purposes
-      #VolunteerMailer.application_email("submission", "stevensnow58@gmail.com", args).deliver_now
-      users = AuthUser.all
-      users.each do |user|
-        VolunteerMailer.application_email("submission", user.email, args).deliver_now
-      end
+      VolunteerMailer.application_email("submission", "stevensnow58@gmail.com", args).deliver_now
+      #users = AuthUser.all
+      #users.each do |user|
+        #VolunteerMailer.application_email("submission", user.email, args).deliver_now
+      #end
     end
     ######### This part to be moved to confirmation page
     
@@ -585,9 +587,12 @@ class WelcomeController < ApplicationController
      volunteer = Volunteer.find_by_uniqueID(session[:uniqueID])
     if volunteer != nil
       ######### This part to be moved to confirmation page
+      session[:vol_id] = session[:uniqueID]
+      @root = root_url.to_s.chomp("/")
       args = Hash.new
       args[:name] = volunteer.Name
-      args[:url] = url_for(action: 'reference_form', controller: 'welcome') + "?ref_id=" + session[:uniqueID]
+      #args[:url] = url_for(action: 'reference_form', controller: 'welcome') + "?ref_id=" + session[:uniqueID]
+      args[:url] = @root + welcome_reference_form_path(:ref_id => session[:vol_id].to_s).to_s
       if not session[:reference_email_1].blank?
         VolunteerMailer.application_email("reference", session[:reference_email_1], args).deliver_now
       end
@@ -597,7 +602,8 @@ class WelcomeController < ApplicationController
       if not session[:reference_email_3].blank?
         VolunteerMailer.application_email("reference", session[:reference_email_3], args).deliver_now
       end
-      args[:url] = url_for(action: 'volunteer', controller: 'welcome') + "?uniqueID=" + session[:uniqueID]
+      args[:url] = @root + welcome_status_path(:vol_id => session[:vol_id].to_s).to_s
+      #args[:url] = @root + welcome_status_path(:vol_id => @ref_id.to_s).to_s
       VolunteerMailer.application_email("applicant", volunteer.EmailAddress, args).deliver_now
       ######### This part to be moved to confirmation page
     end
