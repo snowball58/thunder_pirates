@@ -9,24 +9,24 @@
 / To the extent possible under law, the author(s) have dedicated all copyright and related and neighboring rights to this software to the public domain worldwide. This software is distributed without any warranty.
 / You should have received a copy of the CC0 Public Domain Dedication along with this software. If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
 
-.main-title Search for Volunteer Application
+.main-title Search Incomplete Applications
 
 = form_tag admin_query_volunteer_path, :method => :post do
 	.form-item
-		%span Type the user name:
+		%span.subtitle Filter Applications by Entering a Name:
 		= text_field_tag :volunteer_name
 		
-	.form-item  
-		= submit_tag 'Search', :class => "smaller-button"
+	.form-item 
+		= submit_tag 'Search', :class => "admin-button"
 
 
-Applications found:
+%span.subtitle Incomplete Applications: 
 %br
 %table
 	%thead
 		%tr
-			%td Name
-			%td Email
+			%td.subtitle Name
+			%td.subtitle Email
 	%tbody
 	- @volunteers.each do |volunteer|
 		%tr
@@ -34,3 +34,5 @@ Applications found:
 				= link_to volunteer.Name, admin_show_volunteer_path(volunteer.id)
 			%td 
 				= volunteer.EmailAddress
+%br
+= link_to("Back to Admin Home", auth_user_root_path, :class => "admin-button")
