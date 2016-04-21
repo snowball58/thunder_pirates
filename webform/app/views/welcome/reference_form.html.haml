@@ -20,6 +20,10 @@
 
 =form_tag welcome_reference_form_path, :method => :post do
   .form-item
+    %span Your Name
+    = text_field_tag(:your_name, @your_name)
+    
+  .form-item
     %span Volunteer's Name
     = text_field_tag(:reference_name, @reference_name)
 
