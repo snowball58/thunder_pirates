@@ -142,4 +142,12 @@
   %br
   
     = submit_tag 'Submit!', :class => "button"
+    %br
+    %br
   //^Path needs to be renamed to Patrick's determined path (the splash page)
+  
+  .form-item
+    = 'Status Link:'
+    
+  .form-item
+    =@root + welcome_status_path(:vol_id => @ref_id.to_s).to_s

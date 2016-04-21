@@ -453,19 +453,21 @@ class WelcomeController < ApplicationController
   end
   
   def reference_form
-    if params[:ref_id] != nil && session[:ref_unique_id] == nil or params[:ref_id] != nil && session[:ref_unique_id] != nil
+    if params[:ref_id] != nil #&& session[:ref_unique_id] == nil or params[:ref_id] != nil && session[:ref_unique_id] != nil
       uID = SecureRandom.base64
       while Reference.exists?(:uniqueID => uID) do
         uID = SecureRandom.base64
       end
       b = Reference.new
       b.uniqueID = uID
-      b.VolunteerId = params[:ref_id]
       b.date_modified = Time.now
-      b.save
+      b.VolunteerId = nil
+      b.Signature_4 = params[:ref_id] #use to temp hold volID
       session[:ref_unique_id] = uID
+      b.save
     elsif params[:ref_id] == nil && session[:ref_unique_id] != nil
       reference = Reference.find_by_uniqueID(session[:ref_unique_id])
+      @your_name = reference.ReferenceName
       @reference_name = reference.VolunteerName
       @reference_form_area_1 = reference.Howlonghaveyouknownthisperson
       @reference_form_area_2 = reference.Cableincrisissituationwhy
@@ -474,69 +476,80 @@ class WelcomeController < ApplicationController
       @reference_form_area_5 = reference.PertinentInformation
     else
       #need an error page to redirect to
-      @reference_name = "Error"
     end
   end
   
   def reference_form_check
     reference = Reference.find_by_uniqueID(session[:ref_unique_id])
-    if reference != nil
-      session[:ref_id] = reference.VolunteerId
-      reference.VolunteerName = params[:reference_name]
-      reference.Howlonghaveyouknownthisperson = params[:reference_form_area_1]
-      reference.Cableincrisissituationwhy = params[:reference_form_area_2]
-      reference.Doesthispersonusuallyexercisegoodjudgment = params[:reference_form_area_3]
-      reference.Doyouhaveanyhesitationaboutthispersonworkinginthiscapacity = params[:reference_form_area_4]
-      reference.PertinentInformation = params[:reference_form_area_5]
-      reference.date_modified = Time.now
-      reference.save
-        
-      flash[:notice] = nil;
-      # check for required fields before moving on to the next page
-      if params[:reference_name].blank?
-        flash[:notice] = "Name field required."
-        redirect_to welcome_reference_form_path
-        return
-      end
-      if params[:reference_form_area_1].blank?
-        flash[:notice] = "Must answer: \"How long have you known this person?\""
-        redirect_to welcome_reference_form_path
-        return
-      end
-      if params[:reference_form_area_2].blank?
-        flash[:notice] = "Must answer: \"Are they capable in a crisis situation?\""
-        redirect_to welcome_reference_form_path
-        return
-      end
-      if params[:reference_form_area_3].blank?
-        flash[:notice] = "Must answer: \"Does this person usually exercise good judgement?\""
-        redirect_to welcome_reference_form_path
-        return
-      end
-      if params[:reference_form_area_4].blank?
-        flash[:notice] = "Must answer: \"Do you have any hesitations about this persons capacity?\""
-        redirect_to welcome_reference_form_path
-        return
-      end
-        
-      ######### This part to be moved to confirmation page, if one is made for references
-      if Reference.count(:VolunteerId => session[:ref_id]) >= 3
-        args = Array.new
-        args[0] = session[:ref_id]
-        # email to myself for testing purposes
-        #VolunteerMailer.application_email("submission", "stevensnow58@gmail.com", args).deliver_now
-        users = AuthUser.all
-        users.each do |user|
-          VolunteerMailer.application_email("submission", user.email, args).deliver_now
-        end
-      end
-      ######### This part to be moved to confirmation page
-      
+    return if !reference
+    #session[:ref_id] = reference.VolunteerId
+    reference.ReferenceName = params[:your_name]
+    reference.VolunteerName = params[:reference_name]
+    reference.Howlonghaveyouknownthisperson = params[:reference_form_area_1]
+    reference.Cableincrisissituationwhy = params[:reference_form_area_2]
+    reference.Doesthispersonusuallyexercisegoodjudgment = params[:reference_form_area_3]
+    reference.Doyouhaveanyhesitationaboutthispersonworkinginthiscapacity = params[:reference_form_area_4]
+    reference.PertinentInformation = params[:reference_form_area_5]
+    reference.date_modified = Time.now
+    reference.save
+    
+    flash[:notice] = nil;
+    # check for required fields before moving on to the next page
+    if params[:your_name].blank?
+      flash[:notice] = "Your name field required."
+      redirect_to welcome_reference_form_path
+      return
     end
-    redirect_to welcome_reference_form_path
+    if params[:reference_name].blank?
+      flash[:notice] = "Volunteer name field required."
+      redirect_to welcome_reference_form_path
+      return
+    end
+    if params[:reference_form_area_1].blank?
+      flash[:notice] = "Must answer: \"How long have you known this person?\""
+      redirect_to welcome_reference_form_path
+      return
+    end
+    if params[:reference_form_area_2].blank?
+      flash[:notice] = "Must answer: \"Are they capable in a crisis situation?\""
+      redirect_to welcome_reference_form_path
+      return
+    end
+    if params[:reference_form_area_3].blank?
+      flash[:notice] = "Must answer: \"Does this person usually exercise good judgement?\""
+      redirect_to welcome_reference_form_path
+      return
+    end
+    if params[:reference_form_area_4].blank?
+      flash[:notice] = "Must answer: \"Do you have any hesitations about this persons capacity?\""
+      redirect_to welcome_reference_form_path
+      return
+    end
+    
+    
+    reference.VolunteerId = reference.Signature_4
+    reference.save
+      
+    ######### This part to be moved to confirmation page, if one is made for references
+    if Reference.count(:VolunteerId => session[:ref_id]) >= 3
+      args = Array.new
+      args[0] = session[:ref_id]
+      # email to myself for testing purposes
+      #VolunteerMailer.application_email("submission", "stevensnow58@gmail.com", args).deliver_now
+      users = AuthUser.all
+      users.each do |user|
+        VolunteerMailer.application_email("submission", user.email, args).deliver_now
+      end
+    end
+    ######### This part to be moved to confirmation page
+    
+  
+    redirect_to 'https://www.scottyshouse.org/'
   end
 
   def review
+    @root = root_url.to_s.chomp("/")
+    @ref_id = session[:uniqueID]
     volunteer = checkin_user
     return if !volunteer
     
@@ -589,6 +602,42 @@ class WelcomeController < ApplicationController
       ######### This part to be moved to confirmation page
     end
     redirect_to welcome_index_path
+  end
+  
+  def status
+    if params[:vol_id] != nil
+      session[:uniqueID] = params[:vol_id]
+      @root = root_url.to_s.chomp("/")
+      @ref_count = 0
+      @ref1 = "Not Recevied"
+      @ref2 = "Not Recevied"
+      @ref3 = "Not Received"
+      Reference.where(VolunteerId: params[:vol_id]).find_each do |r|
+        @ref_count += 1
+        if @ref_count == 1
+          @ref1 = r.ReferenceName
+        elsif @ref_count == 2
+          @ref2 = r.ReferenceName
+        elsif @ref_count == 3
+          @ref3 = r.ReferenceName
+        end
+      end
+      
+      volunteer = Volunteer.find_by_uniqueID(params[:vol_id])
+      if !volunteer
+        #redirect to error
+      end
+      @expiration = volunteer.date_modified.to_date
+      for i in 1..60 do
+        @expiration = @expiration.next
+      end
+    else
+      #need an error page to redirect to
+    end
+  end
+  
+  def status_check
+    redirect_to 'https://www.scottyshouse.org/'
   end
 
   def pdf
