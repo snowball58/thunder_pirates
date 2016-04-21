@@ -1,0 +1,47 @@
+/ Scotty's House Volunteer WebForm
+/ Written in 2016 by: 
+/ Gustavo Estrela
+/ Logan Ford
+/ Patrick Herrington
+/ Noemie Nakamura
+/ Steven Snow
+/ Matthew Wiecek
+/ To the extent possible under law, the author(s) have dedicated all copyright and related and neighboring rights to this software to the public domain worldwide. This software is distributed without any warranty.
+/ You should have received a copy of the CC0 Public Domain Dedication along with this software. If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
+
+.main-title Status
+
+-# The method attribute specifies how to send form data (GET or POST)
+-# GET is default and appends the data to the URL in name/value pairs URL?name=value&name=value
+-# POST sends data as HTTP post transaction 
+-# Form data is sent to the page specified in the action attribute
+
+=form_tag welcome_status_path, :method => :post do
+ 
+  .status-item Reference 1:
+  = label_tag(:ref1, @ref1)
+  %br 
+  %br
+  
+  .status-item Reference 2:
+  = label_tag(:ref2, @ref2)
+  %br 
+  %br
+  
+  .status-item Reference 3:
+  = label_tag(:ref3, @ref3)
+  %br 
+  %br
+  
+  .status-item Expiration Date:
+  = label_tag(:expiration, @expiration)
+  %br 
+  %br
+  
+  .status-item  
+    = link_to 'Edit Application', welcome_review_path
+  
+  .status-item  
+    = submit_tag 'Finished', :class => "button"
+    
+    
