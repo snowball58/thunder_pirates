@@ -14,10 +14,6 @@ class VolunteerMailer < ApplicationMailer
             refs.each do |ref|
                 attachments["#{ref.uniqueID}.pdf"] = File.read(RefPDF.new(ref).export('/tmp/Ref.pdf'))
             end
-            record.destroy
-            refs.each do |ref|
-                ref.destroy
-            end
 
             mail(to: receiver, subject: title, body: body)
         elsif type == "reference"

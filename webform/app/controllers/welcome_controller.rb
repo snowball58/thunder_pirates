@@ -537,11 +537,16 @@ class WelcomeController < ApplicationController
       puts args[0]
       puts "jownvjwdnvdnvwijdnvidnviuwdnviwdvnwidvniwudvneuivnwieudvniwuvn"
       # email to myself for testing purposes
+      # must remove before final deployment
       VolunteerMailer.application_email("submission", "stevensnow58@gmail.com", args).deliver_now
-      #users = AuthUser.all
-      #users.each do |user|
-        #VolunteerMailer.application_email("submission", user.email, args).deliver_now
-      #end
+      users = AuthUser.all
+      users.each do |user|
+        VolunteerMailer.application_email("submission", user.email, args).deliver_now
+      end
+      Volunteer.find_by_uniqueID(reference.VolunteerId).destroy
+      Reference.where('"VolunteerId" = ? and "ReferenceName" IS NOT NULL', reference.VolunteerId).each do |ref|
+        ref.destroy
+      end
     end
     ######### This part to be moved to confirmation page
     
