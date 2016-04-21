@@ -588,7 +588,13 @@ class WelcomeController < ApplicationController
       VolunteerMailer.application_email("applicant", volunteer.EmailAddress, args).deliver_now
       ######### This part to be moved to confirmation page
     end
-    redirect_to welcome_index_path
+    redirect_to welcome_thank_you_path
+  end
+  
+  def thank_you
+    volunteer = checkin_user
+    return if !volunteer
+    @name = volunteer[:Name]
   end
 
   def pdf

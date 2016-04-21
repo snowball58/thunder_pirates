@@ -1,0 +1,30 @@
+/ Scotty's House Volunteer WebForm
+/ Written in 2016 by: 
+/ Gustavo Estrela
+/ Logan Ford
+/ Patrick Herrington
+/ Noemie Nakamura
+/ Steven Snow
+/ Matthew Wiecek
+/ To the extent possible under law, the author(s) have dedicated all copyright and related and neighboring rights to this software to the public domain worldwide. This software is distributed without any warranty.
+/ You should have received a copy of the CC0 Public Domain Dedication along with this software. If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
+
+.main-title Thank you for your application, #{@name}!
+
+-# The method attribute specifies how to send form data (GET or POST)
+-# GET is default and appends the data to the URL in name/value pairs URL?name=value&name=value
+-# POST sends data as HTTP post transaction 
+-# Form data is sent to the page specified in the action attribute
+
+=form_tag welcome_thank_you_path, :method => :post do
+
+  %span.subtitle Your application was submitted successfully.
+  %br
+  %br
+  %span.subtitle NOTE: Your application will not be sent to Scotty's House untill all 3 of your provided references have responded. References have 60 days to complete their referrals. 
+  %br
+  %br
+  // %span.subtitle To view the status of your application, please see the link below:
+  // %br
+  // %br
+  =link_to("Back to Scotty's House", "https://scottyshouse.org", class: "button", style: "width: 25%")

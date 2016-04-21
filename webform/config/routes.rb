@@ -60,6 +60,8 @@ Rails.application.routes.draw do
   
   get 'welcome/review', :to => 'welcome#review'
   post 'welcome/review', :to => 'welcome#review_check'
+  
+  get 'welcome/thank_you', :to => 'welcome#thank_you'
 
   get 'pdf', :to => 'welcome#pdf'
   
