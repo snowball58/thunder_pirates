@@ -9,8 +9,10 @@
 / To the extent possible under law, the author(s) have dedicated all copyright and related and neighboring rights to this software to the public domain worldwide. This software is distributed without any warranty.
 / You should have received a copy of the CC0 Public Domain Dedication along with this software. If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
 
-Current user is 
-= @current_email
+.main-title Manage Administrators
+%span.subtitle Howdy! You are currently logged in as #{@current_email}.
+%br
+%span.subtitle View and/or delete other administrators below.
 
 %table
     %thead
@@ -23,7 +25,7 @@ Current user is
             %td.admin-td 
                 =user.email
             %td.admin-td
-                = button_to 'delete', admin_delete_user_path(:id => user.id), :method => :delete
+                = button_to 'Delete', admin_delete_user_path(:id => user.id), :method => :delete
             
 %br
-= link_to("Admin", auth_user_root_path)
+= link_to("Back to Admin Home", auth_user_root_path, :class => "admin-button")

@@ -28,4 +28,8 @@
     = password_field_tag(:password_confirmation)
     
   .form-item  
-    = submit_tag 'Continue', :class => "button"
+    = submit_tag 'Add This Administrator', :class => "admin-button"
+    %br
+    %br
+    %br
+    = link_to("Back to Admin Home", auth_user_root_path, :class => "admin-button")
