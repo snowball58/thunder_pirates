@@ -16,26 +16,30 @@
 -# POST sends data as HTTP post transaction 
 -# Form data is sent to the page specified in the action attribute
 
-#subtitle Please list a person to contact in the event of an emergency.
+.subtitle Please list a person to contact in the event of an emergency.
+%br
+%br
 =form_tag welcome_emergency_notification_path, :method => :post do
   .form-item
-    %span Name
+    %span.subtitle *Indicates a required field.
+    %br
+    %span.subtitle *Name
     = text_field_tag(:emergency_name, @emergency_name)
 
   .form-item
-    %span Primary Phone Number 
+    %span.subtitle *Primary Phone Number 
     = text_field_tag(:emergency_primary_phone, @emergency_primary_phone)
 
   .form-item
-    %span Alternate Phone Number 
+    %span.subtitle Alternate Phone Number 
     = text_field_tag(:emergency_secondary_phone, @emergency_secondary_phone)
 
   .form-item
-    %span Address
+    %span.subtitle *Address
     = text_field_tag(:emergency_address, @emergency_address)
 
   .form-item
-    %span Relationship
+    %span.subtitle *Relationship
     = text_field_tag(:emergency_relationship, @emergency_relationship)
   
   .form-item  

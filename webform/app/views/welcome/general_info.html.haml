@@ -18,43 +18,43 @@
 
 =form_tag welcome_general_info_path, :method => :post do
   .form-item
-    %span How did you learn about Scotty's House and our volunteer program?
+    %span.subtitle How did you learn about Scotty's House and our volunteer program?
     = text_area_tag(:program_source, @program_source)
   
   .form-item
-    %span What would you like to gain from your volunteer experience?
+    %span.subtitle What would you like to gain from your volunteer experience?
     = text_area_tag(:experience_gain, @experience_gain)
   
   .form-item
-    %span What are you volunteering for?
+    %span.subtitle What are you volunteering for?
     %br
     = radio_button_tag(:reason, "class_credit", @reason_class_credit)
     = label_tag(:reason_class_credit, "Class Credit")
     %br
-    %span Please provide the name of your instructor.
+    %span.subtitle Please provide the name of your instructor.
     = text_field_tag(:instructor_name, @instructor_name)
     
     = radio_button_tag(:reason, "org_credit", @reason_org_credit)
     = label_tag(:reason_org_credit, "Organization Credit")
     %br
-    %span Please provide the name of your organization.
+    %span.subtitle Please provide the name of your organization.
     = text_field_tag(:organization_name, @organization_name)   
     
     = radio_button_tag(:reason, "other")
     = label_tag(:reason_other, "Other")
     %br
-    %span Please explain.
+    %span.subtitle Please explain.
     = text_field_tag(:explanation, @explanation)
        
   .form-item
-    %span Are you currently employed? 
+    %span.subtitle Are you currently employed? 
     = radio_button_tag(:employed, "yes")
     = label_tag(:employed_yes, "Yes")
     
     = radio_button_tag(:employed, "no")
     = label_tag(:employed_no, "No")
     %br
-    %span Name of employer:  
+    %span.subtitle Name of employer:  
     = text_field_tag(:employer_name, @employer_name)
   
   .form-item  

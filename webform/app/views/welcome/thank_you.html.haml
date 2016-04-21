@@ -24,7 +24,11 @@
   %span.subtitle NOTE: Your application will not be sent to Scotty's House untill all 3 of your provided references have responded. References have 60 days to complete their referrals. 
   %br
   %br
-  // %span.subtitle To view the status of your application, please see the link below:
-  // %br
-  // %br
+  %span.subtitle You can view the status of your application by clicking the link below:
+  .form-item
+    =link_to(@root + welcome_status_path(:vol_id => @ref_id.to_s).to_s, @root + welcome_status_path(:vol_id => @ref_id.to_s).to_s)
+  %br
+  %br
+  %br
   =link_to("Back to Scotty's House", "https://scottyshouse.org", class: "button", style: "width: 25%")
+  

@@ -28,7 +28,7 @@
   = hidden_field_tag "nof_experiences", params[:nof_experiences]
 
   .form-item
-    %span Please list any previous Volunteer experience, particularly in working with children and families:
+    %span.subtitle Please list any previous Volunteer experience, particularly in working with children and families:
 
   %table{:style => "width:100%", :id => "experiences", :border => "0px"}
     %thead
@@ -57,35 +57,35 @@
   %br
 
   .form-item
-    %span Do you have any experience with:
+    %span.subtitle Do you have any experience with:
     %br
     %br
     %span Child Abuse?
     = check_box_tag :child_abuse_check, "Yes", @child_abuse_check
 
     %br
-    %span If Yes, explain why:
+    %span.subtitle If Yes, explain why:
     = text_area_tag :child_abuse_text, @child_abuse_text
     
     %br
-    %span Foster Care?
+    %span.subtitle Foster Care?
     = check_box_tag :foster_care_check, "Yes", @foster_care_check
     %br
-    %span If Yes, explain why:
+    %span.subtitle If Yes, explain why:
     = text_area_tag :foster_care_text, @foster_care_text
 
     %br
-    %span Criminal, Juvenile or Family Court System?
+    %span.subtitle Criminal, Juvenile or Family Court System?
     = check_box_tag :criminal_check, "Yes", @criminal_check
     %br
-    %span If Yes, explain why:
+    %span.subtitle If Yes, explain why:
     = text_area_tag :criminal_text, @criminal_text
 
     %br
-    %span Other Child Service Agencies?
+    %span.subtitle Other Child Service Agencies?
     = check_box_tag :agency_check, "Yes", @agency_check
     %br
-    %span If Yes, explain why:
+    %span.subtitle If Yes, explain why:
     = text_area_tag :agency_text, @agency_text
 
   .form-item  

@@ -18,35 +18,35 @@
 
 =form_tag welcome_skills_path, :method => :post do
   .form-item
-    %span Do you speak any languages other than English?
+    %span.subtitle Do you speak any languages other than English?
     = check_box_tag(:multilingual_speaker, "Yes", @multilingual_speaker)
 
     %br
-    %span If so, what language(s)?
+    %span.subtitle If so, what language(s)?
     = text_field_tag(:speaking_languages, @speaking_languages)
 
   .form-item
-    %span Do you read/write in any language other than English?
+    %span.subtitle Do you read/write in any language other than English?
     = check_box_tag(:multilingual_reader, "Yes", @multilingual_reader)
 
     %br
-    %span If so, what language(s)?
+    %span.subtitle If so, what language(s)?
     = text_field_tag(:reading_languages, @reading_languages)
 
   .form-item
-    %span Do you have any experience with blind or hearing impaired persons?
+    %span.subtitle Do you have any experience with blind or hearing impaired persons?
     = check_box_tag(:impaired_experience, "Yes", @impaired_experience)
     
     %br
-    %span If so, in what capacity?
+    %span.subtitle If so, in what capacity?
     = text_area_tag(:impaired_capacity, @impaired_capacity)
 
   .form-item
-    %span Do you have any experience with handicapped persons?
+    %span.subtitle Do you have any experience with handicapped persons?
     = check_box_tag(:handicapped_experience, "Yes", @handicapped_experience)
 
     %br
-    %span If so, in what capacity?
+    %span.subtitle If so, in what capacity?
     = text_area_tag(:handicapped_capacity, @handicapped_capacity)
   
   .form-item  

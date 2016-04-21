@@ -18,39 +18,41 @@
 
 =form_tag welcome_volunteer_path, :method => :post do
   .form-item
-    %span Name:
+    %span.subtitle *Indicates a required field.
+    %br
+    %span.subtitle *Name:
     = text_field_tag(:name, @name)
   
   .form-item
-    %span Date of Birth:
+    %span.subtitle *Date of Birth:
     = text_field_tag(:birth, @birth)
     
   .form-item
-    %span Email Address:
+    %span.subtitle *Email Address:
     = text_field_tag(:email, @email)
     
   .form-item
-    %span Home Phone:
+    %span.subtitle *Primary Phone:
     = text_field_tag(:home_phone, @home_phone)
     
   .form-item
-    %span Cell Phone:
+    %span.subtitle Secondary Phone:
     = text_field_tag(:cell_phone, @cell_phone)
     
   .form-item
-    %span Street Address / Appartment Number:
+    %span.subtitle *Street Address / Appartment Number:
     = text_field_tag(:street, @street)
     
   .form-item
-    %span City:
+    %span.subtitle *City:
     = text_field_tag(:city, @city)
     
   .form-item
-    %span State:
+    %span.subtitle *State:
     = text_field_tag(:state, @state)
     
   .form-item
-    %span Zip Code:
+    %span.subtitle *Zip Code:
     = text_field_tag(:zip, @zip)
     
   .form-item
