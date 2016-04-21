@@ -548,8 +548,6 @@ class WelcomeController < ApplicationController
   end
 
   def review
-    @root = root_url.to_s.chomp("/")
-    @ref_id = session[:uniqueID]
     volunteer = checkin_user
     return if !volunteer
     
@@ -605,6 +603,8 @@ class WelcomeController < ApplicationController
   end
   
   def thank_you
+    @root = root_url.to_s.chomp("/")
+    @ref_id = session[:uniqueID]
     volunteer = checkin_user
     return if !volunteer
     @name = volunteer[:Name]
