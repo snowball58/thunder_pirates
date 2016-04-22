@@ -61,7 +61,7 @@ class AdminController < ApplicationController
   end
 
   def reference_pdf
-    record = Reference.find_by_uniqueID(session[:id])
+    record = Reference.find_by_uniqueID(params[:id])
     send_file RefPDF.new(record).export('/tmp/Ref.pdf'), type: 'application/pdf' , :disposition => 'inline', :stream => false
   end
 end
