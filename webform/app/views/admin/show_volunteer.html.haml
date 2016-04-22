@@ -48,6 +48,6 @@
 = @volunteer.DaysTimesyouwillbeavailabletovolunteer.to_i > 1 ? "days" : "day"
 %br
 %br
-/ = button_to "Review Full Application", admin_volunteer, :class => "smaller-button"
-
-= button_to "Back to user queries", admin_query_volunteer_path, :class => "smaller-button"
+= button_to "Review Full Application", admin_volunteer_pdf_path(@volunteer.uniqueID), :class => "smaller-button", :method => :get
+%br
+= button_to "Back to Application List", admin_query_volunteer_path, :class => "smaller-button"

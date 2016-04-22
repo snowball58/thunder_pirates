@@ -54,7 +54,7 @@ class AdminController < ApplicationController
   end
 
   def volunteer_pdf
-    record = Volunteer.find_by_uniqueID(session[:uniqueID])
+    record = Volunteer.find_by_uniqueID(params[:id])
     send_file ScottyPDF.new(record).export('/tmp/application.pdf'), type: 'application/pdf' , :disposition => 'inline', :stream => false
   end
 end
