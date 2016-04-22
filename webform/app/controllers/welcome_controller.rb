@@ -414,7 +414,9 @@ class WelcomeController < ApplicationController
   
   def reference_form_emails
     volunteer = checkin_user
-    return if !volunteer
+    if !volunteer
+      return 
+    end
     @root = root_url.to_s.chomp("/")
     @ref_id = session[:uniqueID]
     @reference_email_1 = session[:reference_email_1]
@@ -604,6 +606,7 @@ class WelcomeController < ApplicationController
       if not session[:reference_email_3].blank?
         VolunteerMailer.application_email("reference", session[:reference_email_3], args).deliver_now
       end
+      args[:url2] = args[:url]
       args[:url] = @root + welcome_status_path(:vol_id => session[:vol_id].to_s).to_s
       #args[:url] = @root + welcome_status_path(:vol_id => @ref_id.to_s).to_s
       VolunteerMailer.application_email("applicant", volunteer.EmailAddress, args).deliver_now
