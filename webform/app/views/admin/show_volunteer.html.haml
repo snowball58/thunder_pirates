@@ -11,6 +11,9 @@
 
 .main-title Review Application
 
+%span.subtitle Volunteer
+%br
+%br
 %span.subtitle
 	= "Name:"
 = "#{@volunteer.Name}"
@@ -48,6 +51,56 @@
 = @volunteer.DaysTimesyouwillbeavailabletovolunteer.to_i > 1 ? "days" : "day"
 %br
 %br
-= button_to "Review Full Application", admin_volunteer_pdf_path(@volunteer.uniqueID), :class => "smaller-button", :method => :get
+= button_to "Review Volunteer Application", admin_volunteer_pdf_path(@volunteer.uniqueID), :class => "smaller-button", :method => :get
 %br
+
+
+%span.subtitle 
+	= "Reference 1:"
+%br
+%br
+- if @references[0] != nil
+	%span.subtitle
+		= "Name:"
+	= "#{@references[0].ReferenceName}"
+	%br
+	%br
+	= button_to "Review Reference Application", admin_reference_pdf_path(@references[0].uniqueID), :class => "smaller-button", :method => :get
+- else
+	%span Not received
+%br
+%br
+
+%span.subtitle 
+	= "Reference 2:"
+%br
+%br
+- if @references[1] != nil
+	%span.subtitle
+		= "Name:"
+	= "#{@references[1].ReferenceName}"
+	%br
+	%br
+	= button_to "Review Reference Application", admin_reference_pdf_path(@references[1].uniqueID), :class => "smaller-button", :method => :get
+- else
+	%span Not received
+%br
+%br
+
+%span.subtitle 
+	= "Reference 3:"
+%br
+%br
+- if @references[2] != nil
+	%span.subtitle
+		= "Name:"
+	= "#{@references[2].ReferenceName}"
+	%br
+	%br
+	= button_to "Review Reference Application", admin_reference_pdf_path(@references[2].uniqueID), :class => "smaller-button", :method => :get
+- else
+	%span Not received
+%br
+%br
+
 = button_to "Back to Application List", admin_query_volunteer_path, :class => "smaller-button"

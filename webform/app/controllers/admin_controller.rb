@@ -51,10 +51,17 @@ class AdminController < ApplicationController
       flash[:notice] = "We couldn't find this application, please query again"
       redirect_to admin_query_volunteer_path
     end
+
+    @references = Reference.where(VolunteerId: @volunteer.uniqueID).take(3)
   end
 
   def volunteer_pdf
     record = Volunteer.find_by_uniqueID(params[:id])
     send_file ScottyPDF.new(record).export('/tmp/application.pdf'), type: 'application/pdf' , :disposition => 'inline', :stream => false
+  end
+
+  def reference_pdf
+    record = Reference.find_by_uniqueID(session[:id])
+    send_file RefPDF.new(record).export('/tmp/Ref.pdf'), type: 'application/pdf' , :disposition => 'inline', :stream => false
   end
 end
