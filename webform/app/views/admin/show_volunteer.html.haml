@@ -11,35 +11,43 @@
 
 .main-title Review Application
 
-%span 
-	= "Name: #{@volunteer.Name}"
+%span.subtitle
+	= "Name:"
+= "#{@volunteer.Name}"
 %br
 %br
 
-%span 
-	= "Date of birth: #{@volunteer.DateofBirth}"
+%span.subtitle
+	= "Date of birth:"
+=" #{@volunteer.DateofBirth}"
 %br
 %br
 
-%span 
-	= "Email address: #{@volunteer.EmailAddress}"
+%span.subtitle 
+	= "Email address:"
+= " #{@volunteer.EmailAddress}"
 %br
 %br
 
-%span 
-	= "Phone numbers: #{@volunteer.PhoneNumbers}"
+%span.subtitle
+	= "Phone numbers:"
+= " #{@volunteer.HomePhone} (home), #{@volunteer.CellPhone} (mobile)"
 %br
 %br
 
-%span 
-	= "MailingAddress #{@volunteer.MailingAddress}"
+%span.subtitle
+	= "MailingAddress"
+= " #{@volunteer.MailingAddress}"
 %br
 %br
 
 
-%span Days available for volunteer
-= @volunteer.DaysTimesyouwillbeavailabletovolunteer
+%span.subtitle
+	= "Days available for volunteer:"
+= " #{@volunteer.DaysTimesyouwillbeavailabletovolunteer}"
+= @volunteer.DaysTimesyouwillbeavailabletovolunteer.to_i > 1 ? "days" : "day"
 %br
 %br
+/ = button_to "Review Full Application", admin_volunteer, :class => "smaller-button"
 
 = button_to "Back to user queries", admin_query_volunteer_path, :class => "smaller-button"

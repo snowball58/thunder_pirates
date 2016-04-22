@@ -31,7 +31,7 @@
 	- @volunteers.each do |volunteer|
 		%tr
 			%td
-				= link_to volunteer.Name, admin_show_volunteer_path(volunteer.id)
+				= link_to volunteer.Name, admin_show_volunteer_path(volunteer.uniqueID)
 			%td 
 				= volunteer.EmailAddress
 %br

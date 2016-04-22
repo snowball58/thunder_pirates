@@ -45,12 +45,16 @@ class AdminController < ApplicationController
   end
 
   def show_volunteer
-    @volunteer = Volunteer.find_by_id(params[:id])
+    @volunteer = Volunteer.find_by_uniqueID(params[:id])
     
     if @volunteer == nil
       flash[:notice] = "We couldn't find this application, please query again"
       redirect_to admin_query_volunteer_path
     end
+  end
 
+  def volunteer_pdf
+    record = Volunteer.find_by_uniqueID(session[:uniqueID])
+    send_file ScottyPDF.new(record).export('/tmp/application.pdf'), type: 'application/pdf' , :disposition => 'inline', :stream => false
   end
 end

@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   get 'admin/query_volunteer', :to => 'admin#query_volunteer'
   post 'admin/query_volunteer', :to => 'admin#query_volunteer'
   get 'admin/show_volunteer/:id' => 'admin#show_volunteer', as: :admin_show_volunteer
+  get 'admin/volunteer_pdf/:id' => 'admin#volunteer_pdf', as: :admin_volunteer_pdf
   
   root 'welcome#index'
   get 'welcome/index', :to => 'welcome#index'
