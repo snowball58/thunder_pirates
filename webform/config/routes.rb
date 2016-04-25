@@ -1,5 +1,5 @@
 # Scotty's House Volunteer WebForm
-# Written in 2016 by: 
+# Written in 2016 by:
 # Gustavo Estrela
 # Logan Ford
 # Patrick Herrington
@@ -19,8 +19,8 @@ Rails.application.routes.draw do
   default_url_options host: Rails.application.config.domain
   devise_for :auth_users, controllers: { sessions: "admin/sessions" }, :skip => [:registrations]
   as :auth_user do
-    get 'auth_users/edit' => 'devise/registrations#edit', :as => 'edit_auth_user_registration'    
-    put 'auth_users' => 'devise/registrations#update', :as => 'auth_user_registration'            
+    get 'auth_users/edit' => 'devise/registrations#edit', :as => 'edit_auth_user_registration'
+    put 'auth_users' => 'devise/registrations#update', :as => 'auth_user_registration'
   end
   get 'admin/new_user' => 'admin#new_user'
   post 'admin/new_user' => 'admin#create_user'
@@ -32,7 +32,7 @@ Rails.application.routes.draw do
   get 'admin/show_volunteer/:id' => 'admin#show_volunteer', as: :admin_show_volunteer
   get 'admin/volunteer_pdf/:id', :to => 'admin#volunteer_pdf', as: :admin_volunteer_pdf
   get 'admin/reference_pdf/:id', :to => 'admin#reference_pdf', as: :admin_reference_pdf
-  
+
   root 'welcome#index'
   get 'welcome/index', :to => 'welcome#index'
   post 'welcome/index', :to => 'welcome#index_check'
@@ -41,7 +41,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
   get 'welcome/volunteer', :to => 'welcome#volunteer'
   post 'welcome/volunteer', :to => 'welcome#volunteer_check'
-  
+
   get 'welcome/general_info', :to => 'welcome#general_info'
   post 'welcome/general_info', :to => 'welcome#general_info_check'
 
@@ -53,28 +53,28 @@ Rails.application.routes.draw do
 
   get 'welcome/emergency_notification', :to => 'welcome#emergency_notification'
   post 'welcome/emergency_notification', :to => 'welcome#emergency_notification_check'
-  
+
   get 'welcome/reference_form_emails', :to => 'welcome#reference_form_emails'
   post 'welcome/reference_form_emails', :to => 'welcome#reference_form_emails_check'
-  
+
   get 'welcome/reference_form', :to => 'welcome#reference_form'
   post 'welcome/reference_form', :to => 'welcome#reference_form_check'
-  
+
   get 'welcome/status', :to => 'welcome#status'
   post 'welcome/status', :to => 'welcome#status_check'
-  
+
   get 'welcome/review', :to => 'welcome#review'
   post 'welcome/review', :to => 'welcome#review_check'
-  
+
   get 'welcome/thank_you', :to => 'welcome#thank_you'
 
   get 'pdf', :to => 'welcome#pdf'
-  
+
   get 'refpdf', :to => 'welcome#refpdf'
-  
+
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
-  
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
