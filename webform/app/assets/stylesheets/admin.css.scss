@@ -1,5 +1,5 @@
 #admin-header {
- background-color: #3d3d5c;
+ background-color: #37404D;
  box-shadow: 0px 2px 5px #444;
  color: #fff;
  height: 60px;
@@ -35,13 +35,11 @@ input[type=text]:focus {
 }
 
 .user-container {
-  border-left: 1px solid white;
-
+  border-left: 1px inset white;
 	display: inline-block;
+  float: right;
 	height: 100%;
 	margin: 0 20px;
-
-	float: right;
 }
 
 .user-label {
@@ -99,8 +97,6 @@ input[type=text]:focus {
 
 .dropdown-content-item:hover {background-color: #f1f1f1;}
 
-// .dropdown-content a:hover {background-color: #f1f1f1;}
-
 .dropdown:hover .dropdown-content {
     display: block;
 }
@@ -142,7 +138,7 @@ td {
 }
 
 .smaller-button:hover {
-	background-color: #3d3d5c;
+	background-color: #37404D;
 	color: #ffffff;
 }
 
@@ -157,7 +153,7 @@ td {
 }
 
 .button:hover {
-	background-color: #3d3d5c;
+	background-color: #37404D;
 	color: #ffffff;
 }
 
@@ -182,36 +178,58 @@ td {
 	vertical-align: middle;
 }
 
-.hub-item {
-	background-color: #ffffff;
-	border: 1px solid #3d3d5c;
-	border-radius: 4px;
-	color: #3d3d5c;
+.hub-container {
+  width: 100%;
+}
 
-	height: 100px;
-	width: auto;
+.hub-item {
+  background-color: #fff;
+	border: 1px solid #37404D;
+	border-radius: 4px;
+	color: #37404D;
+
+  float: left;
+	height: 220px;
+	width: 200px;
 	margin: 0 auto;
 }
 
 .hub-item a {
-	color: #3d3d5c;
-	display: inline-block;
-	vertical-align: middle;
-	line-height: 60px;
+	color: #37404D;
+  display: inline-block;
+  width: 100%;
 
-	padding: 20px;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
 }
 
-.hub-item:hover {
-	background-color: #3d3d5c;
-	color: #fff;
+.hub-item:hover, .hub-item a:hover {
+	background-color: #f1f1f1;
 }
 
-.stretch {
-	width: 100%;
-	display: inline-block;
-	font-size: 0;
-	line-height: 0
+.hub-icon {
+  background-image: image-url("icon_sprites_dark.png");
+  background-repeat: no-repeat;
+  background-size: 60%;
+
+  height: 130px;
+  width: 130px;
+  margin: 15px auto;
+}
+
+#add-admin {
+  background-position: -2px -133px;
+}
+
+#manage-admin {
+  background-position: -406px -2px;
+
+}
+
+#search-forms {
+  background-position: -541px -2px;
+
 }
 
 .horizontal-center {

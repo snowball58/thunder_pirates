@@ -9,13 +9,17 @@
 / To the extent possible under law, the author(s) have dedicated all copyright and related and neighboring rights to this software to the public domain worldwide. This software is distributed without any warranty.
 / You should have received a copy of the CC0 Public Domain Dedication along with this software. If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
 
-.main-title Administrator Home Page
-
 %nav.hub-container
   .hub-item
-    = link_to("Add a New Administrator", admin_new_user_path, :class => "button")
+    = link_to admin_new_user_path do
+      #add-admin.hub-icon
+      Add a New Administrator
   .hub-item
-    = link_to("Manage Administrators", admin_show_users_path, :class => "button")
+    = link_to admin_show_users_path do
+      #manage-admin.hub-icon
+      Manage Administrators
   .hub-item
-    = link_to("Search Incomplete Applications", admin_query_volunteer_path, :class => "button")
+    = link_to admin_query_volunteer_path do
+      #search-forms.hub-icon
+      Search Incomplete Applications
   %span.stretch

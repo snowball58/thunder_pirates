@@ -10,20 +10,24 @@
 # You should have received a copy of the CC0 Public Domain Dedication along with this software. If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
 
 class AdminController < ApplicationController
-  before_filter :authenticate_auth_user!
+  before_filter :authenticate_auth_user!, :get_current_user
   layout 'admin'
-  def index
+
+  def get_current_user
     @current_user = current_auth_user.email
   end
 
+  def index
+  end
+
   def new_user
-      puts 'Hi'
+    puts 'Hi'
   end
 
   def create_user
-      user = AuthUser.new(:email => params[:email], :password => params[:password], :password_confirmation => params[:password_confirmation])
-      user.save
-      redirect_to auth_user_root_path
+    user = AuthUser.new(:email => params[:email], :password => params[:password], :password_confirmation => params[:password_confirmation])
+    user.save
+    redirect_to auth_user_root_path
   end
 
   def show_users
