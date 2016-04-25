@@ -90,10 +90,10 @@ class WelcomeController < ApplicationController
     volunteer.CellPhone = params[:cell_phone]
     numbers = ""
     if(not params[:home_phone].blank?)
-      numbers = "Home: " + params[:home_phone] + "     "
+      numbers = "Primary: " + params[:home_phone] + "     "
     end
     if(not params[:cell_phone].blank?)
-      numbers = numbers + "Cell: " + params[:cell_phone]
+      numbers = numbers + "Secondary: " + params[:cell_phone]
     end
     volunteer.PhoneNumbers = numbers
     volunteer.Street = params[:street]
