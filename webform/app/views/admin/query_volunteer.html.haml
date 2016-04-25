@@ -17,22 +17,32 @@
 		= text_field_tag :volunteer_name
 		
 	.form-item 
-		= submit_tag 'Search', :class => "admin-button"
+		= submit_tag 'Search', :class => "smaller-button"
+	%br
+	%br
+
+- if request.post?
+	%br
+	%br
+	%br
+	%span.subtitle Incomplete Applications: 
+	%br
+	- if @volunteers.size < 1
+		%span No applications found
+	- else
+		%table
+			%thead
+				%tr
+					%td.subtitle Name
+					%td.subtitle Email
+			%tbody
+			- @volunteers.each do |volunteer|
+				%tr
+					%td
+						= link_to volunteer.Name, admin_show_volunteer_path(volunteer.uniqueID)
+					%td 
+						= volunteer.EmailAddress
 
 
-%span.subtitle Incomplete Applications: 
-%br
-%table
-	%thead
-		%tr
-			%td.subtitle Name
-			%td.subtitle Email
-	%tbody
-	- @volunteers.each do |volunteer|
-		%tr
-			%td
-				= link_to volunteer.Name, admin_show_volunteer_path(volunteer.uniqueID)
-			%td 
-				= volunteer.EmailAddress
 %br
 = link_to("Back to Admin Home", auth_user_root_path, :class => "admin-button")

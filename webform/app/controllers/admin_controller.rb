@@ -39,9 +39,12 @@ class AdminController < ApplicationController
   end
   
   def query_volunteer
-    name_query = params[:volunteers_name]
-    name_query
-    @volunteers = Volunteer.where("Name LIKE ?", "%#{params[:volunteer_name]}%")
+    if request.post?
+      name_query = params[:volunteers_name]
+      @volunteers = Volunteer.where("Name LIKE ?", "%#{params[:volunteer_name]}%")
+    else
+      @volunteers = nil
+    end
   end
 
   def show_volunteer
