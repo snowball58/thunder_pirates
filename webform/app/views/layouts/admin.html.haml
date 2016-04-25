@@ -20,11 +20,15 @@
   = stylesheet_link_tag 'admin.css'
 
   %body
-    %header
-      .user-container
-        .user-icon
-          = image_tag("icon_user.svg")
-        .user-label #{@current_user}
+    %header#admin-header
+      .user-container.dropdown
+        %div.dropbtn
+          .user-icon
+            = image_tag("icon_user.svg")
+          .user-label #{@current_user}
+          .dropdown-content
+            = button_to "Logout", destroy_auth_user_session_path, :method => :delete, :class => "dropdown-content-item"
+            = link_to "Change password", edit_auth_user_registration_path, :class => "dropdown-content-item"
 
     .main-wrapper.horizontal-center
       // -if not flash[:notice].blank?
