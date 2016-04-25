@@ -1,5 +1,5 @@
 / Scotty's House Volunteer WebForm
-/ Written in 2016 by: 
+/ Written in 2016 by:
 / Gustavo Estrela
 / Logan Ford
 / Patrick Herrington
@@ -13,7 +13,7 @@
 
 -# The method attribute specifies how to send form data (GET or POST)
 -# GET is default and appends the data to the URL in name/value pairs URL?name=value&name=value
--# POST sends data as HTTP post transaction 
+-# POST sends data as HTTP post transaction
 -# Form data is sent to the page specified in the action attribute
 
 =form_tag welcome_volunteer_path, :method => :post do
@@ -22,43 +22,43 @@
     %br
     %span.subtitle *Name:
     = text_field_tag(:name, @name)
-  
+
   .form-item
     %span.subtitle *Date of Birth:
     = text_field_tag(:birth, @birth)
-    
+
   .form-item
     %span.subtitle *Email Address:
     = text_field_tag(:email, @email)
-    
+
   .form-item
     %span.subtitle *Primary Phone:
     = text_field_tag(:home_phone, @home_phone)
-    
+
   .form-item
     %span.subtitle Secondary Phone:
     = text_field_tag(:cell_phone, @cell_phone)
-    
+
   .form-item
     %span.subtitle *Street Address / Appartment Number:
     = text_field_tag(:street, @street)
-    
+
   .form-item
     %span.subtitle *City:
     = text_field_tag(:city, @city)
-    
+
   .form-item
     %span.subtitle *State:
     = text_field_tag(:state, @state)
-    
+
   .form-item
     %span.subtitle *Zip Code:
     = text_field_tag(:zip, @zip)
-    
+
   .form-item
     %span Scotty's House Child Advocacy Center has several opportunities for Volunteers. All types of Volunteers
     are needed to make services available to families in our community, and we value any skills you may have to
-    help us improve the community in which we live. Listed below are the current volunteer opportunities available 
+    help us improve the community in which we live. Listed below are the current volunteer opportunities available
     at Scotty's House. Please check the areas in which you are interested:
     %br
     = check_box_tag(:family, "Yes", @family_care)
@@ -72,10 +72,10 @@
     %br
     = check_box_tag(:medical, "Yes", @medical_volunteer)
     = "Medical Volunteer"
-    %br 
+    %br
     = check_box_tag(:counseling, "Yes", @counseling_internship)
     = "Program/Counseling Internship"
-    %br 
+    %br
     %br
     = check_box_tag(:outlying, "Yes", @outlying_county)
     = "Outlying County Ambassador Program"
@@ -90,11 +90,10 @@
     %br
     %span If you have Additional Volunteer Opportunities, please specify:
     = text_area_tag(:additional, @additional)
-    
+
   .form-item
     %span Days/Times you will be able to volunteer:
     = text_area_tag(:times, @times)
-    
-  .form-item  
-    = submit_tag 'Continue', :class => "button"
- 
+
+  .form-item
+    = submit_tag 'Continue', :class => "button center-horizontal"

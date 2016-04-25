@@ -1,5 +1,5 @@
 / Scotty's House Volunteer WebForm
-/ Written in 2016 by: 
+/ Written in 2016 by:
 / Gustavo Estrela
 / Logan Ford
 / Patrick Herrington
@@ -11,137 +11,94 @@
 
 .main-title Please Review Your Information!
 
--# The method attribute specifies how to send form data (GET or POST)
--# GET is default and appends the data to the URL in name/value pairs URL?name=value&name=value
--# POST sends data as HTTP post transaction 
--# Form data is sent to the page specified in the action attribute
-
 =form_tag welcome_review_path, :method => :post do
+  .review-container
+    .review-item
+      .review-label Name:
+      = label_tag(:name, @name, class: 'review-info')
 
-  .review-item Name:
-  = label_tag(:name, @name, class: 'review-info')
-  %br 
-  %br
-  
-  .review-item Birthdate: 
-  = label_tag(:birth, @birth, class: 'review-info')
-  %br 
-  %br
-  
-  .review-item Email: 
-  = label_tag(:email, @email, class: 'review-info')
-  %br 
-  %br
-  
-  .review-item Home Phone: 
-  = label_tag(:home_phone, @home_phone, class: 'review-info')
-  %br 
-  %br
-  
-  .review-item Cell Phone: 
-  = label_tag(:cell_phone, @cell_phone, class: 'review-info')
-  %br 
-  %br
-  
-  .review-item Street Address: 
-  = label_tag(:street, @street, class: 'review-info')
-  %br 
-  %br
-  
-  .review-item City: 
-  = label_tag(:city, @city, class: 'review-info')
-  %br 
-  %br
-  
-  .review-item State: 
-  = label_tag(:state, @state, class: 'review-info')
-  %br 
-  %br
-  
-  .review-item Zip Code: 
-  = label_tag(:zip, @zip, class: 'review-info')
-  %br 
-  %br
-  
-  .review-item Availability:
-  = label_tag(:times, @times, class: 'review-info')
-  %br 
-  %br
-  
-  =link_to "Modify Personal Information", welcome_volunteer_path, :class => "review-button"
-  %br
-  %br
-  %br
-  %br
-  %br
+    .review-item
+      .review-label Birth date:
+      = label_tag(:birth, @birth, class: 'review-info')
 
-  .review-item How did you learn about Scotty's House?
-  = label_tag(:program_source, @program_source, class: 'review-info')
-  %br 
-  %br
-  
-  .review-item What do you hope to gain from this experience?
-  = label_tag(:experience_gain, @experience_gain, class: 'review-info')
-  %br 
-  %br
-  
-  =link_to "Modify General Information", welcome_volunteer_path, :class => "review-button"
-  %br
-  %br
-  %br
-  %br
-  %br
-  
-  .review-item Emergency Contact: 
-  = label_tag(:emergency_name, @emergency_name, class: 'review-info')
-  %br 
-  %br
-  
-  .review-item Emergency Contact Primary Phone: 
-  = label_tag(:emergency_primary_phone, @emergency_primary_phone, class: 'review-info')
-  %br 
-  %br
-  
-  .review-item Emergency Contact Address: 
-  = label_tag(:emergency_address, @emergency_address, class: 'review-info')
-  %br 
-  %br
-  
-  .review-item Emergency Contact Relationship: 
-  = label_tag(:emergency_relationship, @emergency_relationship, class: 'review-info')
-  %br 
-  %br
-  
-  =link_to "Modify Emergency Information", welcome_emergency_notification_path, :class => "review-button"
-  %br
-  %br
-  %br
-  %br
-  %br
-  
-  .review-item Reference Email #1: 
-  = label_tag(:reference_email_1, @reference_email_1, class: 'review-info')
-  %br 
-  %br
-  
-  .review-item Reference Email #2: 
-  = label_tag(:reference_email_2, @reference_email_2, class: 'review-info')
-  %br 
-  %br
-  
-  .review-item Reference Email #3: 
-  = label_tag(:reference_email_3, @reference_email_3, class: 'review-info')
-  %br 
-  %br
-  
-  =link_to "Modify Reference Information", welcome_reference_form_emails_path, :class => "review-button"
-  %br
-  %br
-  %br
-  %br
-  %br
-  
-    = submit_tag 'Submit!', :class => "button"
-    %br
-    %br
+    .review-item
+      .review-label Email:
+      = label_tag(:email, @email, class: 'review-info')
+
+    .review-item
+      .review-label Home Phone:
+      = label_tag(:home_phone, @home_phone, class: 'review-info')
+
+    .review-item
+      .review-label Cell Phone:
+      = label_tag(:cell_phone, @cell_phone, class: 'review-info')
+
+    .review-item
+      .review-label Street Address:
+      = label_tag(:street, @street, class: 'review-info')
+
+    .review-item
+      .review-label City:
+      = label_tag(:city, @city, class: 'review-info')
+
+    .review-item
+      .review-label State:
+      = label_tag(:state, @state, class: 'review-info')
+
+    .review-item
+      .review-label Zip Code:
+      = label_tag(:zip, @zip, class: 'review-info')
+
+    .review-item
+      .review-label Availability:
+      = label_tag(:times, @times, class: 'review-info')
+
+    =link_to "Modify Personal Information", welcome_volunteer_path, :class => "review-button button"
+
+  .review-container
+    .review-item
+      .review-label How did you learn about Scotty's House?
+      = label_tag(:program_source, @program_source, class: 'review-info')
+
+    .review-item
+      .review-label What do you hope to gain from this experience?
+      = label_tag(:experience_gain, @experience_gain, class: 'review-info')
+
+    =link_to "Modify General Information", welcome_volunteer_path, :class => "review-button button"
+
+  .review-container
+    .review-item
+      .review-label Emergency Contact:
+      = label_tag(:emergency_name, @emergency_name, class: 'review-info')
+
+    .review-item
+      .review-label Emergency Contact Primary Phone:
+      = label_tag(:emergency_primary_phone, @emergency_primary_phone, class: 'review-info')
+
+    .review-item
+      .review-label Emergency Contact Address:
+      = label_tag(:emergency_address, @emergency_address, class: 'review-info')
+
+    .review-item
+      .review-label Emergency Contact Relationship:
+      = label_tag(:emergency_relationship, @emergency_relationship, class: 'review-info')
+
+    =link_to "Modify Emergency Information", welcome_emergency_notification_path, :class => "review-button button"
+
+  .review-container
+    .review-item
+      .review-label Reference Email #1:
+      = label_tag(:reference_email_1, @reference_email_1, class: 'review-info')
+
+    .review-item
+      .review-label Reference Email #2:
+      = label_tag(:reference_email_2, @reference_email_2, class: 'review-info')
+
+    .review-item
+      .review-label Reference Email #3:
+      = label_tag(:reference_email_3, @reference_email_3, class: 'review-info')
+
+    =link_to "Modify Reference Information", welcome_reference_form_emails_path, :class => "review-button button"
+
+  = submit_tag 'Submit!', :class => "button center-horizontal"
   //^Path needs to be renamed to Patrick's determined path (the splash page)

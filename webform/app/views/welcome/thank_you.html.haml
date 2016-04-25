@@ -1,5 +1,5 @@
 / Scotty's House Volunteer WebForm
-/ Written in 2016 by: 
+/ Written in 2016 by:
 / Gustavo Estrela
 / Logan Ford
 / Patrick Herrington
@@ -13,7 +13,7 @@
 
 -# The method attribute specifies how to send form data (GET or POST)
 -# GET is default and appends the data to the URL in name/value pairs URL?name=value&name=value
--# POST sends data as HTTP post transaction 
+-# POST sends data as HTTP post transaction
 -# Form data is sent to the page specified in the action attribute
 
 =form_tag welcome_thank_you_path, :method => :post do
@@ -21,7 +21,7 @@
   %span.subtitle Your application was submitted successfully.
   %br
   %br
-  %span.subtitle NOTE: Your application will not be sent to Scotty's House untill all 3 of your provided references have responded. References have 60 days to complete their referrals. 
+  %span.subtitle NOTE: Your application will not be sent to Scotty's House untill all 3 of your provided references have responded. References have 60 days to complete their referrals.
   %br
   %br
   %span.subtitle You can view the status of your application by clicking the link below:
@@ -30,5 +30,4 @@
   %br
   %br
   %br
-  =link_to("Back to Scotty's House", "https://scottyshouse.org", class: "button", style: "width: 25%")
-  
+  =link_to("Back to Scotty's House", "https://scottyshouse.org", class: "button center-horizontal", style: "width: 25%")

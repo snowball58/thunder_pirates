@@ -1,12 +1,12 @@
 / Scotty's House Volunteer WebForm
-/ Written in 2016 by: 
+/ Written in 2016 by:
 / Gustavo Estrela
 / Logan Ford
 / Patrick Herrington
 / Noemie Nakamura
 / Steven Snow
 / Matthew Wiecek
-/ To the extent possible under law, the author(s) have dedicated all copyright and 
+/ To the extent possible under law, the author(s) have dedicated all copyright and
 / related and neighboring rights to this software to the public domain worldwide. This software is distributed without any warranty.
 / You should have received a copy of the CC0 Public Domain Dedication along with this software. If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
 
@@ -14,15 +14,15 @@
 
 -# The method attribute specifies how to send form data (GET or POST)
 -# GET is default and appends the data to the URL in name/value pairs URL?name=value&name=value
--# POST sends data as HTTP post transaction 
+-# POST sends data as HTTP post transaction
 -# Form data is sent to the page specified in the action attribute
 
-/ params: 
+/ params:
 / = params
 
 %link{:rel => :stylesheet, :type => :"text/css", :href => "/assets/css/style"}
 
-= form_tag welcome_experience_path, :method => :post, :id => :experience_form do 
+= form_tag welcome_experience_path, :method => :post, :id => :experience_form do
 
   / hidden input to save the nof_experiences
   = hidden_field_tag "nof_experiences", params[:nof_experiences]
@@ -50,7 +50,7 @@
             .form-item
               = text_area_tag "responsibilities_#{i}", eval("@responsibilities_#{i}")
 
-  = submit_tag 'Add Experience', :class => "button"
+  = submit_tag 'Add Experience', :id => "add-xp-button", :class => "button"
 
   %br
   %br
@@ -66,7 +66,7 @@
     %br
     %span.subtitle If Yes, explain why:
     = text_area_tag :child_abuse_text, @child_abuse_text
-    
+
     %br
     %span.subtitle Foster Care?
     = check_box_tag :foster_care_check, "Yes", @foster_care_check
@@ -88,5 +88,5 @@
     %span.subtitle If Yes, explain why:
     = text_area_tag :agency_text, @agency_text
 
-  .form-item  
-    = submit_tag 'Continue', :class => "button"
+  .form-item
+    = submit_tag 'Continue', :class => "button center-horizontal"

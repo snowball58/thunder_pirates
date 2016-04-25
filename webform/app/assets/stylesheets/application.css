@@ -13,10 +13,18 @@
  *= require_tree .
  *= require_self
  */
+ @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:700,300);
 
-.subtitle { 
+ * {
+ 	box-sizing: border-box;
+ }
+
+ body {
+ 	font-family: 'Source Sans Pro', sans-serif;
+ 	background-color: #e9e9e9;
+ 	margin: 0%;
+ }
+
+.subtitle {
 	text-align:center;
-	/*font-family:"Avenir";*/
-	font-family: 'Source Sans Pro', sans-serif;
-	font-size:100%;
 }

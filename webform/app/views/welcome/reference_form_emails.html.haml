@@ -1,5 +1,5 @@
 / Scotty's House Volunteer WebForm
-/ Written in 2016 by: 
+/ Written in 2016 by:
 / Gustavo Estrela
 / Logan Ford
 / Patrick Herrington
@@ -13,41 +13,41 @@
 
 -# The method attribute specifies how to send form data (GET or POST)
 -# GET is default and appends the data to the URL in name/value pairs URL?name=value&name=value
--# POST sends data as HTTP post transaction 
+-# POST sends data as HTTP post transaction
 -# Form data is sent to the page specified in the action attribute
 
 #subtitle Please provide emails of your references:
-  
+
 =form_tag welcome_reference_form_emails_path, :method => :post do
   .form-item
     %span.subtitle Reference 1
     = text_field_tag(:reference_email_1, @reference_email_1)
-    
+
   .form-item
     %span.subtitle Reference 2
     = text_field_tag(:reference_email_2, @reference_email_2)
-    
+
   .form-item
     %span.subtitle Reference 3
     = text_field_tag(:reference_email_3, @reference_email_3)
-  
+
   .form-item
     = 'In order for this application to be completed and sent to Scotty\'s House three references must be provided. There are two ways of completing this requirement.'
-    
+
   .form-item
     = '     1) Fill in the emails above and hit the submit button below, and the neccessary information will be sent to their emails.'
-  
+
   .form-item
     = '     2) Distribute the link below to each of the references manually.'
-    
+
   .form-item
     = 'These references must be completed within 60 days of submitting this application, or it will be dropped.'
-  
+
   .form-item
     = 'You can send other references this Reference Link:'
-  
+
   .form-item
     =link_to(@root + welcome_reference_form_path(:ref_id => @ref_id.to_s).to_s, @root + welcome_reference_form_path(:ref_id => @ref_id.to_s).to_s)
-    
-  .form-item  
-    = submit_tag 'Review', :class => "button"
+
+  .form-item
+    = submit_tag 'Review', :class => "button center-horizontal"
