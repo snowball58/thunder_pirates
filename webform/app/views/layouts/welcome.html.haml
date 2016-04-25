@@ -1,5 +1,5 @@
 -# Scotty's House Volunteer WebForm
--# Written in 2016 by: 
+-# Written in 2016 by:
 -# Gustavo Estrela
 -# Logan Ford
 -# Patrick Herrington
@@ -19,18 +19,17 @@
   %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
   = stylesheet_link_tag 'application', 'media' => 'all', 'data-turbolinks-track' => true
   = javascript_include_tag 'application', 'data-turbolinks-track' => true
-  
+
   %body
     %header
-      #header-title.horizontal-center Volunteer & Intern Application Form
+      #header-title.center-horizontal Volunteer & Intern Application Form
       -if not flash[:notice].blank?
         .alert
           = flash[:notice]
-    
+
 
     .main-wrapper.horizontal-center
       .main-header
-        = image_tag("logo.png", :alt => 'logo', :id => 'logo', :class => 'horizontal-center')
+        = image_tag("logo.png", :alt => 'logo', :id => 'logo', :class => 'center-horizontal')
       .main-content
-        = yield 
-
+        = yield
