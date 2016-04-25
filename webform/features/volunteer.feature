@@ -11,7 +11,7 @@ Scenario: Volunteer click continue
 	Given the volunteer page is loaded
 	When name is filled in with asdf
 	And birth is filled in with asdf
-	And email is filled in with asdf
+	And email is filled in with asdf@asdf.comasdf
 	And home_phone is filled in with asdf
 	And street is filled in with asdf
 	And city is filled in with asdf
@@ -49,6 +49,10 @@ Scenario: Emergency click continue
 	Given the index page is loaded
 	When the Continue button is clicked
 	Given the emergency_notification page is loaded
+	And emergency_name is filled in with asdf
+	And emergency_primary_phone is filled in with asdf
+	And emergency_address is filled in with asdf
+	And emergency_relationship is filled in with asdf
 	When the Continue button is clicked
     Then the References title is displayed
 
