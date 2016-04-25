@@ -1,5 +1,5 @@
 -# Scotty's House Volunteer WebForm
--# Written in 2016 by: 
+-# Written in 2016 by:
 -# Gustavo Estrela
 -# Logan Ford
 -# Patrick Herrington
@@ -18,15 +18,18 @@
   %title Administrator Area
   %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
   = stylesheet_link_tag 'admin.css'
-  
+
   %body
     %header
-      #header-title.horizontal-center Administrator Area
-    
+      .user-container
+        .user-icon
+          = image_tag("icon_user.svg")
+        .user-label #{@current_user}
+
     .main-wrapper.horizontal-center
       // -if not flash[:notice].blank?
       //   .alert
       //     = flash[:notice]
       .main-header
       .main-content
-        = yield 
+        = yield

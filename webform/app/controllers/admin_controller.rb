@@ -1,5 +1,5 @@
 # Scotty's House Volunteer WebForm
-# Written in 2016 by: 
+# Written in 2016 by:
 # Gustavo Estrela
 # Logan Ford
 # Patrick Herrington
@@ -13,31 +13,31 @@ class AdminController < ApplicationController
   before_filter :authenticate_auth_user!
   layout 'admin'
   def index
-  
+    @current_user = current_auth_user.email
   end
-  
+
   def new_user
       puts 'Hi'
   end
-  
+
   def create_user
       user = AuthUser.new(:email => params[:email], :password => params[:password], :password_confirmation => params[:password_confirmation])
       user.save
       redirect_to auth_user_root_path
   end
-  
+
   def show_users
     @current_email = current_auth_user.email
     @users = AuthUser.where('email != ? ', current_auth_user.email)
   end
-  
+
   def delete_user
     user = AuthUser.find(params[:id])
     user.destroy
-    
+
     redirect_to admin_show_users_path
   end
-  
+
   def query_volunteer
     name_query = params[:volunteers_name]
     name_query
@@ -46,7 +46,7 @@ class AdminController < ApplicationController
 
   def show_volunteer
     @volunteer = Volunteer.find_by_uniqueID(params[:id])
-    
+
     if @volunteer == nil
       flash[:notice] = "We couldn't find this application, please query again"
       redirect_to admin_query_volunteer_path
