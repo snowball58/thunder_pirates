@@ -1,0 +1,26 @@
+!!!
+%html
+  %head
+  %title Administrator Area
+  %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
+  = stylesheet_link_tag 'admin.css'
+
+  %body
+    .login-container
+      = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+        .field
+          = f.label :email, class: "subtitle"
+          = f.email_field :email, autofocus: true
+
+        .field
+          = f.label :password, class: "subtitle"
+          = f.password_field :password, autocomplete: "off"
+
+        - if devise_mapping.rememberable?
+          .field
+          = f.check_box :remember_me
+          = f.label :remember_me
+
+        .actions
+          = f.submit "Log In", class: "admin-button"
+      = render "devise/shared/links"

@@ -23,8 +23,7 @@
     %header#admin-header
       .user-container.dropdown
         %div.dropbtn
-          .user-icon
-            = image_tag("icon_user.svg")
+          .user-icon.light-sprites
           .user-label #{@current_user}
           .dropdown-content
             = button_to "Logout", destroy_auth_user_session_path, :method => :delete, :class => "dropdown-content-item"
