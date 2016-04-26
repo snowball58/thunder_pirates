@@ -585,6 +585,8 @@ class WelcomeController < ApplicationController
     @reference_email_1 = session[:reference_email_1]
     @reference_email_2 = session[:reference_email_2]
     @reference_email_3 = session[:reference_email_3]
+    
+    flash[:review] = true
   end
   
   def review_check

@@ -44,3 +44,7 @@
 
   .form-item
     = submit_tag 'Continue', :class => "button center-horizontal"
+    -if flash[:review]
+      %br
+      %br
+      = link_to "Back to Review", welcome_review_path, :class => "button center-horizontal"
