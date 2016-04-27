@@ -6,21 +6,23 @@
   = stylesheet_link_tag 'admin.css'
 
   %body
-    .login-container
-      = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-        .field
-          = f.label :email, class: "subtitle"
-          = f.email_field :email, autofocus: true
+    #login-container
+      #login-header Administrator Area
+      #login-content
+        = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+          .form-item
+            = f.label :email, class: "side-label"
+            = f.email_field :email, autofocus: true
 
-        .field
-          = f.label :password, class: "subtitle"
-          = f.password_field :password, autocomplete: "off"
+          .form-item
+            = f.label :password, class: "side-label"
+            = f.password_field :password, autocomplete: "off"
 
-        - if devise_mapping.rememberable?
-          .field
-          = f.check_box :remember_me
-          = f.label :remember_me
+          - if devise_mapping.rememberable?
+            .form-item
+            = f.check_box :remember_me
+            = f.label :remember_me
 
-        .actions
-          = f.submit "Log In", class: "admin-button"
-      = render "devise/shared/links"
+          .actions
+            = f.submit "Log In", class: "button"
+        = render "devise/shared/links"

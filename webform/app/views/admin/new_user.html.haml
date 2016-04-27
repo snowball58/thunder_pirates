@@ -13,24 +13,15 @@
 
 =form_tag admin_new_user_path, :method => :post do
   .form-item
-    %span.subtitle Email
-    %br
+    .form-label Email
     = email_field_tag(:email)
-    %br
-    %br
-    %span.subtitle Password
-    %em (At least 8 characters)
-    %br
-    = password_field_tag(:password)
-    %br
-    %br
-    %span.subtitle Confirm Password
-    %br
-    = password_field_tag(:password_confirmation)
-
   .form-item
-    = submit_tag 'Add This Administrator', :class => "button"
-    %br
-    %br
-    %br
-    = link_to("Back to Admin Home", auth_user_root_path, :class => "button")
+    .form-label Password (At least 8 characters)
+    = password_field_tag(:password)
+  .form-item
+    .form-label Confirm Password
+    = password_field_tag(:password_confirmation)
+  .form-item
+    = submit_tag 'Add This Administrator', :class => "light-button"
+
+  = link_to("Back to Admin Home", auth_user_root_path, :class => "button")

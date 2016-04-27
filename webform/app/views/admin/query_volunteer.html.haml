@@ -14,7 +14,9 @@
 .search-container
 	= form_tag admin_query_volunteer_path, :method => :post do
 		= text_field_tag :volunteer_name
-		= image_submit_tag("icon_find.svg", :class => "icon-button find-button")
+		= image_submit_tag("icon_find.svg", :class => "find-button")
+
+	= link_to("View all", "#", :class => "light-button")
 
 %table
 	%thead
