@@ -1,5 +1,5 @@
 -# Scotty's House Volunteer WebForm
--# Written in 2016 by: 
+-# Written in 2016 by:
 -# Gustavo Estrela
 -# Logan Ford
 -# Patrick Herrington
@@ -9,21 +9,27 @@
 -# To the extent possible under law, the author(s) have dedicated all copyright and related and neighboring rights to this software to the public domain worldwide. This software is distributed without any warranty.
 -# You should have received a copy of the CC0 Public Domain Dedication along with this software. If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
 
--# The way layout works is that is sets a general structure to the page
--# Then, with yield, additional content is integrated
-
 !!!
 %html
   %head
-  %title Application Form
+  %title Administrator Area
   %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
   = stylesheet_link_tag 'admin.css'
-  
+
   %body
-    %header
-      #header-title.horizontal-center Administrator Area
-    
+    %header#admin-header
+      .user-container.dropdown
+        %div.dropbtn
+          .user-icon.light-sprites
+          .user-label #{@current_user}
+          .dropdown-content
+            = button_to "Logout", destroy_auth_user_session_path, :method => :delete, :class => "dropdown-content-item"
+            = link_to "Change password", edit_auth_user_registration_path, :class => "dropdown-content-item"
+            
     .main-wrapper.horizontal-center
+      // -if not flash[:notice].blank?
+      //   .alert
+      //     = flash[:notice]
       .main-header
       .main-content
-        = yield 
+        = yield

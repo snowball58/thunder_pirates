@@ -19,6 +19,11 @@ header {
 	z-index: 1;
 }
 
+a:link , a:visited {
+  color: #34a2d3;
+  text-decoration: none;
+}
+
 input {
 	outline: none;
 }
@@ -38,6 +43,12 @@ textarea {
 
 form {
 	position: relative;
+}
+
+thead, th {
+	font-weight: 700;
+  background-color: #fff;
+  color: #000;
 }
 
 td, th {

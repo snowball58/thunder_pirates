@@ -1,5 +1,5 @@
 # Scotty's House Volunteer WebForm
-# Written in 2016 by: 
+# Written in 2016 by:
 # Gustavo Estrela
 # Logan Ford
 # Patrick Herrington
@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-  
+
     layout :layout_by_resource
 
   def layout_by_resource

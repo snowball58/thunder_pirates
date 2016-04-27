@@ -1,5 +1,5 @@
 / Scotty's House Volunteer WebForm
-/ Written in 2016 by: 
+/ Written in 2016 by:
 / Gustavo Estrela
 / Logan Ford
 / Patrick Herrington
@@ -9,40 +9,27 @@
 / To the extent possible under law, the author(s) have dedicated all copyright and related and neighboring rights to this software to the public domain worldwide. This software is distributed without any warranty.
 / You should have received a copy of the CC0 Public Domain Dedication along with this software. If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
 
-.main-title Search Incomplete Applications
+.main-title Incomplete Applications
 
-= form_tag admin_query_volunteer_path, :method => :post do
-	.form-item
-		%span.subtitle Filter Applications by Entering a Name:
-		= text_field_tag :volunteer_name
-		
-	.form-item 
-		= submit_tag 'Search', :class => "smaller-button"
-	%br
-	%br
+.search-container
+	= form_tag admin_query_volunteer_path, :method => :post do
+		= image_submit_tag("icon_find.svg", :class => "find-button")
+		#search-box
+			= text_field_tag :volunteer_name
 
-- if request.post?
-	%br
-	%br
-	%br
-	%span.subtitle Incomplete Applications: 
-	%br
-	- if @volunteers.size < 1
-		%span No applications found
-	- else
-		%table
-			%thead
-				%tr
-					%td.subtitle Name
-					%td.subtitle Email
-			%tbody
-			- @volunteers.each do |volunteer|
-				%tr
-					%td
-						= link_to volunteer.Name, admin_show_volunteer_path(volunteer.uniqueID)
-					%td 
-						= volunteer.EmailAddress
+%table
+	%thead
+		%tr
+			%th Name
+			%th Email
+	- @volunteers.each do |volunteer|
+		%tr
+			%td
+				= volunteer.Name
+			%td
+				= volunteer.EmailAddress
+			%td.td-button
+				= link_to admin_show_volunteer_path(volunteer.uniqueID) do
+					.icon-button.dark-sprites
 
-
-%br
-= link_to("Back to Admin Home", auth_user_root_path, :class => "admin-button")
+= link_to("Back to Admin Home", auth_user_root_path, :class => "button")
