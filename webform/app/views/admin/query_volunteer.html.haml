@@ -12,24 +12,29 @@
 .main-title Incomplete Applications
 
 .search-container
-	= form_tag admin_query_volunteer_path, :method => :post do
-		= image_submit_tag("icon_find.svg", :class => "find-button")
-		#search-box
-			= text_field_tag :volunteer_name
+  = form_tag admin_query_volunteer_path, :method => :post do
+    = image_submit_tag("icon_find.svg", :class => "find-button")
+    #search-box
+      = text_field_tag :volunteer_name
 
-%table
-	%thead
-		%tr
-			%th Name
-			%th Email
-	- @volunteers.each do |volunteer|
-		%tr
-			%td
-				= volunteer.Name
-			%td
-				= volunteer.EmailAddress
-			%td.td-button
-				= link_to admin_show_volunteer_path(volunteer.uniqueID) do
-					.icon-button.dark-sprites
+- if request.post?
+  - if @volunteers.size < 1
+    %em No applications found
+  - else
+    %table
+      %thead
+        %tr
+          %th Name
+          %th Email
+      - @volunteers.each do |volunteer|
+        %tr
+          %td
+            = volunteer.Name
+          %td
+            = volunteer.EmailAddress
+          %td.td-button
+            = link_to admin_show_volunteer_path(volunteer.uniqueID) do
+              .icon-button.dark-sprites
+
 
 = link_to("Back to Admin Home", auth_user_root_path, :class => "button")
