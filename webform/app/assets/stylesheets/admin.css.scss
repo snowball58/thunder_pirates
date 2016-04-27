@@ -76,22 +76,31 @@ td {
 }
 
 // Form properties
+.form-container {
+  margin: 50px auto;
+  width: 50%;
+}
+
 .form-item {
+  min-height: 40px;
   margin-bottom: 10px;
 }
 
 .form-item .form-label {
-  width: 100%;
+  width: auto;
 }
 
 .form-item .side-label {
-  width: 100px;
+  float: left;
+  min-width: 80px;
+  margin-right: 10px;
 }
 
 .form-item input[type=text],
 .form-item input[type=email],
 .form-item input[type=password] {
-  max-width: 80%;
+  float: left;
+  max-width: 100%;
 }
 
 // Button properties
@@ -105,6 +114,10 @@ td {
   color: #37404D;
 	font-weight: normal;
 	text-align: center;
+}
+
+.light-button:hover {
+  background-color: #f2f2f2;
 }
 
 .button {
@@ -128,22 +141,26 @@ td {
 .icon-button {
 	height: 40px;
 	width: 40px;
+
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  background-size: auto 100%;
 }
 
 .del-button {
-	border: none;
-	cursor: pointer;
-
   background-position: -69px 0px;
-  background-size: auto 100%;
-  border-radius: 50%;
+}
+
+.file-button {
+  background-position: -69px 0px;
 }
 
 .find-button {
+  float: right;
   height: 25px;
   width: 25px;
-  float: left;
-  vertical-align: middle;
+  margin-left: 10px;
 }
 
 /* Header properties */
@@ -231,7 +248,7 @@ td {
   box-shadow: 0px 3px 10px #888888;
 
   width: 400px;
-  height: auto;
+  height: 300px;
 
   position: fixed;
   left: 50%;
@@ -255,12 +272,19 @@ td {
   margin: 40px;
 }
 
+#login-content input[type=submit] {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
 
 /* Main menu properties */
 .hub-container {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .hub-item {
@@ -274,7 +298,7 @@ td {
   float: left;
   position: relative;
 	height: 220px;
-	width: 200px;
+	width: 280px;
 }
 
 @media screen and (max-width: 800px) {
@@ -348,14 +372,43 @@ td {
 /* Search properties */
 .search-container {
   height: 40px;
-  margin: 40px 0;
+  max-width: 50%;
+  margin: 40px auto;
 }
 
-.search-container form {
-	margin: auto;
+#search-box {
+  overflow: hidden;
+  width: auto;
 }
 
-#volunteer_name {
-  float: left;
-  margin-right: 10px;
+#search-box input { width: 100%; }
+
+/* Review properties */
+.review-container {
+ border: 1px solid #eee;
+ border-radius: 4px;
+
+ padding: 20px;
+ margin-bottom: 15px;
+ position: relative;
+}
+
+.review-label {
+ font-size: 100%;
+}
+
+.review-info {
+ font-weight: 700;
+ font-size: 100%;
+}
+
+.review-item {
+ margin-bottom: 10px;
+}
+
+.review-button {
+ position: absolute;
+ right: 0;
+ bottom: 0;
+ margin: 20px;
 }

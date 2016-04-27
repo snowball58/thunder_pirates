@@ -13,10 +13,9 @@
 
 .search-container
 	= form_tag admin_query_volunteer_path, :method => :post do
-		= text_field_tag :volunteer_name
 		= image_submit_tag("icon_find.svg", :class => "find-button")
-
-	= link_to("View all", "#", :class => "light-button")
+		#search-box
+			= text_field_tag :volunteer_name
 
 %table
 	%thead
@@ -26,8 +25,11 @@
 	- @volunteers.each do |volunteer|
 		%tr
 			%td
-				= link_to volunteer.Name, admin_show_volunteer_path(volunteer.uniqueID)
+				= volunteer.Name
 			%td
 				= volunteer.EmailAddress
+			%td.td-button
+				= link_to admin_show_volunteer_path(volunteer.uniqueID) do
+					.icon-button.dark-sprites
 
 = link_to("Back to Admin Home", auth_user_root_path, :class => "button")

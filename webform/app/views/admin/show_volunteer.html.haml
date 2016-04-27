@@ -1,5 +1,5 @@
 / Scotty's House Volunteer WebForm
-/ Written in 2016 by: 
+/ Written in 2016 by:
 / Gustavo Estrela
 / Logan Ford
 / Patrick Herrington
@@ -11,96 +11,82 @@
 
 .main-title Review Application
 
-%span.subtitle Volunteer
-%br
-%br
-%span.subtitle
-	= "Name:"
-= "#{@volunteer.Name}"
-%br
-%br
+.review-container
+	.review-item
+		.review-label Name:
+		.review-info
+			= "#{@volunteer.Name}"
 
-%span.subtitle
-	= "Date of birth:"
-=" #{@volunteer.DateofBirth}"
-%br
-%br
+	.review-item
+		.review-label Birth date:
+		.review-info
+			= "#{@volunteer.DateofBirth}"
 
-%span.subtitle 
-	= "Email address:"
-= " #{@volunteer.EmailAddress}"
-%br
-%br
+		.review-item
+			.review-label Email:
+			.review-info
+				= "#{@volunteer.EmailAddress}"
 
-%span.subtitle
-	= "Phone numbers:"
-= " #{@volunteer.HomePhone} (home), #{@volunteer.CellPhone} (mobile)"
-%br
-%br
+		.review-item
+			.review-label Home Phone:
+			.review-info
+				= "#{@volunteer.HomePhone}"
 
-%span.subtitle
-	= "MailingAddress"
-= " #{@volunteer.MailingAddress}"
-%br
-%br
+		.review-item
+			.review-label Cell Phone:
+			.review-info
+				= "#{@volunteer.CellPhone}"
 
+		.review-item
+			.review-label Address:
+			.review-info
+				= "#{@volunteer.MailingAddress}"
 
-%span.subtitle
-	= "Days available for volunteer:"
-= " #{@volunteer.DaysTimesyouwillbeavailabletovolunteer}"
-= @volunteer.DaysTimesyouwillbeavailabletovolunteer.to_i > 1 ? "days" : "day"
-%br
-%br
-= button_to "Review Volunteer Application", admin_volunteer_pdf_path(@volunteer.uniqueID), :class => "smaller-button", :method => :get
-%br
+		.review-item
+			.review-label Availability:
+			.review-info
+				= "#{@volunteer.DaysTimesyouwillbeavailabletovolunteer}"
+				- if @volunteer.DaysTimesyouwillbeavailabletovolunteer.to_i > 1 then "days"
+				- elsif @volunteer.DaysTimesyouwillbeavailabletovolunteer.to_i == 1 then "day"
+				- else
+					%em None
 
+		= button_to "Review Volunteer Application", admin_volunteer_pdf_path(@volunteer.uniqueID), :class => "review-button light-button", :method => :get
 
-%span.subtitle 
-	= "Reference 1:"
-%br
-%br
-- if @references[0] != nil
-	%span.subtitle
-		= "Name:"
-	= "#{@references[0].ReferenceName}"
-	%br
-	%br
-	= button_to "Review Reference Application", admin_reference_pdf_path(@references[0].uniqueID), :class => "smaller-button", :method => :get
-- else
-	%span Not received
-%br
-%br
+.review-container
+	.review-item Reference #1
 
-%span.subtitle 
-	= "Reference 2:"
-%br
-%br
-- if @references[1] != nil
-	%span.subtitle
-		= "Name:"
-	= "#{@references[1].ReferenceName}"
-	%br
-	%br
-	= button_to "Review Reference Application", admin_reference_pdf_path(@references[1].uniqueID), :class => "smaller-button", :method => :get
-- else
-	%span Not received
-%br
-%br
+	- if @references[0] != nil
+		.review-label Name:
+		.review-info
+			= "#{@references[0].ReferenceName}"
+		= button_to "Review Reference Application", admin_reference_pdf_path(@references[0].uniqueID), :class => "review-button light-button", :method => :get
+	- else
+		.review-info
+			%em Not received
 
-%span.subtitle 
-	= "Reference 3:"
-%br
-%br
-- if @references[2] != nil
-	%span.subtitle
-		= "Name:"
-	= "#{@references[2].ReferenceName}"
-	%br
-	%br
-	= button_to "Review Reference Application", admin_reference_pdf_path(@references[2].uniqueID), :class => "smaller-button", :method => :get
-- else
-	%span Not received
-%br
-%br
+.review-container
+	.review-item Reference #2
 
-= button_to "Back to Application List", admin_query_volunteer_path, :class => "smaller-button"
+	- if @references[1] != nil
+		.review-label Name:
+		.review-info
+			= "#{@references[1].ReferenceName}"
+		= button_to "Review Reference Application", admin_reference_pdf_path(@references[1].uniqueID), :class => "review-button light-button", :method => :get
+	- else
+		.review-info
+			%em Not received
+
+.review-container
+	.review-item Reference #3
+
+	- if @references[2] != nil
+		.review-label Name:
+		.review-info
+			= "#{@references[2].ReferenceName}"
+		= button_to "Review Reference Application", admin_reference_pdf_path(@references[2].uniqueID), :class => "review-button light-button", :method => :get
+	- else
+		.review-info
+			%em Not received
+
+= button_to "Back to Application List", admin_query_volunteer_path, :class => "button"
