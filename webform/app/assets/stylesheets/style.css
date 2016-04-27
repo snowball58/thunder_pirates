@@ -162,6 +162,11 @@ td, th {
 	margin-bottom: 2%;
 }
 
+
+.subtitle {
+	text-align: center;	
+}
+
 .main-content {
 	position: relative;
 }
