@@ -54,7 +54,7 @@ a:link , a:visited {
 // Table properties
 table {
 	width: 100%;
-	margin-bottom: 20px;
+	margin: 20px auto;
   border-collapse: collapse;
 }
 
@@ -73,6 +73,7 @@ td {
 .td-button {
 	border: none;
 	text-align: left;
+  width: 50px;
 }
 
 // Form properties

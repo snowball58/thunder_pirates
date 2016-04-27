@@ -25,7 +25,7 @@
           .dropdown-content
             = button_to "Logout", destroy_auth_user_session_path, :method => :delete, :class => "dropdown-content-item"
             = link_to "Change password", edit_auth_user_registration_path, :class => "dropdown-content-item"
-
+            
     .main-wrapper.horizontal-center
       // -if not flash[:notice].blank?
       //   .alert
