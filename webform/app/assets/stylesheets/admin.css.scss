@@ -398,7 +398,6 @@ td {
 
 /* Search properties */
 .search-container {
-  height: 40px;
   max-width: 50%;
   margin: 40px auto;
 }
@@ -406,6 +405,7 @@ td {
 #search-box {
   overflow: hidden;
   width: auto;
+  margin-bottom: 15px;
 }
 
 #search-box input { width: 100%; }
