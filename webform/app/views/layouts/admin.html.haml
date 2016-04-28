@@ -28,8 +28,16 @@
 
     .main-wrapper.horizontal-center
       -if not flash[:notice].blank?
+        .notice
+          :erb 
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            <%= flash[:notice] %>
+      -if not flash[:alert].blank?
         .alert
-          = flash[:notice]
+          :erb 
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            <%= flash[:alert] %>
+        %br
       .main-header
       .main-content
         = yield

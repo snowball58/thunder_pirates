@@ -20,12 +20,18 @@
   %body
     %header
       #header-title.center-horizontal Volunteer & Intern Application Form
-      -if not flash[:notice].blank?
-        .alert
-          = flash[:notice]
-
 
     .main-wrapper.horizontal-center
+      -if not flash[:notice].blank?
+        .notice
+          :erb 
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            <%= flash[:notice] %>
+      -if not flash[:alert].blank?
+        .alert
+          :erb 
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            <%= flash[:alert] %>
       .main-header
         = image_tag("logo.png", :alt => 'logo', :id => 'logo', :class => 'center-horizontal')
       .main-content

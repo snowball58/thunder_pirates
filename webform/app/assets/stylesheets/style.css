@@ -129,16 +129,32 @@ td, th {
 }
 
 .alert {
-	font-size: 110%;
-	background-color: #ffeeee;
-	border: 1px solid #ff0000;
-	padding: .2%;
-	border-radius: 4px;
-	color: #ff0000;
-	position: fixed;
-	margin-top: .5%;
-	left: 50%;
-	transform: translate(-50%, 0);
+    padding: 20px;
+    background-color: #f44336; /* Red */
+    color: white;
+    margin-bottom: 15px;
+}
+
+.notice {
+    padding: 20px;
+    background-color: #4CAF50; /* Green */
+    color: white;
+    margin-bottom: 15px;
+}
+
+/* The close button */
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+}
+
+.closebtn:hover {
+    color: black;
 }
 
 .main-wrapper {
