@@ -27,9 +27,9 @@
             = link_to "Change password", edit_auth_user_registration_path, :class => "dropdown-content-item"
 
     .main-wrapper.horizontal-center
-      // -if not flash[:notice].blank?
-      //   .alert
-      //     = flash[:notice]
+      -if not flash[:notice].blank?
+        .alert
+          = flash[:notice]
       .main-header
       .main-content
         = yield
