@@ -466,6 +466,8 @@ class WelcomeController < ApplicationController
       b.VolunteerId = params[:ref_id]
       session[:ref_unique_id] = uID
       b.save
+      volunteer = Volunteer.find_by_uniqueID(params[:ref_id])
+      @reference_name = volunteer.Name
     elsif params[:ref_id] == nil && session[:ref_unique_id] != nil
       reference = Reference.find_by_uniqueID(session[:ref_unique_id])
       @your_name = reference.ReferenceName
@@ -485,7 +487,9 @@ class WelcomeController < ApplicationController
     if !reference
       return
     end
-    reference.ReferenceName = params[:your_name]
+    if not params[:your_name].blank? 
+      reference.ReferenceName = params[:your_name]
+    end
     reference.VolunteerName = params[:reference_name]
     reference.Howlonghaveyouknownthisperson = params[:reference_form_area_1]
     reference.Cableincrisissituationwhy = params[:reference_form_area_2]
@@ -626,14 +630,18 @@ class WelcomeController < ApplicationController
   def status
     if params[:vol_id] != nil
       session[:uniqueID] = params[:vol_id]
-      volunteer = checkin_user
+      volunteer = Volunteer.find_by_uniqueID(params[:vol_id])
+      if volunteer == nil
+        redirect_to welcome_completed_status_path
+        return
+      else
       @name = volunteer[:Name]
       @root = root_url.to_s.chomp("/")
       @ref_count = 0
       @ref1 = "Not Recevied"
       @ref2 = "Not Recevied"
       @ref3 = "Not Received"
-      Reference.where(VolunteerId: params[:vol_id]).find_each do |r|
+      Reference.where(VolunteerId: params[:vol_id], VolunteerName: @name).find_each do |r|
         @ref_count += 1
         if @ref_count == 1
           @ref1 = r.ReferenceName
@@ -644,21 +652,25 @@ class WelcomeController < ApplicationController
         end
       end
       
-      volunteer = Volunteer.find_by_uniqueID(params[:vol_id])
-      if !volunteer
-        #redirect to error
-      end
-      @expiration = volunteer.date_modified.to_date
-      for i in 1..60 do
-        @expiration = @expiration.next
+        @expiration = volunteer.date_modified.to_date
+        for i in 1..60 do
+          @expiration = @expiration.next
+        end
       end
     else
-      #need an error page to redirect to
+      redirect_to welcome_completed_status_path
+      return
     end
   end
   
   def status_check
     redirect_to 'https://www.scottyshouse.org/'
+  end
+  
+  def completed_status
+  end
+  
+  def completed_status_check
   end
 
   def pdf
