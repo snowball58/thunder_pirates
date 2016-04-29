@@ -32,11 +32,4 @@ class VolunteerMailer < ApplicationMailer
             #invalid email type
         end
     end
-    def test_email
-        receiver = "stevensnow58@gmail.com"
-        title = 'Test Email'
-        body = "https://www.reddit.com/"
-        attachments["Adam_Albrecht_Copyright_Release.pdf"] = File.read("#{Rails.root}/Adam_Albrecht_Copyright_Release.pdf")
-        mail(to: receiver, subject: title, body: body)
-    end
 end

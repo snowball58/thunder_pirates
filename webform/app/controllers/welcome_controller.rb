@@ -544,7 +544,6 @@ class WelcomeController < ApplicationController
       puts "jownvjwdnvdnvwijdnvidnviuwdnviwdvnwidvniwudvneuivnwieudvniwuvn"
       # email to myself for testing purposes
       # must remove before final deployment
-      VolunteerMailer.application_email("submission", "stevensnow58@gmail.com", args).deliver_now
       users = AuthUser.all
       users.each do |user|
         VolunteerMailer.application_email("submission", user.email, args).deliver_now
