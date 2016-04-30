@@ -34,33 +34,32 @@ class WelcomeController < ApplicationController
   
   def index_check
     secret_key =  "6Lf9vh4TAAAAAAIC6mh7tdS6BuVxmrUuZGXDCiRx"
-    verify_params = {"secret" => secret_key, "response" => params["g-recaptcha-response"], "remoteip" => request.remote_ip}
 
     # prepare post to google verification
-    http = Net::HTTP
+    # http = Net::HTTP
+    verify_params = {"secret" => secret_key, "response" => params["g-recaptcha-response"], "remoteip" => request.remote_ip}
     query = URI.encode_www_form(verify_params)
     uri = URI.parse("https://www.google.com/recaptcha/api/siteverify" + '?' + query)
-    http_instance = http.new(uri.host, uri.port)
-    
-    if uri.port == 443
-      http_instance.use_ssl = true
-      http_instance.verify_mode = OpenSSL::SSL::VERIFY_NONE
-    end
+    http_instance = Net::HTTP.new(uri.host, uri.port)
+    http_instance.use_ssl = true
+    http_instance.verify_mode = OpenSSL::SSL::VERIFY_NONE
     request = Net::HTTP::Get.new(uri.request_uri)
     verify_response = JSON.parse(http_instance.request(request).body)
 
-    if !verify_response["success"]
-      redirect_to welcome_volunteer_path # go to next if everything is good
+    if verify_response["success"]
+      create_volunteer_id
+      redirect_to welcome_volunteer_path
     else
       flash[:alert] = "We couldn't verify your identity, try the captcha again"
       redirect_to welcome_index_path
     end
   end
-  
-  def volunteer
-    if params[:uniqueID] 
+
+  def create_volunteer_id
+    if params[:uniqueID]
       session[:uniqueID] = params[:uniqueID]
     end
+
     if not Volunteer.exists?(:uniqueID => session[:uniqueID])
       uniqueID = SecureRandom.base64
       while Volunteer.exists?(:uniqueID => uniqueID) do
@@ -70,33 +69,39 @@ class WelcomeController < ApplicationController
       b.uniqueID = uniqueID
       b.save
       session[:uniqueID] = uniqueID
-    else
-      volunteer = Volunteer.find_by_uniqueID(session[:uniqueID])
-      # query the text fields like this
-      @name = volunteer[:Name]
-      @birth = volunteer[:DateofBirth]
-      @email = volunteer[:EmailAddress]
-      @home_phone = volunteer[:HomePhone]
-      @cell_phone = volunteer[:CellPhone]
-      @street = volunteer[:Street]
-      @city = volunteer[:City]
-      @state = volunteer[:State]
-      @zip = volunteer[:Zip]
-      @county = volunteer[:County]
-      @additional = volunteer[:IfyouhaveselectedAdditionalVolunteerOpportunitiespleasespecify]
-      @times = volunteer[:DaysTimesyouwillbeavailabletovolunteer]
-      
-      # query check boxes like this
-      # if box is saved as not being checked, should have empty value in database!
-      # if box is saved as being checked, should have "Yes" as value for pdf purposes
-      @family_care = volunteer[:FamilyCare]
-      @ambassador = volunteer[:Ambassador]
-      @virtual_volunteer = volunteer[:VirtualVolunteer]
-      @medical_volunteer = volunteer[:MedicalVolunteer]
-      @counseling_internship = volunteer[:ProgramCounselingInternship]
-      @outlying_county = volunteer[:OutlyingCountyAmbassadorProgram] 
-      @additionl_opportunities = volunteer[:AdditionalVolunteerOpportunities]
     end
+  end
+  
+  def volunteer
+    # Check that the current user has an ID set on first page
+    volunteer = checkin_user
+    return if !volunteer
+
+    volunteer = Volunteer.find_by_uniqueID(session[:uniqueID])
+    # query the text fields like this
+    @name = volunteer[:Name]
+    @birth = volunteer[:DateofBirth]
+    @email = volunteer[:EmailAddress]
+    @home_phone = volunteer[:HomePhone]
+    @cell_phone = volunteer[:CellPhone]
+    @street = volunteer[:Street]
+    @city = volunteer[:City]
+    @state = volunteer[:State]
+    @zip = volunteer[:Zip]
+    @county = volunteer[:County]
+    @additional = volunteer[:IfyouhaveselectedAdditionalVolunteerOpportunitiespleasespecify]
+    @times = volunteer[:DaysTimesyouwillbeavailabletovolunteer]
+      
+    # query check boxes like this
+    # if box is saved as not being checked, should have empty value in database!
+    # if box is saved as being checked, should have "Yes" as value for pdf purposes
+    @family_care = volunteer[:FamilyCare]
+    @ambassador = volunteer[:Ambassador]
+    @virtual_volunteer = volunteer[:VirtualVolunteer]
+    @medical_volunteer = volunteer[:MedicalVolunteer]
+    @counseling_internship = volunteer[:ProgramCounselingInternship]
+    @outlying_county = volunteer[:OutlyingCountyAmbassadorProgram] 
+    @additionl_opportunities = volunteer[:AdditionalVolunteerOpportunities]
   end
   
   def volunteer_check
