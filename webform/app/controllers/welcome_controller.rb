@@ -33,10 +33,11 @@ class WelcomeController < ApplicationController
   end
   
   def index_check
-    secret_key =  ENV['RECAPTCHA_PRIVATE_KEY']
+    if defined?(ENV['RECAPTCHA_PRIVATE_KEY'])
+      secret_key =  ENV['RECAPTCHA_PRIVATE_KEY']
+    end
 
     # prepare post to google verification
-    # http = Net::HTTP
     verify_params = {"secret" => secret_key, "response" => params["g-recaptcha-response"], "remoteip" => request.remote_ip}
     query = URI.encode_www_form(verify_params)
     uri = URI.parse("https://www.google.com/recaptcha/api/siteverify" + '?' + query)
@@ -46,7 +47,7 @@ class WelcomeController < ApplicationController
     request = Net::HTTP::Get.new(uri.request_uri)
     verify_response = JSON.parse(http_instance.request(request).body)
 
-    if verify_response["success"]
+    if verify_response["success"] || Rails.env.development?
       create_volunteer_id
       redirect_to welcome_volunteer_path
     else
