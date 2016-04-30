@@ -34,42 +34,25 @@ class WelcomeController < ApplicationController
   
   def index_check
     secret_key =  "6Lf9vh4TAAAAAAIC6mh7tdS6BuVxmrUuZGXDCiRx"
+    verify_params = {"secret" => secret_key, "response" => params["g-recaptcha-response"], "remoteip" => request.remote_ip}
 
     # prepare post to google verification
     http = Net::HTTP
-    verify_params = {'secret' => secret_key, "remoteip" => request.remote_ip, "response" => params["g-recaptcha-response"]}
     query = URI.encode_www_form(verify_params)
-    print "query: " + query
-    uri = URI.parse("https://www.google.com/recaptcha/api/verify" + '?' + query)
+    uri = URI.parse("https://www.google.com/recaptcha/api/siteverify" + '?' + query)
     http_instance = http.new(uri.host, uri.port)
-
+    
     if uri.port == 443
       http_instance.use_ssl = true
       http_instance.verify_mode = OpenSSL::SSL::VERIFY_NONE
     end
-
     request = Net::HTTP::Get.new(uri.request_uri)
-    print http_instance.request(request)
-    # uri = URI("https://www.google.com/recaptcha/api/verify")
-    # https = Net::HTTP.new(uri.host, uri.port)
+    verify_response = JSON.parse(http_instance.request(request).body)
 
-    # https.use_ssl = true if uri.scheme == 'https'
-    # verify_request = Net::HTTP::Post.new(uri.path)
-    # verify_request["secret"] = secret_key # recaptcha app private_key
-    # verify_request["remoteip"] = request.remote_ip #ip address of the user
-    # verify_request["response"] = params["g-recaptcha-response"] # 
-
-    # send it and get response
-    # verify_response = https.request(verify_request)
-    # verify_response = https.post_form(uri, post_params)
-    # print verify_response.body
-    # hash = JSON.parse(verify_response.body)
-
-    # verify captcha success
-    if hash["success"]
+    if !verify_response["success"]
       redirect_to welcome_volunteer_path # go to next if everything is good
     else
-      flash[:notice] = "We couldn't verify your identity, try the captcha again"
+      flash[:alert] = "We couldn't verify your identity, try the captcha again"
       redirect_to welcome_index_path
     end
   end
