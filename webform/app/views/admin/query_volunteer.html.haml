@@ -16,6 +16,8 @@
     = image_submit_tag("icon_find.svg", :class => "find-button")
     #search-box
       = text_field_tag :volunteer_name
+  %div{ :style => "width: 140px; margin: auto;"}	
+    = button_to "View all", admin_query_volunteer_path, :class => "light-button", :method => "post"
 
 - if request.post?
   - if @volunteers.size < 1
@@ -34,7 +36,7 @@
             = volunteer.EmailAddress
           %td.td-button
             = link_to admin_show_volunteer_path(volunteer.uniqueID) do
-              .icon-button.dark-sprites
+              .icon-button.file-button.dark-sprites
 
 
 = link_to("Back to Admin Home", auth_user_root_path, :class => "button")

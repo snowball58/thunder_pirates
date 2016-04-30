@@ -62,6 +62,9 @@ Rails.application.routes.draw do
 
   get 'welcome/status', :to => 'welcome#status'
   post 'welcome/status', :to => 'welcome#status_check'
+  
+  get 'welcome/completed_status', :to => 'welcome#completed_status'
+  post 'welcome/completed_status', :to => 'welcome#completed_status_check'
 
   get 'welcome/review', :to => 'welcome#review'
   post 'welcome/review', :to => 'welcome#review_check'
