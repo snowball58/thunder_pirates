@@ -19,8 +19,8 @@ Rails.application.routes.draw do
   default_url_options host: Rails.application.config.domain
   devise_for :auth_users, controllers: { sessions: "admin/sessions" }, :skip => [:registrations]
   as :auth_user do
-    get 'auth_users/edit' => 'devise/registrations#edit', :as => 'edit_auth_user_registration'
-    put 'auth_users' => 'devise/registrations#update', :as => 'auth_user_registration'
+    get 'auth_users/edit' => 'admin/registrations#edit', :as => 'edit_auth_user_registration'
+    put 'auth_users' => 'admin/registrations#update', :as => 'auth_user_registration'
   end
   get 'admin/new_user' => 'admin#new_user'
   post 'admin/new_user' => 'admin#create_user'
