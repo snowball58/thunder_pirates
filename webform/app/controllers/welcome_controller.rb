@@ -10,6 +10,11 @@
 # You should have received a copy of the CC0 Public Domain Dedication along with this software. If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
 
 class WelcomeController < ApplicationController
+
+  # both necessary for getting captcha response from google
+  require 'uri'
+  require 'net/http'
+
   layout 'welcome'
   
   def index
@@ -28,8 +33,28 @@ class WelcomeController < ApplicationController
   end
   
   def index_check
-    # check input, other processing here
-    redirect_to welcome_volunteer_path # go to next if everything is good
+
+    # prepare post to google verification
+    uri = URI("http://www.google.com/recaptcha/api/verify")
+    https = Net::HTTP.new(uri.host, uri.port)
+    https.use_ssl = true
+    verify_request = Net::HTTP::Post.new(uri.path)
+    secret_key =  "6Lf9vh4TAAAAAAIC6mh7tdS6BuVxmrUuZGXDCiRx"
+    verify_request["secret"] = secret_key # recaptcha app private_key
+    verify_request["remoteip"] = request.remote_ip #ip address of the user
+    verify_request["response"] = params["g-recaptcha-response"] # 
+
+    # send it and get response
+    response = https.request(request)
+    hash = JSON.parse(status)
+
+    # verify captcha success
+    if hash["success"]
+      redirect_to welcome_volunteer_path # go to next if everything is good
+    else
+      flash[:notice] = "We couldn't verify your identity, try the captcha again"
+      redirect_to welcome_index_path
+    end
   end
   
   def volunteer
