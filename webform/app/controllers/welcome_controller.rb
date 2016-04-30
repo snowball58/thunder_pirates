@@ -33,20 +33,37 @@ class WelcomeController < ApplicationController
   end
   
   def index_check
+    secret_key =  "6Lf9vh4TAAAAAAIC6mh7tdS6BuVxmrUuZGXDCiRx"
 
     # prepare post to google verification
-    uri = URI("http://www.google.com/recaptcha/api/verify")
-    https = Net::HTTP.new(uri.host, uri.port)
-    https.use_ssl = true
-    verify_request = Net::HTTP::Post.new(uri.path)
-    secret_key =  "6Lf9vh4TAAAAAAIC6mh7tdS6BuVxmrUuZGXDCiRx"
-    verify_request["secret"] = secret_key # recaptcha app private_key
-    verify_request["remoteip"] = request.remote_ip #ip address of the user
-    verify_request["response"] = params["g-recaptcha-response"] # 
+    http = Net::HTTP
+    verify_params = {'secret' => secret_key, "remoteip" => request.remote_ip, "response" => params["g-recaptcha-response"]}
+    query = URI.encode_www_form(verify_params)
+    print "query: " + query
+    uri = URI.parse("https://www.google.com/recaptcha/api/verify" + '?' + query)
+    http_instance = http.new(uri.host, uri.port)
+
+    if uri.port == 443
+      http_instance.use_ssl = true
+      http_instance.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    end
+
+    request = Net::HTTP::Get.new(uri.request_uri)
+    print http_instance.request(request)
+    # uri = URI("https://www.google.com/recaptcha/api/verify")
+    # https = Net::HTTP.new(uri.host, uri.port)
+
+    # https.use_ssl = true if uri.scheme == 'https'
+    # verify_request = Net::HTTP::Post.new(uri.path)
+    # verify_request["secret"] = secret_key # recaptcha app private_key
+    # verify_request["remoteip"] = request.remote_ip #ip address of the user
+    # verify_request["response"] = params["g-recaptcha-response"] # 
 
     # send it and get response
-    response = https.request(request)
-    hash = JSON.parse(status)
+    # verify_response = https.request(verify_request)
+    # verify_response = https.post_form(uri, post_params)
+    # print verify_response.body
+    # hash = JSON.parse(verify_response.body)
 
     # verify captcha success
     if hash["success"]
