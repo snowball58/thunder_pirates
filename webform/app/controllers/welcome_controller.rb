@@ -33,7 +33,7 @@ class WelcomeController < ApplicationController
   end
   
   def index_check
-    secret_key =  "6Lf9vh4TAAAAAAIC6mh7tdS6BuVxmrUuZGXDCiRx"
+    secret_key =  ENV['RECAPTCHA_PRIVATE_KEY']
 
     # prepare post to google verification
     # http = Net::HTTP
