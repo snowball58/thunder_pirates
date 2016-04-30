@@ -1,5 +1,4 @@
 class Admin::UnlocksController < Devise::UnlocksController
-  layout false
   # GET /resource/unlock/new
   # def new
   #   super
