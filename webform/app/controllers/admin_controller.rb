@@ -51,6 +51,13 @@ class AdminController < ApplicationController
     end
   end
 
+  def delete_volunteer
+    volunteer = Volunteer.find_by_uniqueID(params[:id])
+    volunteer.destroy
+
+    redirect_to admin_query_volunteer_path
+  end
+
   def show_volunteer
     @volunteer = Volunteer.find_by_uniqueID(params[:id])
 

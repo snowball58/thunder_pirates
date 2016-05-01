@@ -37,6 +37,9 @@
           %td.td-button
             = link_to admin_show_volunteer_path(volunteer.uniqueID) do
               .icon-button.file-button.dark-sprites
+          %td.td-button
+            = link_to admin_delete_volunteer_path(volunteer.uniqueID) do
+              .icon-button.del-button.dark-sprites
 
 
 = link_to("Back to Admin Home", auth_user_root_path, :class => "button")
