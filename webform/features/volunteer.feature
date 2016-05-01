@@ -8,6 +8,8 @@ Scenario: Index click continue
 	Then the Volunteer Application title is displayed
 
 Scenario: Volunteer click continue
+	Given the index page is loaded
+	When the Continue button is clicked
 	Given the volunteer page is loaded
 	When name is filled in with asdf
 	And birth is filled in with asdf

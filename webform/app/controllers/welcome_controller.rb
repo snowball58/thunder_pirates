@@ -47,7 +47,7 @@ class WelcomeController < ApplicationController
     request = Net::HTTP::Get.new(uri.request_uri)
     verify_response = JSON.parse(http_instance.request(request).body)
 
-    if verify_response["success"] || Rails.env.development?
+    if verify_response["success"] || !Rails.env.production?
       create_volunteer_id
       redirect_to welcome_volunteer_path
     else
