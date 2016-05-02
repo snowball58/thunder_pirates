@@ -1,6 +1,10 @@
 Feature: Text and check box input on volunteer page
 	Volunteer form should have all required input fields
 	Valid inputs are saved to database
+
+Background:
+    Given the index page is loaded
+    And the Continue button is clicked
 	
 Scenario: 
     Given the volunteer page is loaded

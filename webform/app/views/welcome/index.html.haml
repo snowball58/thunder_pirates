@@ -14,4 +14,9 @@
 .subtitle Welcome to the online Volunteer & Intern Application! Please click continue.
 %br
 = form_tag welcome_index_path, :method => :post do
+  %div.center-horizontal.g-recaptcha{"data-sitekey" => "6Lf9vh4TAAAAAGCYETips_e-ReHpQiV3mn1p9OWG", :name =>  "oi"}
+  %br
+  %br
+  %br
+  %br
   = submit_tag 'Continue', :class => "button center-horizontal"
