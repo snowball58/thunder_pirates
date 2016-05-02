@@ -33,13 +33,13 @@
     %br
     %span.subtitle Please provide the name of your instructor.
     = text_field_tag(:instructor_name, @instructor_name)
-
+    %br
     = radio_button_tag(:reason, "org_credit", @reason_org_credit)
     = label_tag(:reason_org_credit, "Organization Credit")
     %br
     %span.subtitle Please provide the name of your organization.
     = text_field_tag(:organization_name, @organization_name)
-
+    %br
     = radio_button_tag(:reason, "other")
     = label_tag(:reason_other, "Other")
     %br
