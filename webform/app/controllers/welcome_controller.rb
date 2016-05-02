@@ -528,6 +528,8 @@ class WelcomeController < ApplicationController
     reference.Doyouhaveanyhesitationaboutthispersonworkinginthiscapacity = params[:reference_form_area_4]
     reference.PertinentInformation = params[:reference_form_area_5]
     reference.date_modified = Time.now
+    time = Time.new
+    reference.Date_4 = time.month.to_s + "/" + time.day.to_s + "/" + time.year.to_s
     reference.save
     
     flash[:alert] = nil;
