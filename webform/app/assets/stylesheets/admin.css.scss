@@ -77,8 +77,9 @@ a:link , a:visited {
 
 // Table properties
 table {
-	width: 100%;
-	margin: 20px auto;
+  width: 100%;
+  max-width: 100%;
+  margin: 20px auto;
   border-collapse: collapse;
 }
 
