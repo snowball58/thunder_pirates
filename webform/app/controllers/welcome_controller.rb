@@ -569,13 +569,9 @@ class WelcomeController < ApplicationController
     reference.save
       
     ######### This part to be moved to confirmation page, if one is made for reference
-    puts Reference.where('"VolunteerId" = ? and "ReferenceName" IS NOT NULL', reference.VolunteerId).count
     if Reference.where('"VolunteerId" = ? and "ReferenceName" IS NOT NULL', reference.VolunteerId).count >= 3
       args = Array.new
       args[0] = reference.VolunteerId
-      puts "jownvjwdnvdnvwijdnvidnviuwdnviwdvnwidvniwudvneuivnwieudvniwuvn"
-      puts args[0]
-      puts "jownvjwdnvdnvwijdnvidnviuwdnviwdvnwidvniwudvneuivnwieudvniwuvn"
       # email to myself for testing purposes
       # must remove before final deployment
       users = AuthUser.all
