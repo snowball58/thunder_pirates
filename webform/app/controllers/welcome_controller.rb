@@ -504,8 +504,10 @@ class WelcomeController < ApplicationController
       @your_name = reference.ReferenceName
       @reference_name = reference.VolunteerName
       @reference_form_area_1 = reference.Howlonghaveyouknownthisperson
+      @reference_form_area_15 = reference.Capableincrisissituation
       @reference_form_area_2 = reference.Cableincrisissituationwhy
       @reference_form_area_3 = reference.Doesthispersonusuallyexercisegoodjudgment
+      @reference_form_area_35 = reference.Goodjudgmentelaborate
       @reference_form_area_4 = reference.Doyouhaveanyhesitationaboutthispersonworkinginthiscapacity
       @reference_form_area_5 = reference.PertinentInformation
     else
@@ -527,6 +529,8 @@ class WelcomeController < ApplicationController
     reference.Doesthispersonusuallyexercisegoodjudgment = params[:reference_form_area_3]
     reference.Doyouhaveanyhesitationaboutthispersonworkinginthiscapacity = params[:reference_form_area_4]
     reference.PertinentInformation = params[:reference_form_area_5]
+    reference.Goodjudgmentelaborate = params[:reference_form_area_35]
+    reference.Capableincrisissituation = params[:reference_form_area_15]
     reference.date_modified = Time.now
     time = Time.new
     reference.Date_4 = time.month.to_s + "/" + time.day.to_s + "/" + time.year.to_s

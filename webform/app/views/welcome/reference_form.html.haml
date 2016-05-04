@@ -34,13 +34,21 @@
     = text_area_tag(:reference_form_area_1, @reference_form_area_1, :maxlength => 560)
     
   .form-item
-    %span.subtitle *In your opinion, is this person capable of working with children and families in a crisis sitation? Please tell us why:
+    %span.subtitle *In your opinion, is this person capable of working with children in a crisis situation?
+    = text_area_tag(:reference_form_area_15, @reference_form_area_15, :maxlength => 70)
+    
+  .form-item
+    %span.subtitle *Please tell us why:
     = text_area_tag(:reference_form_area_2, @reference_form_area_2, :maxlength => 560)
     
   .form-item
-    %span.subtitle *Does this person usually exercise good judgement? Please elaborate:
-    = text_area_tag(:reference_form_area_3, @reference_form_area_3, :maxlength => 560)
+    %span.subtitle *Does this person usually exercise good judgement?
+    = text_area_tag(:reference_form_area_3, @reference_form_area_3, :maxlength => 70)
     
+  .form-item
+    %span.subtitle *Please elaborate:
+    = text_area_tag(:reference_form_area_35, @reference_form_area_35, :maxlength => 560)
+  
   .form-item
     %span.subtitle *How would this person relate to a child dealing with highly sensitive issues, and do you have any hesitation about this person working in this capacity? 
     = text_area_tag(:reference_form_area_4, @reference_form_area_4, :maxlength => 560)
