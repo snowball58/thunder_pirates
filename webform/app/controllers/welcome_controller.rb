@@ -530,6 +530,7 @@ class WelcomeController < ApplicationController
     reference.date_modified = Time.now
     time = Time.new
     reference.Date_4 = time.month.to_s + "/" + time.day.to_s + "/" + time.year.to_s
+    reference.Signature_4 = params[:your_name]
     reference.save
     
     flash[:alert] = nil;
