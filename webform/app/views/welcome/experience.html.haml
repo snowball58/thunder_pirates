@@ -39,13 +39,13 @@
         %tr
           %td
             .form-item
-              = text_area_tag "length_of_time_#{i}", eval("@length_of_time_#{i}")
+              = text_area_tag("length_of_time_#{i}", eval("@length_of_time_#{i}") , :maxlength => 50)
           %td
             .form-item
-              = text_area_tag "organization_#{i}", eval("@organization_#{i}")
+              = text_area_tag("organization_#{i}", eval("@organization_#{i}") , :maxlength => 50)
           %td
             .form-item
-              = text_area_tag "responsibilities_#{i}", eval("@responsibilities_#{i}")
+              = text_area_tag("responsibilities_#{i}", eval("@responsibilities_#{i}") , :maxlength => 50)
 
   = submit_tag 'Add Experience', :id => "add-xp-button", :class => "button"
 
@@ -62,28 +62,28 @@
 
     %br
     %span.subtitle If Yes, explain why:
-    = text_area_tag :child_abuse_text, @child_abuse_text
+    = text_area_tag(:child_abuse_text, @child_abuse_text, :maxlength => 140)
 
     %br
     %span.subtitle Foster Care?
     = check_box_tag :foster_care_check, "Yes", @foster_care_check
     %br
     %span.subtitle If Yes, explain why:
-    = text_area_tag :foster_care_text, @foster_care_text
+    = text_area_tag(:foster_care_text, @foster_care_text, :maxlength => 140)
 
     %br
     %span.subtitle Criminal, Juvenile or Family Court System?
     = check_box_tag :criminal_check, "Yes", @criminal_check
     %br
     %span.subtitle If Yes, explain why:
-    = text_area_tag :criminal_text, @criminal_text
+    = text_area_tag(:criminal_text, @criminal_text, :maxlength => 140)
 
     %br
     %span.subtitle Other Child Service Agencies?
     = check_box_tag :agency_check, "Yes", @agency_check
     %br
     %span.subtitle If Yes, explain why:
-    = text_area_tag :agency_text, @agency_text
+    = text_area_tag(:agency_text, @agency_text, :maxlength => 140)
 
   .form-item
     = submit_tag 'Continue', :class => "button center-horizontal"
