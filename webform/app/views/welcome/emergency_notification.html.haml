@@ -24,23 +24,23 @@
     %span.subtitle *Indicates a required field.
     %br
     %span.subtitle *Name
-    = text_field_tag(:emergency_name, @emergency_name)
+    = text_field_tag(:emergency_name, @emergency_name, :maxlength => 70)
 
   .form-item
     %span.subtitle *Primary Phone Number
-    = text_field_tag(:emergency_primary_phone, @emergency_primary_phone)
+    = text_field_tag(:emergency_primary_phone, @emergency_primary_phone, :maxlength => 70)
 
   .form-item
     %span.subtitle Alternate Phone Number
-    = text_field_tag(:emergency_secondary_phone, @emergency_secondary_phone)
+    = text_field_tag(:emergency_secondary_phone, @emergency_secondary_phone, :maxlength => 70)
 
   .form-item
     %span.subtitle *Address
-    = text_field_tag(:emergency_address, @emergency_address)
+    = text_field_tag(:emergency_address, @emergency_address, :maxlength => 70)
 
   .form-item
     %span.subtitle *Relationship
-    = text_field_tag(:emergency_relationship, @emergency_relationship)
+    = text_field_tag(:emergency_relationship, @emergency_relationship, :maxlength => 70)
 
   .form-item
     = submit_tag 'Continue', :class => "button center-horizontal"

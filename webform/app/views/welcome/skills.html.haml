@@ -23,7 +23,7 @@
 
     %br
     %span.subtitle If so, what language(s)?
-    = text_field_tag(:speaking_languages, @speaking_languages)
+    = text_field_tag(:speaking_languages, @speaking_languages, :maxlength => 70)
 
   .form-item
     %span.subtitle Do you read/write in any language other than English?
@@ -31,7 +31,7 @@
 
     %br
     %span.subtitle If so, what language(s)?
-    = text_field_tag(:reading_languages, @reading_languages)
+    = text_field_tag(:reading_languages, @reading_languages, :maxlength => 70)
 
   .form-item
     %span.subtitle Do you have any experience with blind or hearing impaired persons?
@@ -39,7 +39,7 @@
 
     %br
     %span.subtitle If so, in what capacity?
-    = text_area_tag(:impaired_capacity, @impaired_capacity)
+    = text_area_tag(:impaired_capacity, @impaired_capacity, :maxlength => 70)
 
   .form-item
     %span.subtitle Do you have any experience with handicapped persons?
@@ -47,7 +47,7 @@
 
     %br
     %span.subtitle If so, in what capacity?
-    = text_area_tag(:handicapped_capacity, @handicapped_capacity)
+    = text_area_tag(:handicapped_capacity, @handicapped_capacity, :maxlength => 70)
 
   .form-item
     = submit_tag 'Continue', :class => "button center-horizontal"
