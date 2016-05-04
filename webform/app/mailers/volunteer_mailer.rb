@@ -26,7 +26,7 @@ class VolunteerMailer < ApplicationMailer
             body = "Thank you for applying to volunteer at Scotty's House Child Advocacy Center!\n\n"
             body = body + "You can view your application status with this link: " + args[:url] + "\n\n"
             body = body + "If you need to, give this link out to any references you didn't give an email for: " + args[:url2] + "\n\n"
-            body = body + "The application will not be considered until all  3 references have submitted to us."
+            body = body + "The application will not be considered until all 3 references have submitted to us."
             mail(to: receiver, subject: title, body: body)
         else
             #invalid email type
