@@ -31,23 +31,23 @@
 
   .form-item
     %span.subtitle *How long have you known this person and in what capacity? 
-    = text_area_tag(:reference_form_area_1, @reference_form_area_1)
+    = text_area_tag(:reference_form_area_1, @reference_form_area_1, :maxlength => 140)
     
   .form-item
     %span.subtitle *In your opinion, is this person capable of working with children and families in a crisis sitation? Please tell us why:
-    = text_area_tag(:reference_form_area_2, @reference_form_area_2)
+    = text_area_tag(:reference_form_area_2, @reference_form_area_2, :maxlength => 140)
     
   .form-item
     %span.subtitle *Does this person usually exercise good judgement? Please elaborate:
-    = text_area_tag(:reference_form_area_3, @reference_form_area_3)
+    = text_area_tag(:reference_form_area_3, @reference_form_area_3, :maxlength => 140)
     
   .form-item
     %span.subtitle *How would this person relate to a child dealing with highly sensitive issues, and do you have any hesitation about this person working in this capacity? 
-    = text_area_tag(:reference_form_area_4, @reference_form_area_4)
+    = text_area_tag(:reference_form_area_4, @reference_form_area_4, :maxlength => 140)
   
   .form-item
     %span.subtitle Please share any additional pertinent information that would assist us in evaluating this person's involvement with our agency.
-    = text_area_tag(:reference_form_area_5, @reference_form_area_5)
+    = text_area_tag(:reference_form_area_5, @reference_form_area_5, :maxlength => 140)
   
   .form-item  
     = submit_tag 'Finished', :class => "button"
